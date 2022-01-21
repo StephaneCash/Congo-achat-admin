@@ -3,7 +3,7 @@ import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, 
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import { db } from "../config/FirebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,13 +26,13 @@ const DetailUser = (props) => {
     const [data, setData] = useState([]);
     const usersCollection = collection(db, "ads");
 
-    const getUsers = async () => {
+    const getAnnonces = async () => {
         const dataUsers = await getDocs(usersCollection);
         setData(dataUsers.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
     useEffect(() => {
-        getUsers();
+        getAnnonces();
     }, []);
 
     const handleBloquerUser = () => {
@@ -49,6 +49,33 @@ const DetailUser = (props) => {
         })
     }
 
+    const closeModal = (props) => {
+        return props.close;
+    }
+
+    const deleteAnnonce = async (id) => {
+        const annonce = doc(db, 'ads', id);
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir supprimer cette annonce ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                deleteDoc(annonce)
+                getAnnonces();
+                closeModal(props);
+                swal('Annonce supprimée avec succès', {
+                    icon: "success",
+                });
+
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     const idRecu = props.id;
 
     const classes = useStyles();
@@ -58,13 +85,13 @@ const DetailUser = (props) => {
             <Modal show={props.show} className={classes.modal} id="detailUser">
                 <Modal.Header>
                     <CardHeader
-                        style={{ width: "100%"}}
+                        style={{ width: "100%" }}
                         title="Détail annonce"
                         action={
-                            <i className="fa fa-close" onClick={props.close} style={{borderRadius:"5px",cursor: 'pointer', border: '1px solid silver', padding: '10px'}}></i>
+                            <i className="fa fa-close" onClick={props.close} style={{ borderRadius: "5px", cursor: 'pointer', border: '1px solid silver', padding: '10px' }}></i>
                         }
                         avatar={
-                            <Avatar style={{backgroundColor:'black'}}>
+                            <Avatar style={{ backgroundColor: 'black' }}>
                                 {data.map((va) => {
                                     if (va.id === idRecu) {
                                         return va.productName.charAt(0).toUpperCase();
@@ -143,7 +170,13 @@ const DetailUser = (props) => {
                                                     <CardActions>
                                                         <Button variant='outlined' style={{ color: 'orange', border: '1px solid orange' }}>Pause</Button>
                                                         <Button variant='outlined' color="secondary">Desaprove</Button>
-                                                        <Button variant='outlined' style={{ color: 'red', border: '1px solid red' }}>Supprimer</Button>
+                                                        <Button
+                                                            variant='outlined'
+                                                            style={{ color: 'red', border: '1px solid red' }}
+                                                            onClick={() => deleteAnnonce(val.id)}
+                                                        >
+                                                            Supprimer
+                                                        </Button>
                                                         <Button variant='outlined' style={{ color: 'green', border: '1px solid green' }}>Extend</Button>
                                                     </CardActions>
                                                 </Grid>

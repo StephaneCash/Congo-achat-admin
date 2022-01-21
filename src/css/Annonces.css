@@ -1,6 +1,14 @@
-#stat {
-    margin-right: 22px;
-}
-#stat .MuiCard-root{
+#stat .MuiCard-root {
     max-height: auto;
+}
+
+.pictures {
+    display: grid !important;
+    grid-template-columns: 300px 300px 300px 300px !important;
+    margin: auto;
+}
+
+.picture {
+    width: 100% !important;
+    height: 300px;
 }

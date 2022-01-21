@@ -17,17 +17,17 @@ function AppSettings() {
     const appSettingsCollection = collection(db, 'app-settings');
 
     const [dataProvinces, setDataProvinces] = useState([]);
-    const provincesCollection = collection(db, 'provinces');
+    //const provincesCollection = collection(db, 'provinces');
 
     const getAppSettings = async () => {
         const dataAppSettings = await getDocs(appSettingsCollection);
         setData(dataAppSettings.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
 
-    const getProvinces = async () => {
+    /*const getProvinces = async () => {
         const provinces = await getDocs(provincesCollection);
         setDataProvinces(provinces.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    }
+    }*/
 
     const changeEtatBtn = () => {
         setEtat(true);
@@ -41,14 +41,14 @@ function AppSettings() {
 
     useEffect(() => {
         getAppSettings();
-        getProvinces();
+        //getProvinces();
     });
 
     return (
         <>
             <div className="users">
                 <NavBar />
-                <Grid className="d-flex">
+                <div className="d-flex">
                     <Grid xs={2} sm={2}>
                         <LeftBar />
                     </Grid>
@@ -87,23 +87,26 @@ function AppSettings() {
                             </div>
 
                             <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
-                            <Grid className='d-flex'>
-                                <Grid sm={6} xs={6} item={true}>
+                            <div className='d-flex'>
+                                <div className="col-6">
                                     <Typography variant="h5" style={{ marginLeft: "10px" }}>Category</Typography>
-                                    <table className="table table-bordered table-bordeless table-striped mt-4" style={{ marginLeft: "10px" }}>
-                                        <thead>
-                                            <tr>
-                                                <th>Category</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Name</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </Grid>
-                                <Grid sm={6} xs={6} item={true} className="mt-2" style={{ marginLeft: "100px" }}>
+                                    {etat === true ? (
+                                        <>
+                                            <table className="table table-bordered table-bordeless table-striped mt-5" style={{ marginLeft: "10px" }}>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Category</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Name</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </>
+                                    ) : ''}
+                                </div>
+                                <div className="col-6" className="mt-2" style={{ marginLeft: "100px", width: "100%" }}>
+
                                     {etat === false ? (
                                         <>
                                             <Button variant="outlined" onClick={changeEtatBtn}>
@@ -117,11 +120,21 @@ function AppSettings() {
                                             </Button>
                                         </>
                                     )}
-                                </Grid>
-                            </Grid>
+                                    <table className="table table-bordered table-bordeless table-striped" style={{ marginRight: "50px", marginTop: "35px" }}>
+                                        <tbody>
+                                            <tr>
+                                                <th>Sub Category</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Name</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </Card>
                     </Grid>
-                </Grid>
+                </div>
             </div>
         </>
     )

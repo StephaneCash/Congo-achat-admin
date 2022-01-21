@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     griddash: {
         display: "flex",
         [theme.breakpoints.down("sm")]: {
-            display: "block"
+            display: "block",
         },
     },
     stat: {
@@ -70,7 +70,7 @@ const Annonces = () => {
                             </div>
                             <div className={classes.griddash}>
                                 <Grid item={true} id="stat" xs={12} sm={12}>
-                                    <div className="gallery">
+                                    <div className="gallery pictures">
                                         {data.length > 0 ? (<>
                                             {data.map((val, index) => {
                                                 return (

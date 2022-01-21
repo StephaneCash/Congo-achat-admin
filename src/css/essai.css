@@ -1,43 +1,37 @@
-.gallery {
-    margin-top: 10px;
-    -webkit-column-count: 4;
-    -moz-column-count: 4;
-
-}
-
-.gallery img{
-    width: 100%;
-}
 
 .gallery .pics {
     -webkit-transition: all 350ms ease;
     transition: all 350ms ease;
     cursor: pointer;
-    margin-bottom: 12px;
 }
 
-.gallery .pics:hover{
-    filter:opacity(.8);
+.gallery .MuiCardHeader-content {
+    height: 20px;
+}
+
+.gallery .MuiCard-root {
+    margin-left: 22px;
+    height: 50vh;
+    margin-top: 22px;
+    border: 1px solid silver;
+}
+
+.gallery .pics:hover {
+    filter: opacity(.8);
 }
 
 @media (max-width: 991px) {
-    .gallery {
-        -webkit-column-count: 2;
-        -moz-column-count: 2;
-        column-count: 2;
+    .pictures {
+        grid-template-columns: auto auto !important;
+        margin: auto;
     }
 }
 
 @media (max-width: 480px) {
-    .gallery {
-        -webkit-column-count: 1;
-        -moz-column-count: 1;
-        column-count: 1;
-        -webkit-column-width: 100%;
-        -mow-column-width: 100%;
-        column-width: 100%;
+    .pictures {
+        display: block !important;
+        grid-template-columns: auto  !important;
+        margin: auto;
     }
-    .gallery img {
-        max-height: 50vh;
-    }
+
 }
