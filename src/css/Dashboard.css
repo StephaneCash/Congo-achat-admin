@@ -1,0 +1,24 @@
+.dashboard #stat {
+    margin-right: 22px;
+}
+
+.users-link {
+    color: rgb(29, 27, 27);
+    text-decoration: none !important;
+}
+
+.dashboard .courb {
+    margin-right: 10px;
+}
+
+.dashboard a {
+    text-decoration: none !important;
+}
+
+.dashboard .span {
+    text-transform: lowercase !important;
+}
+
+.dashboard #courb{
+    margin-right: 20px;
+}

@@ -1,0 +1,19 @@
+
+.login .icon {
+    text-align: center !important;
+}
+
+.login .text {
+    color: rgb(189, 40, 40);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.login .MuiSvgIcon-root{
+    font-size:60px;
+    margin-top: -20px;
+}
+
+.login .textLog{
+    text-transform: lowercase;
+}
