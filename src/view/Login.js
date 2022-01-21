@@ -133,7 +133,7 @@ const Login = () => {
                                         <Button
                                             className={classes.btnSub}
                                             variant="contained"
-                                            color="primary" onClick={loginSubmit}>C <span className="textLog">onnexion <i className="fa fa-refresh fa-spin"></i></span></Button>
+                                            color="secondary" onClick={loginSubmit}>C <span className="textLog">onnexion <i className="fa fa-refresh fa-spin"></i></span></Button>
                                     </>
                                 ) : (
                                     <>

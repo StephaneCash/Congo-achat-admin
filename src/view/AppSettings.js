@@ -1,4 +1,4 @@
-import { Card, TextField } from '@material-ui/core';
+import { Button, Card, TextField, Typography } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
 import { Grid } from '@mui/material';
 import React from 'react';
@@ -9,6 +9,9 @@ import { db } from "../config/FirebaseConfig";
 import { useState, useEffect } from "react";
 
 function AppSettings() {
+
+    const [etat, setEtat] = useState(false);
+    const [showCategory, setShowCategory] = useState(false);
 
     const [data, setData] = useState([]);
     const appSettingsCollection = collection(db, 'app-settings');
@@ -24,6 +27,16 @@ function AppSettings() {
     const getProvinces = async () => {
         const provinces = await getDocs(provincesCollection);
         setDataProvinces(provinces.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+
+    const changeEtatBtn = () => {
+        setEtat(true);
+        setShowCategory(true);
+    }
+
+    const handleBtnHide = () => {
+        setEtat(false);
+        setShowCategory(false);
     }
 
     useEffect(() => {
@@ -56,14 +69,15 @@ function AppSettings() {
                                                             className="mt-1"
                                                             value={val.adPrice}
                                                             type="number"
-                                                            variant='outlined' 
+                                                            variant='filled'
                                                             label="Add Price" />
-
+                                                        <br />
                                                         <TextField
                                                             value={val.mPaisaID}
                                                             type="number"
-                                                            variant='outlined' 
+                                                            variant='filled'
                                                             label="Mpsa ID" />
+
                                                     </div>
                                                 )
                                             })
@@ -71,6 +85,40 @@ function AppSettings() {
                                     </tbody>
                                 </table>
                             </div>
+
+                            <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
+                            <Grid className='d-flex'>
+                                <Grid sm={6} xs={6} item={true}>
+                                    <Typography variant="h5" style={{ marginLeft: "10px" }}>Category</Typography>
+                                    <table className="table table-bordered table-bordeless table-striped mt-4" style={{ marginLeft: "10px" }}>
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Name</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </Grid>
+                                <Grid sm={6} xs={6} item={true} className="mt-2" style={{ marginLeft: "100px" }}>
+                                    {etat === false ? (
+                                        <>
+                                            <Button variant="outlined" onClick={changeEtatBtn}>
+                                                Afficher
+                                            </Button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Button variant="outlined" onClick={handleBtnHide}>
+                                                Cacher
+                                            </Button>
+                                        </>
+                                    )}
+                                </Grid>
+                            </Grid>
                         </Card>
                     </Grid>
                 </Grid>
