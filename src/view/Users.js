@@ -185,7 +185,7 @@ function Users() {
                             <table className="table table-bordered table-borderless table-hover">
                                 <thead style={{ backgroundColor: "#efefef" }}>
                                     <tr>
-                                        <th></th>
+                                        <th>#</th>
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Name</th>
@@ -207,7 +207,9 @@ function Users() {
                                                             <>
                                                                 <tr key={index}>
                                                                     <td>
-                                                                        <Checkbox className='checkbox-user' />
+                                                                        {
+                                                                            index + 1
+                                                                        }
                                                                     </td>
 
                                                                     <td>{val.username}</td>

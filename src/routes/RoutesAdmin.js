@@ -5,6 +5,7 @@ import Annonces from "../view/Annonces";
 import Login from "../view/Login";
 import Essai from "../view/essai";
 import AppSettings from "../view/AppSettings";
+import SubAdmins from "../view/SubAdmins";
 
 const RoutesAdmin = () => {
     return (
@@ -16,6 +17,7 @@ const RoutesAdmin = () => {
                 <Route path='annonces' element={<Annonces />} />
                 <Route path="essais" element={<Essai />} />
                 <Route path='appsetting' element={<AppSettings />} />
+                <Route path='subAdmins' element={<SubAdmins />} />
             </Routes>
         </BrowserRouter>
     )

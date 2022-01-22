@@ -76,7 +76,11 @@ const LeftBar = () => {
                 </div>
                 <div className={classes.item}>
                     <Build className={classes.icon} />
-                    <Typography className={classes.text}>Sous Admin</Typography>
+                    <Typography className={classes.text}>
+                        <NavLink to="/subAdmins">
+                            Sous Admins
+                        </NavLink>
+                    </Typography>
                 </div>
                 <div className={classes.item}>
                     <SupervisedUserCircle className={classes.icon} />

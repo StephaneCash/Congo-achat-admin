@@ -4,24 +4,24 @@
     box-shadow:none !important;
 }
 
-.users .btnChange{
+.subAdmins .btnChange{
     border: 2px solid silver !important;
     width: 40px !important;
     color: rgb(59, 55, 55) !important;
     margin-right: 5px;
 }
 
-.users .btn-add-user{
+.subAdmins .btn-add-user{
     color: white;
     border: 2px solid silver !important;
     background-color: #c72f3c;
 }
 
-.users .btn-add-user:hover{
+.subAdmins .btn-add-user:hover{
     color: #fff !important;
 }
 
-.users .faUser{
+.subAdmins .faUser{
     border-radius: 100%;
     background-color:#efefef !important;
     width: 20px;
@@ -29,25 +29,24 @@
     color: rgb(54, 51, 51) !important;
 }
 
-.users table thead tr th {
+.subAdmins table thead tr th {
     font-size: 14px;
     color: #555 !important;
 }
 
-.users .buttonAdd{
+.subAdmins .buttonAdd{
     border-radius: 3px;
     padding: 5px;
     width: 40px;
 }
 
-.users .input-group-text{
+.subAdmins .input-group-text{
     height:40px;
     line-height:25px;
 }
 
 table tbody tr td{
     font-size:13px;
-    cursor:pointer
 }
 
 .btn {
