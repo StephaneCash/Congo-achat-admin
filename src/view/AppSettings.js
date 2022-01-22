@@ -7,6 +7,8 @@ import NavBar from '../includes/NavBar';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from "../config/FirebaseConfig";
 import { useState, useEffect } from "react";
+import Load from '../includes/Load';
+import "../css/AppSettings.css";
 
 function AppSettings() {
 
@@ -46,7 +48,7 @@ function AppSettings() {
 
     return (
         <>
-            <div className="users">
+            <div className="users appSettings">
                 <NavBar />
                 <div className="d-flex">
                     <Grid xs={2} sm={2}>
@@ -58,11 +60,16 @@ function AppSettings() {
                                 <h4 className="align-center"> App Settings <Settings /> </h4>
                                 <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                             </div>
+                            {data.length <= 0 && (
+                                <div className="loader">
+                                    <Load />
+                                </div>
+                            )}
                             <div className="col-6">
                                 <table className="table table-striped">
                                     <tbody>
                                         {
-                                            data.map((val, index) => {
+                                            data.length > 0 && data.map((val, index) => {
                                                 return (
                                                     <div key={index}>
                                                         <TextField
@@ -120,16 +127,20 @@ function AppSettings() {
                                             </Button>
                                         </>
                                     )}
-                                    <table className="table table-bordered table-bordeless table-striped" style={{ marginRight: "50px", marginTop: "35px" }}>
-                                        <tbody>
-                                            <tr>
-                                                <th>Sub Category</th>
-                                            </tr>
-                                            <tr>
-                                                <td>Name</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    {etat === true && (
+                                        <>
+                                            <table className="table table-bordered table-bordeless table-striped" style={{ marginRight: "50px", marginTop: "35px" }}>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Sub Category</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Name</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         </Card>

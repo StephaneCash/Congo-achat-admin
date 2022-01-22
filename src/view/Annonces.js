@@ -71,7 +71,7 @@ const Annonces = () => {
                             <div className={classes.griddash}>
                                 <Grid item={true} id="stat" xs={12} sm={12}>
                                     <div className="gallery pictures">
-                                        {data.length > 0 ? (<>
+                                        {data.length > 0 && (<>
                                             {data.map((val, index) => {
                                                 return (
                                                     <div className="pics" key={index}>
@@ -98,13 +98,15 @@ const Annonces = () => {
                                                     </div>
                                                 )
                                             })}
-                                        </>) : (<>
-                                            <div className="loader" style={{ margin: '0 auto' }}>
-                                                <Load style={{ margin: '0 auto', color: 'red'}} />
-                                            </div>
-                                        </>)}
+                                        </>)
+                                        }
 
                                     </div>
+                                    {data.length <= 0 && (<>
+                                        <Grid xs={12} sm={12} className="loader" item={true}>
+                                            <Load style={{ color: 'red' }} />
+                                        </Grid>
+                                    </>)}
                                 </Grid>
                             </div>
                         </Card>

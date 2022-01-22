@@ -4,11 +4,17 @@
 
 .pictures {
     display: grid !important;
-    grid-template-columns: 300px 300px 300px 300px !important;
+    grid-template-columns: 400px 400px 400px !important;
     margin: auto;
 }
 
 .picture {
     width: 100% !important;
     height: 300px;
+}
+
+#stat .loader {
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
 }
