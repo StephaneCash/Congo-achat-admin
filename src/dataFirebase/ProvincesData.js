@@ -1,30 +1,14 @@
-import React from 'react';
+import { db } from "../config/FirebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
+import {useState} from "react";
 
-function ProvincesData() {
-    return <div>
-        {<div className="pics" key={index}>
-            <Card sx={{ maxWidth: 345 }}>
-                <CardHeader
-                    subheader={val.subCategory}
-                />
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image={val.photos}
-                />
-                <CardActions disableSpacing>
-                    <Typography>
-                        <strong style={{ fontSize: '26px' }}>{val.productName}</strong> <br />
-                        {val.province}, {val.city}
-                    </Typography>
-                    <Typography variant="h5"></Typography>
-                </CardActions>
-                <CardActions>
-                    <Button variant='outlined' onClick={() => detailAnnonce(val.id)}>Détail</Button>
-                </CardActions>
-            </Card>
-        </div>}
-    </div>;
+const provincesCollection = collection(db, 'ads');
+let data = [];
+
+export default {
+    collectionProvinces: async () => {
+        const provinces = await getDocs(provincesCollection);
+        data.push(provinces.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        return console.log(data);
+    }
 }
-
-export default ProvincesData;

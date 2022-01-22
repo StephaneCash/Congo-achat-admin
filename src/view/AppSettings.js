@@ -16,7 +16,7 @@ function AppSettings() {
     const [showCategory, setShowCategory] = useState(false);
 
     const [data, setData] = useState([]);
-    const appSettingsCollection = collection(db, 'app-settings');
+    const appSettingsCollection = collection(db, 'app-settings',);
 
     const [dataProvinces, setDataProvinces] = useState([]);
     //const provincesCollection = collection(db, 'provinces');
@@ -26,10 +26,12 @@ function AppSettings() {
         setData(dataAppSettings.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
 
-    /*const getProvinces = async () => {
-        const provinces = await getDocs(provincesCollection);
-        setDataProvinces(provinces.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    }*/
+
+    const getProvinces = async () => {
+        
+        //const provinces = await getDocs(provincesCollection);
+        //setDataProvinces(provinces.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
 
     const changeEtatBtn = () => {
         setEtat(true);
