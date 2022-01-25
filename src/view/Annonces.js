@@ -75,18 +75,18 @@ const Annonces = () => {
                                             {data.map((val, index) => {
                                                 return (
                                                     <div className="pics" key={index}>
-                                                        <Card sx={{ maxWidth: 345 }}>
+                                                        <Card sx={{ maxWidth: 34 }}>
                                                             <CardHeader
                                                                 subheader={val.subCategory}
                                                             />
                                                             <CardMedia
                                                                 component="img"
-                                                                height="194"
+                                                                height="150"
                                                                 image={val.photos}
                                                             />
                                                             <CardActions disableSpacing>
                                                                 <Typography>
-                                                                    <strong style={{ fontSize: '26px' }}>{val.productName}</strong> <br />
+                                                                    <strong style={{ fontSize: '20px' }}>{val.productName}</strong> <br />
                                                                     {val.province}, {val.city}
                                                                 </Typography>
                                                                 <Typography variant="h5"></Typography>

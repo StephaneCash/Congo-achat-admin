@@ -7,17 +7,23 @@
 
 .gallery .MuiCardHeader-content {
     height: 20px;
+    font-size: 12px !important;
+}
+
+.gallery .MuiTypography-body1{
+    font-size: 12px !important;
+    font-family: Segoe UI;
 }
 
 .gallery .MuiCard-root {
     margin-left: 22px;
-    height: 50vh;
+    height: 42vh;
     margin-top: 22px;
     border: 1px solid silver;
 }
 
 .gallery .pics:hover {
-    filter: opacity(.8);
+    filter: opacity(.5);
 }
 
 @media (max-width: 991px) {

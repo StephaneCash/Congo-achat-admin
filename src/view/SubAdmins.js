@@ -1,4 +1,4 @@
-import { Card, Checkbox, Grid, Button } from '@material-ui/core';
+import { Card, Grid, Button } from '@material-ui/core';
 import { Build, PersonAdd } from '@material-ui/icons';
 import React from 'react';
 import LeftBar from '../includes/LeftBar';
@@ -14,10 +14,21 @@ function SubAdmins() {
     const subAdmins = collection(db, 'subAdmins');
 
     const [data, setData] = useState([]);
+    const [idDetail, setIdDetail] = useState();
+    const [inputValueSearch, setInputValueSearch] = useState("");
 
     const getSubAdmins = async () => {
         const dataSubAdmin = await getDocs(subAdmins);
         setData(dataSubAdmin.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    const detailSudAdmin = (id) => {
+        setIdDetail(id);
+    };
+
+    const handleInput = (e) =>{
+        setInputValueSearch(e.target.value);
+        console.log(inputValueSearch);
     }
 
     useEffect(() => {
@@ -50,6 +61,7 @@ function SubAdmins() {
                                                     className="form-control input-search "
                                                     placeholder="Rechercher"
                                                     autoComplete="off"
+                                                    onChange={handleInput}
                                                 />
                                                 <div className="input-group-append">
                                                     <i className="input-group-text fa fa-search fa-1x" aria-hidden="true"></i>
@@ -71,78 +83,121 @@ function SubAdmins() {
                             </div>
 
                             <div className="col-12 mt-3">
-                                <table className="table table-bordered table-borderless table-hover">
-                                    <thead style={{ backgroundColor: "#efefef" }}>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Nom </th>
-                                            <th>Numéro De Téléphone </th>
-                                            <th>E-mail </th>
-                                            <th>Date De Création </th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            data.length > 0 ? (
-                                                <>
-                                                    {
-                                                        data.map((val, index) => {
-                                                            return (
-                                                                <>
-                                                                    <tr key={index}>
-                                                                        <td>
-                                                                            {
-                                                                                index + 1
-                                                                            }
-                                                                        </td>
+                                <div className="sudAdminsList">
+                                    <table className="table table-bordered table-borderless table-hover">
+                                        <thead style={{ backgroundColor: "#efefef" }}>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nom </th>
+                                                <th>Numéro De Téléphone </th>
+                                                <th>E-mail </th>
+                                                <th>Date De Création </th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                data.length > 0 ? (
+                                                    <>
+                                                        {
+                                                            data.filter((val) => {
+                                                                let value = val.name.toLowerCase();
+                                                                return value.includes(inputValueSearch);
+                                                            }).map((val, index) => {
+                                                                return (
+                                                                    <>
+                                                                        <tr key={index}>
+                                                                            <td>
+                                                                                {
+                                                                                    index + 1
+                                                                                }
+                                                                            </td>
 
-                                                                        <td>{val.name}</td>
-                                                                        <td>{val.numero}</td>
-                                                                        <td>{val.email}</td>
-                                                                        <td>{val.time}</td>
+                                                                            <td>{val.name}</td>
+                                                                            <td>{val.numero}</td>
+                                                                            <td>{val.email}</td>
+                                                                            <td>{val.time}</td>
 
-                                                                        <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
-                                                                            <button type="button"
-                                                                                className="btn btnChange">
-                                                                                <i className="fa fa-edit"></i>
-                                                                            </button>
-                                                                            <button type="button"
-                                                                                className="btn btnChange">
-                                                                                <i className="fa fa-info"></i>
-                                                                            </button>
-                                                                            <button type="button"
-                                                                                className="btn btnChange">
-                                                                                <i className="fa fa-trash"></i>
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                </>
-                                                            )
-                                                        })
+                                                                            <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
+                                                                                <button type="button"
+                                                                                    className="btn btnChange">
+                                                                                    <i className="fa fa-edit"></i>
+                                                                                </button>
+                                                                                <button type="button"
+                                                                                    onClick={() => detailSudAdmin(val.id)}
+                                                                                    className="btn btnChange">
+                                                                                    <i className="fa fa-info"></i>
+                                                                                </button>
+                                                                                <button type="button"
+                                                                                    className="btn btnChange">
+                                                                                    <i className="fa fa-trash"></i>
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </>
+                                                                )
+                                                            })
 
-                                                    }
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <tr>
-                                                        <td colSpan="8px" style={{ textAlign: 'center' }}>
-                                                            <Load />
-                                                        </td>
-                                                    </tr>
-                                                </>
-                                            )
-                                        }
-                                    </tbody>
-                                </table>
-                                <nav className="d-flex justify-content-center">
-                                    <ul className="pagination">
-
-                                    </ul>
-                                </nav>
+                                                        }
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <tr>
+                                                            <td colSpan="8px" style={{ textAlign: 'center' }}>
+                                                                <Load />
+                                                            </td>
+                                                        </tr>
+                                                    </>
+                                                )
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </Card>
+
+                        {idDetail !== undefined && (<>
+                            <Grid xs={12} ys={12} style={{ marginTop: "10px" }}>
+                                <Card>
+                                    <div className="detailSudAdmin">
+                                        {data.map((val, index) => {
+                                            if (val.id === idDetail) {
+                                                return (
+                                                    <>
+                                                        <table className="table table-bordered table-borderless table-hover">
+                                                            <tbody key={index}>
+                                                                <tr>
+                                                                    <td colSpan="2px" style={{ textAlign: 'center', fontSize: '15px' }}>Détail et opérations</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style={{ fontSize: '15px' }}>Nom</td>
+                                                                    <td>{val.name}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Email</td>
+                                                                    <td>{val.email}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colSpan="2px">
+                                                                        <Button variant="outlined">
+                                                                            Bloquer
+                                                                        </Button>
+                                                                    </td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </>
+                                                )
+                                            }
+                                        })}
+                                    </div>
+                                </Card>
+                            </Grid>
+
+                        </>)}
                     </Grid>
+
                 </Grid>
             </div>
         </>
