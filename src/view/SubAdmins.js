@@ -8,6 +8,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import Load from '../includes/Load';
 import "../css/SubAdmins.css";
+import AddSousAdmin from '../modal/add-SouAdmins';
 
 function SubAdmins() {
 
@@ -26,10 +27,20 @@ function SubAdmins() {
         setIdDetail(id);
     };
 
-    const handleInput = (e) =>{
+    const handleInput = (e) => {
         setInputValueSearch(e.target.value);
         console.log(inputValueSearch);
     }
+
+    const [etatModal, setEtatModal] = useState(false);
+
+    const addSudAdminModal = () => {
+        setEtatModal(true)
+    };
+
+    const handleCloseModal = () => {
+        setEtatModal(false);
+    };
 
     useEffect(() => {
         getSubAdmins();
@@ -72,6 +83,7 @@ function SubAdmins() {
                                 </div>
                                 <div className="col-7 mt-3">
                                     <Button
+                                        onClick={addSudAdminModal}
                                         type="button"
                                         variant="contained"
                                         style={{ float: "right", backgroundColor: "#973c44", color: "#fff" }}
@@ -200,6 +212,10 @@ function SubAdmins() {
 
                 </Grid>
             </div>
+            <AddSousAdmin
+                show={etatModal}
+                close={handleCloseModal}
+            />
         </>
     );
 }

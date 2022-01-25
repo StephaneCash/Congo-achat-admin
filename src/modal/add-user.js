@@ -1,6 +1,7 @@
 import { Modal } from "react-bootstrap";
 import "../css/addUserModal.css";
 import { makeStyles } from "@material-ui/core/styles"
+import { Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
         border: "2px solid silver",
         boxShadow: theme.shadows[5],
-        top: '44%',
+        top: '40%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
         height: "auto",
@@ -44,8 +45,9 @@ const AddUser = (props) => {
                             <div className="row">
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label>Entrer un username</label>
-                                        <input
+                                        <TextField
+                                            label="Username"
+                                            variant="outlined"
                                             type="text"
                                             className="form-control 
                                             mt-2" id="username"
@@ -53,77 +55,77 @@ const AddUser = (props) => {
                                             placeholder="Un username"
                                             value={username}
                                         />
-                                        <span style={{ color: "red" }}> {ListError.username} </span>
 
                                     </div>
                                     <div className="form-group">
-                                        <label className="label mt-4">Entrer une adresse email</label>
-                                        <input
+                                        <TextField
                                             type="text"
-                                            className="form-control mt-2"
+                                            variant="outlined"
+                                            className="form-control mt-3"
                                             id="email"
+                                            label="Email"
                                             onChange={e => onChange(e)}
                                             placeholder="Adresse email"
                                             value={email}
                                         />
-                                        <span style={{ color: "red" }}> {ListError.email} </span>
                                     </div>
                                     <div className="form-group">
-                                        <label className="label mt-4">Entrer un nom</label>
-                                        <input
+                                        <TextField
                                             type="text"
-                                            className="form-control mt-2"
+                                            label="Nom"
+                                            variant="outlined"
+                                            className="form-control mt-3"
                                             id="name"
                                             onChange={e => onChange(e)}
                                             placeholder="Un nom"
                                             value={name}
                                         />
-                                        <span style={{ color: "red" }}> {ListError.name} </span>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label>Entrer un numéro de téléphone</label>
-                                        <input
+                                        <TextField
                                             type="text"
+                                            label="Téléphone"
                                             className="form-control mt-2"
                                             id="phoneNumber"
                                             placeholder="Un numéro de téléphone"
                                             onChange={e => onChange(e)}
+                                            variant="outlined"
                                             value={phoneNumber}
                                         />
-                                        <span style={{ color: "red" }}> {ListError.phone} </span>
                                     </div>
                                     <div className="form-group">
-                                        <label className="label mt-4">Province</label>
-                                        <input
+                                        <TextField
                                             type="text"
-                                            className="form-control"
+                                            className="form-control mt-3"
                                             placeholder="Province"
                                             id="province"
+                                            label="Province"
+                                            variant="outlined"
                                             onChange={e => onChange(e)}
                                             value={province}
                                         />
-                                        <span style={{ color: "red" }}> {ListError.province} </span>
                                     </div>
                                     <div className="form-group">
-                                        <label className="label mt-4">Entrer le nom de la ville</label>
-                                        <input
+                                        <TextField
                                             type="text"
-                                            className="form-control mt-2"
+                                            className="form-control mt-3"
                                             id="city"
+                                            label="City"
+                                            variant="outlined"
                                             onChange={e => onChange(e)}
                                             placeholder="Une ville"
                                             value={city}
                                         />
-                                        <span style={{ color: "red" }}> {ListError.city} </span>
                                     </div>
                                     <div className="form-group">
-                                        <label className="label mt-4">Entrer le montant de la balance</label>
-                                        <input
+                                        <TextField
                                             type="text"
-                                            className="form-control mt-2"
+                                            variant="outlined"
+                                            className="form-control mt-3"
                                             id="balance"
+                                            label="Balance"
                                             onChange={e => onChange(e)}
                                             placeholder="Une balance"
                                             value={balance}
@@ -135,16 +137,16 @@ const AddUser = (props) => {
                         </div>
                     </form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <button type="submit" className="btn" onClick={props.close}>Annuler</button>
-                    <button
+                <Modal.Footer style={{paddingRight: "30px"}}>
+                    <Button type="submit" className="btn" onClick={props.close}>Annuler</Button>
+                    <Button
                         type="submit"
                         className="btn"
-                        style={{ backgroundColor: 'white', color: '#555' }}
+                        style={{ backgroundColor: 'white', color: '#555', marginLeft:"10px" }}
                         onClick={() => handleSubmitUser()}
                     >
                         {id ? "Editer" : "Ajouter"}
-                    </button>
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>
