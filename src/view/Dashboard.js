@@ -46,10 +46,18 @@ function Dashboard() {
     const [data, setData] = useState([]);
     const usersCollection = collection(db, "users");
     const annoncesCollection = collection(db, "ads");
+    const provincesCollection = collection(db, "provinces");
 
     const getUsers = async () => {
         const dataUsers = await getDocs(usersCollection);
         setData(dataUsers.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+
+    const [prov, setProv] = useState([]);
+
+    const getProvinces = async () => {
+        const dataProvinces = await getDocs(provincesCollection);
+        setProv(dataProvinces.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
 
     const [annonces, setAnnonces] = useState([]);
@@ -62,6 +70,7 @@ function Dashboard() {
     useEffect(() => {
         getUsers();
         getAnnonces();
+        getProvinces();
     }, []);
 
     const data4 = {
@@ -153,7 +162,7 @@ function Dashboard() {
                                                     </CardContent>
                                                     <CardActions>
                                                         <Link to="/users">
-                                                            <Button variant="contained" size="small" style={{backgroundColor:"#973c44", color:"#fff"}}>V<span className="span" >oir tout</span></Button>
+                                                            <Button variant="contained" size="small" style={{ backgroundColor: "#973c44", color: "#fff" }}>V<span className="span" >oir tout</span></Button>
                                                         </Link>
                                                     </CardActions>
                                                 </div>
@@ -174,7 +183,9 @@ function Dashboard() {
                                                     </CardContent>
                                                     <CardActions>
                                                         <Link to="/annonces">
-                                                            <Button variant="contained" size="small" style={{backgroundColor:"#973c44", color:"#fff"}}>
+                                                            <Button
+                                                                variant="contained"
+                                                                size="small" style={{ backgroundColor: "#973c44", color: "#fff" }}>
                                                                 V<span className="span">oir tout</span>
                                                             </Button>
                                                         </Link>
@@ -186,7 +197,7 @@ function Dashboard() {
                                         <Grid sm={4} xs={4} item={true} className={classes.stat} id="stat">
                                             <Card>
                                                 <CardHeader
-                                                    title="Users"
+                                                    title="Provinces"
                                                     avatar={
                                                         <Group />
                                                     }
@@ -194,11 +205,13 @@ function Dashboard() {
                                                 />
                                                 <div className="d-flex">
                                                     <CardContent variant="body">
-                                                        <Typography variant="h5" style={{ color: "#555" }}>{data.length}</Typography>
+                                                        <Typography variant="h5" style={{ color: "#555" }}>
+                                                            {prov.length}
+                                                        </Typography>
                                                     </CardContent>
                                                     <CardActions>
                                                         <Link to="/users">
-                                                            <Button variant="contained" size="small" style={{backgroundColor:"#973c44", color:"#fff"}}>
+                                                            <Button variant="contained" size="small" style={{ backgroundColor: "#973c44", color: "#fff" }}>
                                                                 V<span className="span">oir tout</span>
                                                             </Button>
                                                         </Link>
@@ -210,7 +223,7 @@ function Dashboard() {
                                         <Grid sm={4} xs={4} item={true} className={classes.stat}>
                                             <Card>
                                                 <CardHeader
-                                                    title="Users"
+                                                    title="Clients"
                                                     avatar={
                                                         <Group />
                                                     }
@@ -222,7 +235,7 @@ function Dashboard() {
                                                     </CardContent>
                                                     <CardActions>
                                                         <Link to="/users">
-                                                            <Button variant="contained" size="small" style={{backgroundColor:"#973c44", color:"#fff"}}>
+                                                            <Button variant="contained" size="small" style={{ backgroundColor: "#973c44", color: "#fff" }}>
                                                                 V<span className="span">oir tout</span>
                                                             </Button>
                                                         </Link>

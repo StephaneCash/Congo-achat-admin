@@ -6,6 +6,8 @@ import Login from "../view/Login";
 import Essai from "../view/essai";
 import AppSettings from "../view/AppSettings";
 import SubAdmins from "../view/SubAdmins";
+import Clients from "../view/Clients";
+import Provinces from "../view/Provinces"
 
 const RoutesAdmin = () => {
     return (
@@ -18,6 +20,8 @@ const RoutesAdmin = () => {
                 <Route path="essais" element={<Essai />} />
                 <Route path='appsetting' element={<AppSettings />} />
                 <Route path='subAdmins' element={<SubAdmins />} />
+                <Route path='clients' element={<Clients />} />
+                <Route path="provinces" element={<Provinces />} />
             </Routes>
         </BrowserRouter>
     )
