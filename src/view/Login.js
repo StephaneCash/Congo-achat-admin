@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
             maxWidth: "30%",
             marginTop: "10px",
             minHeight: "60vh",
-            padding: "10px",
+            padding: "10px 20px",
             margin: "0 auto",
             border: "1px solid silver"
         },
@@ -60,29 +60,20 @@ const Login = () => {
 
     let errorsList = {};
 
+    console.log(errorsList);
+
     const [etatBtn, setEtatBtn] = useState(false);
 
+    let username = document.querySelector("#username");
+    let password = document.querySelector('#password');
+
     const loginSubmit = (e) => {
-        e.preventDefault();
+
         setEtatBtn(true);
         const data = {
             username: valuesInput.username,
             password: valuesInput.password,
         }
-
-        axios.post(`http://localhost:8000/api/login`, data).then(res => {
-            console.log(res);
-            if (res.data.status === "200") {
-                navigate('/dashboard');
-                console.log('COOLLLL');
-            } else {
-                errorsList.username = res.data.Erreur_validators.username;
-                errorsList.password = res.data.Erreur_validators.password;
-                console.log(errorsList);
-            }
-        }).catch(err => {
-            console.log(err);
-        })
     }
 
     return (
@@ -99,6 +90,7 @@ const Login = () => {
                             </CardContent>
                         </Grid>
                         <Grid sm={12} xs={12} item={true}>
+                            {errorsList.length > 0 ? (<p><span>{errorsList.password || errorsList.username}</span></p>) : ""}
                             <CardContent>
                                 <TextField
                                     className={classes.input}
@@ -111,7 +103,7 @@ const Login = () => {
                                     value={valuesInput.username}
                                 />
                                 <br />
-                                {errorsList.length > 0 ? (<p><span>{ }</span></p>) : ""}
+
                                 <TextField
                                     className={classes.input}
                                     id="password"

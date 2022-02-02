@@ -211,7 +211,7 @@ function Users() {
                                 </thead>
                                 <tbody>
                                     {
-                                        data.length > 0 && time === false ? (
+                                        data.length > 0 ? (
                                             <>
                                                 {
                                                     data.filter(val => {
@@ -262,15 +262,7 @@ function Users() {
                                             <>
                                                 <tr>
                                                     <td colSpan="8px" style={{ textAlign: 'center' }}>
-                                                        {time === false ? (<> <Load /></>)
-                                                            : (<>
-                                                                <h5>Temps de chargement dépassé... Vérifier votre connexion internet.</h5>
-                                                                <Button
-                                                                    onClick={refeshPage}
-                                                                    size='small'>
-                                                                    Refresh la page
-                                                                </Button>
-                                                            </>)}
+                                                        <Load />
                                                     </td>
                                                 </tr>
                                             </>

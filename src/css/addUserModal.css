@@ -9,6 +9,10 @@
     
 }
 
+.modal{
+    margin-top: 10px ;
+}
+
 
 #add-user .modal-body {
     font-size: 16px;
