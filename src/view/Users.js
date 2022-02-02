@@ -74,12 +74,21 @@ function Users() {
         seteDtailModal(false);
     }
 
+    const [time, setTime] = useState(false);
+
+    const timeLoad = () => {
+        setTimeout(() => {
+            setTime(true);
+        }, 10000);
+    }
+
     const pageSize = 7;
 
     const getUsers = async () => {
         const dataUsers = await getDocs(usersCollection);
         setData(dataUsers.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         setPaginated(_(dataUsers.docs).slice(0).take(pageSize).value());
+        timeLoad();
     };
 
     useEffect(() => {
@@ -111,6 +120,11 @@ function Users() {
     const handleUpdateUser = (val) => {
         setFormData(val);
         showModalAddUser();
+    };
+
+    const refeshPage = () => {
+        getUsers();
+        setTime(false);
     }
 
     const handleDeleteUser = async (id) => {
@@ -197,7 +211,7 @@ function Users() {
                                 </thead>
                                 <tbody>
                                     {
-                                        data.length > 0 ? (
+                                        data.length > 0 && time === false ? (
                                             <>
                                                 {
                                                     data.filter(val => {
@@ -248,7 +262,15 @@ function Users() {
                                             <>
                                                 <tr>
                                                     <td colSpan="8px" style={{ textAlign: 'center' }}>
-                                                        <Load />
+                                                        {time === false ? (<> <Load /></>)
+                                                            : (<>
+                                                                <h5>Temps de chargement dépassé... Vérifier votre connexion internet.</h5>
+                                                                <Button
+                                                                    onClick={refeshPage}
+                                                                    size='small'>
+                                                                    Refresh la page
+                                                                </Button>
+                                                            </>)}
                                                     </td>
                                                 </tr>
                                             </>
