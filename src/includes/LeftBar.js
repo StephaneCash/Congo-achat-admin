@@ -84,7 +84,11 @@ const LeftBar = () => {
                 </div>
                 <div className={classes.item}>
                     <SupervisedUserCircle className={classes.icon} />
-                    <Typography className={classes.text}>Gestion Clients</Typography>
+                    <Typography className={classes.text}>
+                        <NavLink to='/clients'>
+                            Gestion Clients
+                        </NavLink>
+                    </Typography>
                 </div>
                 <div className={classes.item}>
                     <LocationOn className={classes.icon} />
@@ -103,7 +107,11 @@ const LeftBar = () => {
                 </div>
                 <div className={classes.item}>
                     <ApartmentTwoTone className={classes.icon} />
-                    <Typography className={classes.text}>Province</Typography>
+                    <Typography className={classes.text}>
+                        <NavLink to="/provinces">
+                            Provinces
+                        </NavLink>
+                    </Typography>
                 </div>
                 <div className={classes.item}>
                     <KeyboardArrowDownOutlined className={classes.icon} />
