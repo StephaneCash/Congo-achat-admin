@@ -3,8 +3,7 @@ import { Person } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/Styles";
 import "../css/Login.css";
 import { useNavigate } from "react-router-dom";
-import { useContext, useRef, useState } from "react";
-import GoogleButton from "react-google-button";
+import { useState } from "react";
 import { useUserAuth } from "../config/useContextComponent";
 
 
@@ -91,7 +90,7 @@ const Login = () => {
                                 <h3 style={{ textAlign: "center" }}>S'identifier</h3>
 
                             </Grid>
-                            <div style={{width: '91%', margin: '0 auto'}}>{error !== "" && <div className="alert alert-danger">{error.code}</div>}</div>
+                            <div style={{ width: '91%', margin: '0 auto' }}>{error !== "" && <div className="alert alert-danger">{error.code}</div>}</div>
                             <form onSubmit={loginSubmit}>
                                 <Grid sm={12} xs={12} item={true}>
                                     <CardContent>
@@ -115,7 +114,6 @@ const Login = () => {
                                             onChange={(e) => setPassword(e.target.value)}
                                             name="password"
                                         />
-                                        <GoogleButton className={classes.btnSub} />
 
                                     </CardContent>
                                 </Grid>
@@ -123,7 +121,7 @@ const Login = () => {
                                     <CardContent>
 
                                         <Button
-                                        style={{height:"50px"}}
+                                            style={{ height: "50px" }}
                                             type="submit"
                                             className={classes.btnSub}
                                             variant="contained"

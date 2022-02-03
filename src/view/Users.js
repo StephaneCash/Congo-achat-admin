@@ -38,7 +38,9 @@ function Users() {
         setFormData({ ...formData, [id]: value });
     }
 
-    const handleSubmitUser = async () => {
+    const handleSubmitUser = async (e) => {
+
+        e.preventDefault();
 
         if (formData.id) {
             const userDoc = doc(db, 'users', formData.id);
