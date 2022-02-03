@@ -1,12 +1,15 @@
 
-.login .icon {
-    text-align: center !important;
+.login  {
+    background-color: #efefef;
+    height:100vh;
+    margin-top: -10px;
 }
 
 .login .text {
     color: rgb(189, 40, 40);
     font-weight: bold;
     font-size: 20px;
+    text-align: center
 }
 
 .login .MuiSvgIcon-root{

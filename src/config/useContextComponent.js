@@ -1,47 +1,33 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { auth } from "./FirebaseConfig";
 import {
     signInWithEmailAndPassword,
-    onAuthStateChanged
+    signOut,
+    onAuthStateChanged,
 } from "firebase/auth";
-import {auth} from "../config/FirebaseConfig";
 
-export const UserContext = createContext();
 
-export function UserContextProvider(props) {
+const userAuthContext = createContext();
 
-    const [modalState, setModalState] = useState({
-        signUpModal: true,
-        signInModal: false
-    });
+export function UserAuthContextProvider({ children }) {
+    const [user, setUser] = useState("");
 
-    const [currentUser, setCurrentUser] = useState();
-    const [loadingData, setLoadingData] = useState(true);
-
-    const toggleModals = (modal) => {
-        if (modal === "signIn") {
-            setModalState({
-                signUpModal: false,
-                signInModal: true
-            });
-        }
-        if (modal === "signIn") {
-            setModalState({
-                signUpModal: true,
-                signInModal: false
-            });
-        }
-        if (modal === "close") {
-            setModalState({
-                signUpModal: false,
-                signInModal: false
-            });
-        }
+    function login(email, password) {
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
-    return (
-        <UserContext.Provider value={{ modalState, toggleModals }}>
-            {props.children}
-        </UserContext.Provider>
-    )
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+        return () => {
+            unsubscribe();
+        }
+    }, [])
 
-}
+    return <userAuthContext.Provider value={{ user, login }}> {children} </userAuthContext.Provider>;
+};
+
+export function useUserAuth() {
+    return useContext(userAuthContext);
+};

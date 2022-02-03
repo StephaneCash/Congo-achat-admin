@@ -83,20 +83,8 @@ const LeftBar = () => {
                     </Typography>
                 </div>
                 <div className={classes.item}>
-                    <SupervisedUserCircle className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to='/clients'>
-                            Gestion Clients
-                        </NavLink>
-                    </Typography>
-                </div>
-                <div className={classes.item}>
                     <LocationOn className={classes.icon} />
                     <Typography className={classes.text}>Trouver vos clients</Typography>
-                </div>
-                <div className={classes.item}>
-                    <Note className={classes.icon} />
-                    <Typography className={classes.text}>Gestion Postes</Typography>
                 </div>
                 <div className={classes.item}>
                     <MonetizationOn className={classes.icon} /> <Typography className={classes.text}> Gestion monétaire</Typography>
