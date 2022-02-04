@@ -58,6 +58,7 @@ const NavBar = () => {
     const logOutHandle = async () => {
         try {
             await logOut();
+            localStorage.removeItem('userAuth')
         } catch (err) {
             console.log(err.message);
         }

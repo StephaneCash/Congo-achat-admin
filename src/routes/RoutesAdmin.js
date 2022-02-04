@@ -12,25 +12,19 @@ import ProtectedRoute from "../view/ProtectedRoute";
 
 const RoutesAdmin = () => {
 
+    //let name = localStorage.getItem("userAuth");
+
     return (
         <BrowserRouter>
             <Routes>
-
-                <Route path='dashboard'
-                    element={
-                        <ProtectedRoute>
-                            <Dashboard />
-                        </ProtectedRoute>
-                    } />
+                <Route path="/" element={<Login />} />
+                <Route path='dashboard' element={<ProtectedRoute><Dashboard /> </ProtectedRoute>} />
                 <Route path='users' element={<ProtectedRoute><Users /></ProtectedRoute>} />
                 <Route path='annonces' element={<ProtectedRoute><Annonces /></ProtectedRoute>} />
                 <Route path="essais" element={<ProtectedRoute><Essai /></ProtectedRoute>} />
                 <Route path='appsetting' element={<ProtectedRoute><AppSettings /></ProtectedRoute>} />
                 <Route path='subAdmins' element={<ProtectedRoute><SubAdmins /></ProtectedRoute>} />
                 <Route path="provinces" element={<ProtectedRoute><Provinces /></ProtectedRoute>} />
-
-                <Route path="/" element={ <Login />} />
-
             </Routes>
         </BrowserRouter>
     )

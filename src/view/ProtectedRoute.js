@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
-import {Navigate} from "react-router-dom";
-import {useUserAuth} from "../config/useContextComponent";
+import React from 'react';
+import { Navigate } from "react-router-dom";
+import { useUserAuth } from "../config/useContextComponent";
 
 function ProtectedRoute({ children }) {
 
-    let {user} = useUserAuth();
+    let { user } = useUserAuth();
 
-    let etat = false;
-
+    /*let name = localStorage.getItem('userAuth');
     if(user){
-        etat = true;
-    }
+        name = user.email;
+        localStorage.setItem('userAuth', "auth");
+    }*/
 
-    sessionStorage.setItem("userAuth", user.email);
-    
-    if(!etat){
+    if (!user) {
         return <Navigate to="/" />
     };
 
