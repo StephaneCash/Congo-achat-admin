@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import AddUser from "../modal/add-user";
 import _ from "lodash";
 import NavBar from "../includes/NavBar";
-import { Button, Card, Grid, Checkbox } from "@material-ui/core";
+import { Button, Card, Grid } from "@material-ui/core";
 import LeftBar from "../includes/LeftBar";
 import { PersonAdd } from "@material-ui/icons";
 import swal from "sweetalert";
@@ -29,8 +29,6 @@ function Users() {
 
     const [detailUser, setDetailUser] = useState();
     const [detailModal, seteDtailModal] = useState(false);
-
-    const ListError = {};
 
     const onChange = (e) => {
         //console.log(e);
@@ -86,6 +84,7 @@ function Users() {
 
     useEffect(() => {
         getUsers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const pageCount = data ? Math.ceil(data.length / pageSize) : 0;

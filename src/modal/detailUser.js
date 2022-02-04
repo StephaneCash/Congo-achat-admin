@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import { Button, ButtonGroup } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import "../css/DetailUser.css";
 import { useState, useEffect } from "react";
@@ -34,6 +34,7 @@ const DetailUser = (props) => {
 
     useEffect(() => {
         getUsers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleBloquerUser = () => {

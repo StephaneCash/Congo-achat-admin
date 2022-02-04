@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
         left: '50%',
         transform: 'translate(-50%, -50%)',
         height: "auto",
-        zIndex: "10000"
+        zIndex: "10000",
+        top: '37%',
     },
 }))
 

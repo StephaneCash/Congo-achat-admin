@@ -43,6 +43,7 @@ const Annonces = () => {
 
     useEffect(() => {
         getAnnonces();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const detailAnnonce = (id) => {

@@ -1,5 +1,6 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
-import { ApartmentTwoTone, Build, Category, Dashboard, KeyboardArrowDownOutlined, MonetizationOn, Note, PanToolTwoTone, People, Settings, SupervisedUserCircle, LocationOn, Announcement } from "@material-ui/icons";
+import { ApartmentTwoTone, Build, Category, Dashboard, KeyboardArrowDownOutlined, 
+    MonetizationOn, People, Settings, LocationOn, Announcement } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import "../css/Menu.css";
 
