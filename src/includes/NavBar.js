@@ -4,7 +4,7 @@ import { db } from "../config/FirebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useUserAuth } from "../config/useContextComponent";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,7 @@ const NavBar = () => {
     const annoncesData = collection(db, 'ads');
     const [data, setData] = useState([]);
 
-    const {user} = useUserAuth();
+    const { user } = useUserAuth();
     console.log("User", user);
 
     const getAnnonces = async () => {
@@ -54,11 +54,12 @@ const NavBar = () => {
 
     useEffect(() => {
         getAnnonces();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     let navigate = useNavigate();
 
-    const logOut = () =>{
+    const logOut = () => {
         navigate("/");
     }
 
@@ -79,8 +80,8 @@ const NavBar = () => {
                         <Badge badgeContent={data.length} color="secondary" className={classes.badge}>
                             <Notifications color="white" />
                         </Badge>
-                        <Avatar alt={user.email.toUpperCase()} src="s"/>
-                        <SettingsPower className={classes.logout} onClick={logOut}  />
+                        <Avatar alt={user.email.toUpperCase()} src="s" />
+                        <SettingsPower className={classes.logout} onClick={logOut} />
                     </div>
                 </Toolbar>
             </AppBar>

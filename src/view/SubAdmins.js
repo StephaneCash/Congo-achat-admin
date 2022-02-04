@@ -44,6 +44,7 @@ function SubAdmins() {
 
     useEffect(() => {
         getSubAdmins();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

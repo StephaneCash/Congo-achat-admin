@@ -71,6 +71,7 @@ function Dashboard() {
         getUsers();
         getAnnonces();
         getProvinces();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const data4 = {

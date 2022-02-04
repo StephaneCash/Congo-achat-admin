@@ -33,6 +33,7 @@ const DetailUser = (props) => {
 
     useEffect(() => {
         getAnnonces();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleBloquerUser = () => {

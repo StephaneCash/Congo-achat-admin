@@ -10,11 +10,11 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
         border: "2px solid silver",
         boxShadow: theme.shadows[5],
-        top: '40%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
         height: "auto",
-        zIndex: "10000"
+        zIndex: "10000",
+        top: '37%',
     },
 }))
 
