@@ -6,22 +6,26 @@ import Login from "../view/Login";
 import Essai from "../view/essai";
 import AppSettings from "../view/AppSettings";
 import SubAdmins from "../view/SubAdmins";
-import Clients from "../view/Clients";
-import Provinces from "../view/Provinces"
+import Provinces from "../view/Provinces";
+import ProtectedRoute from "../view/ProtectedRoute";
 
 const RoutesAdmin = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path='dashboard' element={<Dashboard />} />
-                <Route path='users' element={<Users />} />
-                <Route path='annonces' element={<Annonces />} />
-                <Route path="essais" element={<Essai />} />
-                <Route path='appsetting' element={<AppSettings />} />
-                <Route path='subAdmins' element={<SubAdmins />} />
-                <Route path='clients' element={<Clients />} />
-                <Route path="provinces" element={<Provinces />} />
+                <Route path='dashboard'
+                    element={
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
+                    } />
+                <Route path='users' element={<ProtectedRoute><Users /></ProtectedRoute>} />
+                <Route path='annonces' element={<ProtectedRoute><Annonces /></ProtectedRoute>} />
+                <Route path="essais" element={<ProtectedRoute><Essai /></ProtectedRoute>} />
+                <Route path='appsetting' element={<ProtectedRoute><AppSettings /></ProtectedRoute>} />
+                <Route path='subAdmins' element={<ProtectedRoute><SubAdmins /></ProtectedRoute>} />
+                <Route path="provinces" element={<ProtectedRoute><Provinces /></ProtectedRoute>} />
             </Routes>
         </BrowserRouter>
     )

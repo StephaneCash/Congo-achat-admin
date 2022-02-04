@@ -38,7 +38,9 @@ function Users() {
         setFormData({ ...formData, [id]: value });
     }
 
-    const handleSubmitUser = async () => {
+    const handleSubmitUser = async (e) => {
+
+        e.preventDefault();
 
         if (formData.id) {
             const userDoc = doc(db, 'users', formData.id);
@@ -74,21 +76,12 @@ function Users() {
         seteDtailModal(false);
     }
 
-    const [time, setTime] = useState(false);
-
-    const timeLoad = () => {
-        setTimeout(() => {
-            setTime(true);
-        }, 10000);
-    }
-
     const pageSize = 7;
 
     const getUsers = async () => {
         const dataUsers = await getDocs(usersCollection);
         setData(dataUsers.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         setPaginated(_(dataUsers.docs).slice(0).take(pageSize).value());
-        timeLoad();
     };
 
     useEffect(() => {
@@ -121,11 +114,6 @@ function Users() {
         setFormData(val);
         showModalAddUser();
     };
-
-    const refeshPage = () => {
-        getUsers();
-        setTime(false);
-    }
 
     const handleDeleteUser = async (id) => {
 

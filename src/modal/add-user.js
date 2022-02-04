@@ -39,7 +39,7 @@ const AddUser = (props) => {
                     {id ? `Editer ${name}` : `Ajout d'un utilisateur`}
                 </Modal.Header>
                 <Modal.Body>
-                    <form>
+                    <form onSubmit={handleSubmitUser}>
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-6">
@@ -48,6 +48,7 @@ const AddUser = (props) => {
                                             label="Username"
                                             variant="outlined"
                                             type="text"
+                                            required
                                             className="form-control 
                                             mt-2" id="username"
                                             onChange={e => onChange(e)}
@@ -62,6 +63,7 @@ const AddUser = (props) => {
                                             variant="outlined"
                                             className="form-control mt-3"
                                             id="email"
+                                            required
                                             label="Email"
                                             onChange={e => onChange(e)}
                                             placeholder="Adresse email"
@@ -75,6 +77,7 @@ const AddUser = (props) => {
                                             variant="outlined"
                                             className="form-control mt-3"
                                             id="name"
+                                            required
                                             onChange={e => onChange(e)}
                                             placeholder="Un nom"
                                             value={name}
@@ -86,6 +89,7 @@ const AddUser = (props) => {
                                         <TextField
                                             type="text"
                                             label="Téléphone"
+                                            required
                                             className="form-control mt-2"
                                             id="phoneNumber"
                                             placeholder="Un numéro de téléphone"
@@ -96,6 +100,7 @@ const AddUser = (props) => {
                                     </div>
                                     <div className="form-group">
                                         <TextField
+                                            required
                                             type="text"
                                             className="form-control mt-3"
                                             placeholder="Province"
@@ -110,6 +115,7 @@ const AddUser = (props) => {
                                         <TextField
                                             type="text"
                                             className="form-control mt-3"
+                                            required
                                             id="city"
                                             label="City"
                                             variant="outlined"
@@ -123,6 +129,7 @@ const AddUser = (props) => {
                                             type="text"
                                             variant="outlined"
                                             className="form-control mt-3"
+                                            required
                                             id="balance"
                                             label="Balance"
                                             onChange={e => onChange(e)}
@@ -134,18 +141,18 @@ const AddUser = (props) => {
                                 </div>
                             </div>
                         </div>
+                        <Button type="submit" className="btn" onClick={props.close}>Annuler</Button>
+                        <Button
+                            type="submit"
+                            className="btn"
+                            style={{ backgroundColor: 'white', color: '#555', marginLeft: "10px" }}
+                        >
+                            {id ? "Editer" : "Ajouter"}
+                        </Button>
                     </form>
                 </Modal.Body>
-                <Modal.Footer style={{paddingRight: "30px"}}>
-                    <Button type="submit" className="btn" onClick={props.close}>Annuler</Button>
-                    <Button
-                        type="submit"
-                        className="btn"
-                        style={{ backgroundColor: 'white', color: '#555', marginLeft:"10px" }}
-                        onClick={() => handleSubmitUser()}
-                    >
-                        {id ? "Editer" : "Ajouter"}
-                    </Button>
+                <Modal.Footer style={{ paddingRight: "30px" }}>
+
                 </Modal.Footer>
             </Modal>
         </>

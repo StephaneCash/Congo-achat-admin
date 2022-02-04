@@ -1,10 +1,10 @@
 import { TextField, Button, Card, CardContent, Grid } from "@material-ui/core";
 import { Person } from "@material-ui/icons";
-import { useState } from "react";
 import { makeStyles } from "@material-ui/core/Styles";
 import "../css/Login.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useUserAuth } from "../config/useContextComponent";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -13,27 +13,29 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: "15px",
     },
     container: {
+        paddingTop: "20px"
     },
     card: {
         [theme.breakpoints.up("md")]: {
-            maxWidth: "30%",
-            marginTop: "10px",
-            minHeight: "60vh",
-            padding: "10px 20px",
+            maxWidth: "26.5%",
+            minHeight: "72vh",
+            padding: "20px 20px",
             margin: "0 auto",
-            border: "1px solid silver"
+            border: "1px solid silver",
+            boxShadow: "2px 2px 10px gray",
+            backgroundColor: "#ff"
         },
         [theme.breakpoints.down("sm")]: {
             maxWidth: "70%",
-            marginTop: "10px",
             minHeight: "75vh",
             padding: "5px",
+            backgroundColor: "#ff",
             margin: "0 auto"
         },
         [theme.breakpoints.down("xs md")]: {
-            marginTop: "10px",
             height: "70vh",
             padding: "5px",
+            backgroundColor: "#ff"
         }
     },
     btnSub: {
@@ -43,107 +45,100 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const { login } = useUserAuth();
+
     const classes = useStyles();
-
-    const [valuesInput, setValuesInput] = useState({
-        username: "", password: "",
-    });
-
-    const handleInput = (e) => {
-        e.persist();
-        setValuesInput({
-            ...valuesInput, [e.target.name]: e.target.value
-        });
-    }
 
     let navigate = useNavigate();
 
-    let errorsList = {};
+    const loginSubmit = async (e) => {
+        e.preventDefault();
 
-    console.log(errorsList);
-
-    const [etatBtn, setEtatBtn] = useState(false);
-
-    let username = document.querySelector("#username");
-    let password = document.querySelector('#password');
-
-    const loginSubmit = (e) => {
-
-        setEtatBtn(true);
-        const data = {
-            username: valuesInput.username,
-            password: valuesInput.password,
+        try {
+            await login(email, password);
+            navigate("/dashboard");
+        } catch (err) {
+            setError(err);
+            console.log("Erreur : ", error);
         }
     }
 
     return (
         <div className="login">
-            <div className={classes.container}>
-                <Card className={classes.card}>
-                    <Grid>
-                        <Grid sm={12} xs={12} item={true}>
-                            <CardContent>
-                                <div className="icon">
-                                    <div className=""><Person fontSize="large" /></div>
-                                    <div className="text">Se connecter</div>
-                                </div>
-                            </CardContent>
-                        </Grid>
-                        <Grid sm={12} xs={12} item={true}>
-                            {errorsList.length > 0 ? (<p><span>{errorsList.password || errorsList.username}</span></p>) : ""}
-                            <CardContent>
-                                <TextField
-                                    className={classes.input}
-                                    id="username"
-                                    type="text"
-                                    variant="outlined"
-                                    label="Entrer votre username"
-                                    name="username"
-                                    onChange={handleInput}
-                                    value={valuesInput.username}
-                                />
-                                <br />
+            <>
+                <div className={classes.container}>
+                    <Card className={classes.card}>
+                        <Grid>
+                            <Grid sm={12} xs={12} item={true}>
+                                <CardContent style={{
+                                    border: '1px solid #555',
+                                    width: "70px",
+                                    height: "70px",
+                                    borderRadius: "100%",
+                                    textAlign: "center",
+                                    margin: "5px auto",
+                                    padding: "20px 5px",
+                                }}>
+                                    <div className="icon">
+                                        <div className=""><Person /></div>
+                                    </div>
 
-                                <TextField
-                                    className={classes.input}
-                                    id="password"
-                                    type="password"
-                                    variant="outlined"
-                                    label="Entrer votre password"
-                                    onChange={handleInput}
-                                    value={valuesInput.password}
-                                    name="password"
-                                />
+                                </CardContent>
+                                <h3 style={{ textAlign: "center" }}>S'identifier</h3>
 
+                            </Grid>
+                            <div style={{ width: '91%', margin: '0 auto' }}>{error !== "" && <div className="alert alert-danger">{error.code}</div>}</div>
+                            <form onSubmit={loginSubmit}>
+                                <Grid sm={12} xs={12} item={true}>
+                                    <CardContent>
+                                        <TextField
+                                            className={classes.input}
+                                            id="username"
+                                            type="text"
+                                            required
+                                            variant="outlined"
+                                            label="Entrer votre username"
+                                            name="username"
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
+                                        <TextField
+                                            className={classes.input}
+                                            id="password"
+                                            type="password"
+                                            required
+                                            variant="outlined"
+                                            label="Entrer votre password"
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            name="password"
+                                        />
 
-                            </CardContent>
-                        </Grid>
-                        <Grid sm={12} xs={12} item={true}>
-                            <CardContent>
-                                {etatBtn === true ? (
-                                    <>
+                                    </CardContent>
+                                </Grid>
+                                <Grid sm={12} xs={12} item={true}>
+                                    <CardContent>
+
                                         <Button
+                                            style={{ height: "50px" }}
+                                            type="submit"
                                             className={classes.btnSub}
                                             variant="contained"
-                                            color="secondary" onClick={loginSubmit}>C <span className="textLog">onnexion <i className="fa fa-refresh fa-spin"></i></span></Button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <Button
-                                            className={classes.btnSub}
-                                            variant="contained"
-                                            color="secondary" onClick={loginSubmit}>S <span className="textLog">e connecter</span></Button>
-                                    </>
-                                )}
+                                            color="secondary"
+                                        >
+                                            S <span className="textLog">e connecter</span>
+                                        </Button>
 
-                            </CardContent>
+                                    </CardContent>
+                                </Grid>
+                            </form>
                         </Grid>
-                    </Grid>
-
-
-                </Card>
-            </div>
-        </div>
+                    </Card>
+                </div>
+            </>
+            )
+        </div >
     )
 }
 

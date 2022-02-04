@@ -3,6 +3,8 @@ import { Mail, Notifications, SettingsPower } from "@material-ui/icons";
 import { db } from "../config/FirebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import { useUserAuth } from "../config/useContextComponent";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
     logout: {
         marginLeft: theme.spacing(1),
         cursor: "pointer"
-
     }
 }));
 
@@ -42,6 +43,9 @@ const NavBar = () => {
     const classes = useStyles();
     const annoncesData = collection(db, 'ads');
     const [data, setData] = useState([]);
+
+    const {user} = useUserAuth();
+    console.log("User", user);
 
     const getAnnonces = async () => {
         const dataAnnonces = await getDocs(annoncesData);
@@ -52,7 +56,11 @@ const NavBar = () => {
         getAnnonces();
     }, []);
 
-    const [open, setOpen] = useState(false);
+    let navigate = useNavigate();
+
+    const logOut = () =>{
+        navigate("/");
+    }
 
     return (
         <>
@@ -71,8 +79,8 @@ const NavBar = () => {
                         <Badge badgeContent={data.length} color="secondary" className={classes.badge}>
                             <Notifications color="white" />
                         </Badge>
-                        <Avatar alt="Remy Sharp" src="" />
-                        <SettingsPower className={classes.logout} />
+                        <Avatar alt={user.email.toUpperCase()} src="s"/>
+                        <SettingsPower className={classes.logout} onClick={logOut}  />
                     </div>
                 </Toolbar>
             </AppBar>
