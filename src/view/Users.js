@@ -46,6 +46,7 @@ function Users() {
             getUsers();
             setEtatModal(false);
             swal({ title: "Succès", icon: 'success', text: `User édité avec succès` });
+            setFormData(initialiseValues);
             setListErr(initialiseValues);
             setFormData(initialiseValues);
         }
