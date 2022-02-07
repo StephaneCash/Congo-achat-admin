@@ -1,25 +1,10 @@
 import { Modal } from "react-bootstrap";
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import { db } from "../config/FirebaseConfig";
 import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 import swal from "sweetalert";
-
-const useStyles = makeStyles((theme) => ({
-    modal: {
-        position: 'absolute',
-        width: 700,
-        backgroundColor: 'white',
-        border: "2px solid silver",
-        boxShadow: theme.shadows[5],
-        left: '50%',
-        transform: 'translate(-50%, 12%)',
-        height: "83vh",
-        zIndex: "10000",
-        borderRadius: "5px"
-    },
-}))
+import "../css/ModalDetailAnnonce.css";
 
 const DetailUser = (props) => {
 
@@ -79,11 +64,9 @@ const DetailUser = (props) => {
 
     const idRecu = props.id;
 
-    const classes = useStyles();
-
     return (
-        <>
-            <Modal show={props.show} className={classes.modal} id="detailUser">
+        <div className="modalAnnonce">
+            <Modal show={props.show} className="" id="detailAnnonce">
                 <Modal.Header>
                     <CardHeader
                         style={{ width: "100%" }}
@@ -113,7 +96,7 @@ const DetailUser = (props) => {
                                             <CardHeader title={val.productName} />
                                             <CardMedia
                                                 component="img"
-                                                height="194"
+                                                height="200"
                                                 alt='Image annonce'
                                                 image={val.photos}
                                             />
@@ -196,7 +179,7 @@ const DetailUser = (props) => {
                     </CardActions>
                 </Modal.Footer>
             </Modal>
-        </>
+        </div>
     );
 }
 

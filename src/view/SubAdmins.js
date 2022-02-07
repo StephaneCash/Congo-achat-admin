@@ -4,15 +4,19 @@ import React from 'react';
 import LeftBar from '../includes/LeftBar';
 import NavBar from '../includes/NavBar';
 import { db } from "../config/FirebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, addDoc, deleteDoc, updateDoc, doc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import Load from '../includes/Load';
 import "../css/SubAdmins.css";
 import AddSousAdmin from '../modal/add-SouAdmins';
+import swal from 'sweetalert';
 
 function SubAdmins() {
 
     const subAdmins = collection(db, 'subAdmins');
+
+    const initializeValues = { id: "", email: "", name: "", number: "", };
+    const [formData, setFormData] = useState(initializeValues);
 
     const [data, setData] = useState([]);
     const [idDetail, setIdDetail] = useState();
@@ -23,19 +27,69 @@ function SubAdmins() {
         setData(dataSubAdmin.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
+    const onChange = (e) => {
+        const { value, id } = e.target;
+        setFormData({ ...formData, [id]: value });
+    }
+
+    const handleSubmitSubAdmin = async (e) => {
+        e.preventDefault();
+
+        if (formData.id) {
+            const docSousAdmin = doc(db, 'subAdmins', formData.id);
+            await updateDoc(docSousAdmin, formData);
+            getSubAdmins();
+            swal({ title: "Succès", icon: 'success', text: `Sous admin modifié avec succès` });
+            setFormData(initializeValues);
+            handleCloseModal();
+        } else {
+            await addDoc(subAdmins, formData);
+            getSubAdmins();
+            handleCloseModal();
+            swal({ title: "Succès", icon: 'success', text: `Sous admin ajouté avec succès` });
+            setFormData(initializeValues);
+        }
+    }
+
+    const handleDeleteSubAdmin = async (id) => {
+        const subAdminDoc = doc(db, 'subAdmins', id);
+
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir supprimer ce sous-admin ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                deleteDoc(subAdminDoc)
+                getSubAdmins();
+                swal('Sous-admin supprimé avec succès', {
+                    icon: "success",
+                });
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     const detailSudAdmin = (id) => {
         setIdDetail(id);
     };
 
     const handleInput = (e) => {
         setInputValueSearch(e.target.value);
-        console.log(inputValueSearch);
     }
 
     const [etatModal, setEtatModal] = useState(false);
 
     const addSudAdminModal = () => {
-        setEtatModal(true)
+        setEtatModal(true);
+    };
+
+    const updateSubAdminModal = (val) => {
+        setEtatModal(true);
+        setFormData(val);
     };
 
     const handleCloseModal = () => {
@@ -58,12 +112,11 @@ function SubAdmins() {
                     <Grid xs={10} sm={10} style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
                         <Card style={{ padding: "10px" }}>
                             <div className="col-12" style={{ marginTop: "5px", textAlign: "center" }}>
-                                <h4 className="align-center"> Sub Admins <Build /> </h4>
+                                <h4 className="align-center"> {data.length} Sub Admins <Build /> </h4>
                                 <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                             </div>
 
                             <div className="d-flex">
-
                                 <div className="col-5 mt-3">
                                     <div className="form-group">
                                         <div className="user-field">
@@ -133,6 +186,7 @@ function SubAdmins() {
 
                                                                             <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
                                                                                 <button type="button"
+                                                                                    onClick={() => updateSubAdminModal(val)}
                                                                                     className="btn btnChange">
                                                                                     <i className="fa fa-edit"></i>
                                                                                 </button>
@@ -142,6 +196,7 @@ function SubAdmins() {
                                                                                     <i className="fa fa-info"></i>
                                                                                 </button>
                                                                                 <button type="button"
+                                                                                    onClick={() => handleDeleteSubAdmin(val.id)}
                                                                                     className="btn btnChange">
                                                                                     <i className="fa fa-trash"></i>
                                                                                 </button>
@@ -216,6 +271,9 @@ function SubAdmins() {
             <AddSousAdmin
                 show={etatModal}
                 close={handleCloseModal}
+                onChange={onChange}
+                data={formData}
+                handleSubmitSubAdmin={handleSubmitSubAdmin}
             />
         </>
     );

@@ -2,19 +2,10 @@ import { Modal } from "react-bootstrap";
 import "../css/addUserModal.css";
 import { makeStyles } from "@material-ui/core/styles"
 import { Button, TextField } from "@material-ui/core";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
-        position: 'absolute',
-        width: 700,
-        backgroundColor: 'white',
-        border: "2px solid silver",
-        boxShadow: theme.shadows[5],
-        top: '36%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        height: "auto",
-        zIndex: "10000"
     },
 }))
 
@@ -22,38 +13,43 @@ const AddSousAdmin = (props) => {
 
     const classes = useStyles();
 
-    /*const data = props.data;
-
+    const data = props.data;
     const onChange = props.onChange;
+    const handleSubmitSubAdmin = props.handleSubmitSubAdmin;
 
-    let ListError = [];
-    ListError = props.ListErr;
-
-    const handleSubmitUser = props.handleSubmitUser;
-
-    const { id, username, email, name, phoneNumber, province, city, balance } = data;*/
+    const { id, email, name, numero, } = data;
+    let tempsNow = new Date();
+    data.time = tempsNow.toString().substring(0, 25);
 
     return (
         <>
             <Modal show={props.show} className={classes.modal} id="add-user">
                 <Modal.Header>
-                    {/*id ? `Editer ${name}` : `Ajout d'un utilisateur`*/} Add sous admin
+                    {id ? `Editer ${name}` : `Ajout sous-admin`}
                 </Modal.Header>
                 <Modal.Body>
-                    <form>
+                    <form onSubmit={handleSubmitSubAdmin}>
                         <div className="col-12">
                             <TextField
-                                label="Name"
+                                label="Email"
                                 variant="outlined"
-                                placeholder='Name'
-                                style={{width: '100%'}}
+                                placeholder='Email'
+                                id="email"
+                                style={{ width: '100%' }}
+                                required
+                                onChange={(e) => onChange(e)}
+                                value={email}
                             />
                             <br /><br />
                             <TextField
-                                placeholder="Email"
+                                placeholder="Name"
                                 variant="outlined"
-                                style={{width: '100%'}}
-                                label="Email"
+                                style={{ width: '100%' }}
+                                label="Name"
+                                required
+                                id='name'
+                                onChange={(e) => onChange(e)}
+                                value={name}
                             />
                             <br /><br />
 
@@ -61,21 +57,30 @@ const AddSousAdmin = (props) => {
                                 variant="outlined"
                                 label="Numéro de téléphone"
                                 placeholder="Numéro phone"
-                                style={{width: '100%'}}
+                                style={{ width: '100%' }}
+                                required
+                                onChange={(e) => onChange(e)}
+                                value={numero}
+                                id='numero'
                             />
+                        </div>
+                        <div className="mt-3">
+                            <Button
+                                type="submit"
+                                variant="outlined"
+                                className="btn"
+                                style={{ backgroundColor: 'white', color: '#555', marginLeft: '10px', float: "right" }}
+                            >
+                                {id ? "Editer" : "Ajouter"}
+                            </Button>
+                            <Button className="btn" variant="outlined"
+                                style={{ float: "right", marginLeft: "15px" }}
+                                onClick={props.close}>Annuler</Button>
                         </div>
                     </form>
                 </Modal.Body>
-                <Modal.Footer style={{paddingRight: "30px"}}>
-                    <Button type="submit" className="btn" variant="outlined" onClick={props.close}>Annuler</Button>
-                    <Button
-                        type="submit"
-                        variant="outlined"
-                        className="btn"
-                        style={{ backgroundColor: 'white', color: '#555', marginLeft: '10px'}}
-                    >
-                        Ajouter
-                    </Button>
+                <Modal.Footer style={{ paddingRight: "30px" }}>
+
                 </Modal.Footer>
             </Modal>
         </>

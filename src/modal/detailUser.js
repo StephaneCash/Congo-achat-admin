@@ -9,16 +9,6 @@ import swal from "sweetalert"
 
 const useStyles = makeStyles((theme) => ({
     modal: {
-        position: 'absolute',
-        width: 900,
-        backgroundColor: 'white',
-        border: "2px solid silver",
-        boxShadow: theme.shadows[5],
-        top: '30%',
-        left: '50%',
-        transform: 'translate(-50%, -30%)',
-        height: "auto",
-        zIndex: "9000"
     },
 }))
 

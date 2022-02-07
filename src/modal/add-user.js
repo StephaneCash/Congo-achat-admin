@@ -5,16 +5,7 @@ import { Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
-        position: 'absolute',
-        width: 700,
-        backgroundColor: 'white',
-        border: "2px solid silver",
-        boxShadow: theme.shadows[5],
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        height: "auto",
-        zIndex: "10000",
-        top: '37%',
+
     },
 }))
 
@@ -142,14 +133,21 @@ const AddUser = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <Button type="submit" className="btn" onClick={props.close}>Annuler</Button>
                         <Button
                             type="submit"
                             className="btn"
-                            style={{ backgroundColor: 'white', color: '#555', marginLeft: "10px" }}
+                            variant="outlined"
+                            style={{ color: 'green', marginLeft: "10px", float: "right", border: "1px solid green" }}
                         >
                             {id ? "Editer" : "Ajouter"}
                         </Button>
+
+                        <Button
+                            style={{ float: "right" }}
+                            color='secondary' variant="outlined"
+                            className="btn" onClick={props.close}>
+                            Annuler</Button>
+
                     </form>
                 </Modal.Body>
                 <Modal.Footer style={{ paddingRight: "30px" }}>

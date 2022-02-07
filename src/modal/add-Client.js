@@ -5,16 +5,6 @@ import { Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
-        position: 'absolute',
-        width: 700,
-        backgroundColor: 'white',
-        border: "2px solid silver",
-        boxShadow: theme.shadows[5],
-        top: '36%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        height: "auto",
-        zIndex: "10000"
     },
 }))
 
@@ -22,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 function AddClient(props) {
     const classes = useStyles();
 
-    return <>
+    return <div className="addClient">
         <Modal show={props.show} className={classes.modal} id="add-user">
             <Modal.Header>
                 {/*id ? `Editer ${name}` : `Ajout d'un utilisateur`*/} Ajout client
@@ -66,7 +56,7 @@ function AddClient(props) {
                 </Button>
             </Modal.Footer>
         </Modal>
-    </>;
+    </div>;
 }
 
 export default AddClient;

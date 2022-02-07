@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import "../css/Dashboard.css";
 import { Line, Bar } from "react-chartjs-2";
 import { Chart, registerables } from 'chart.js';
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, Typography, makeStyles } from "@material-ui/core";
+import { Button, Card, CardActions, CardContent, CardHeader, Grid, Typography, makeStyles, TextField } from "@material-ui/core";
 import NavBar from "../includes/NavBar";
 import LeftBar from "../includes/LeftBar";
-import { Announcement, Group, PeopleRounded, PostAddTwoTone } from "@material-ui/icons";
+import { Announcement, Group, MonetizationOn, PeopleRounded, PostAddTwoTone } from "@material-ui/icons";
+import { ApartmentTwoTone } from "@mui/icons-material";
 Chart.register(...registerables);
 
 const useStyles = makeStyles((theme) => ({
@@ -200,9 +201,9 @@ function Dashboard() {
                                                 <CardHeader
                                                     title="Provinces"
                                                     avatar={
-                                                        <Group />
+                                                        <ApartmentTwoTone />
                                                     }
-                                                    subheader="Nombre total des utilisateurs"
+                                                    subheader="Nombre total de provinces"
                                                 />
                                                 <div className="d-flex">
                                                     <CardContent variant="body">
@@ -211,7 +212,7 @@ function Dashboard() {
                                                         </Typography>
                                                     </CardContent>
                                                     <CardActions>
-                                                        <Link to="/users">
+                                                        <Link to="/provinces">
                                                             <Button variant="contained" size="small" style={{ backgroundColor: "#973c44", color: "#fff" }}>
                                                                 V<span className="span">oir tout</span>
                                                             </Button>
@@ -224,22 +225,23 @@ function Dashboard() {
                                         <Grid sm={4} xs={4} item={true} className={classes.stat}>
                                             <Card>
                                                 <CardHeader
-                                                    title="Clients"
+                                                    title="Total revenu"
                                                     avatar={
-                                                        <Group />
+                                                        <MonetizationOn />
                                                     }
-                                                    subheader="Nombre total des utilisateurs"
+                                                    subheader="Le total des recettes"
                                                 />
                                                 <div className="d-flex">
-                                                    <CardContent variant="body">
-                                                        <Typography variant="h5" style={{ color: "#555" }}>{data.length}</Typography>
-                                                    </CardContent>
                                                     <CardActions>
-                                                        <Link to="/users">
-                                                            <Button variant="contained" size="small" style={{ backgroundColor: "#973c44", color: "#fff" }}>
-                                                                V<span className="span">oir tout</span>
-                                                            </Button>
-                                                        </Link>
+                                                        <div
+                                                            style={{
+                                                                border: '1px solid silver', width: '200px', marginLeft: '10px',borderRadius: '5px',
+                                                                margin: '0 auto', textAlign: 'center', height: '', fontSize: '25px' 
+                                                            }}
+                                                        >
+
+                                                            {data.length} $
+                                                        </div>
                                                     </CardActions>
                                                 </div>
                                             </Card>
