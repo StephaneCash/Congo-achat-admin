@@ -4,7 +4,6 @@ import { db } from "../config/FirebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useUserAuth } from "../config/useContextComponent";
-import { useNavigate } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,8 +43,7 @@ const NavBar = () => {
     const annoncesData = collection(db, 'ads');
     const [data, setData] = useState([]);
 
-    const { user } = useUserAuth();
-    console.log("User", user);
+    const { user, logOut } = useUserAuth();
 
     const getAnnonces = async () => {
         const dataAnnonces = await getDocs(annoncesData);
@@ -57,10 +55,13 @@ const NavBar = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    let navigate = useNavigate();
-
-    const logOut = () => {
-        navigate("/");
+    const logOutHandle = async () => {
+        try {
+            await logOut();
+            localStorage.removeItem('userAuth')
+        } catch (err) {
+            console.log(err.message);
+        }
     }
 
     return (
@@ -80,8 +81,8 @@ const NavBar = () => {
                         <Badge badgeContent={data.length} color="secondary" className={classes.badge}>
                             <Notifications color="white" />
                         </Badge>
-                        <Avatar alt={user.email.toUpperCase()} src="s" />
-                        <SettingsPower className={classes.logout} onClick={logOut} />
+                        <Avatar style={{ backgroundColor: "#555" }} alt={user.email.toUpperCase()} src="s" />
+                        <SettingsPower className={classes.logout} onClick={logOutHandle} />
                     </div>
                 </Toolbar>
             </AppBar>

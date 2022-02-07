@@ -9,17 +9,16 @@ import SubAdmins from "../view/SubAdmins";
 import Provinces from "../view/Provinces";
 import ProtectedRoute from "../view/ProtectedRoute";
 
+
 const RoutesAdmin = () => {
+
+    //let name = localStorage.getItem("userAuth");
+
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Login />} />
-                <Route path='dashboard'
-                    element={
-                        <ProtectedRoute>
-                            <Dashboard />
-                        </ProtectedRoute>
-                    } />
+                <Route path='dashboard' element={<ProtectedRoute><Dashboard /> </ProtectedRoute>} />
                 <Route path='users' element={<ProtectedRoute><Users /></ProtectedRoute>} />
                 <Route path='annonces' element={<ProtectedRoute><Annonces /></ProtectedRoute>} />
                 <Route path="essais" element={<ProtectedRoute><Essai /></ProtectedRoute>} />
