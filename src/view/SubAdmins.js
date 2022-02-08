@@ -105,11 +105,11 @@ function SubAdmins() {
         <>
             <div className="subAdmins">
                 <NavBar />
-                <Grid className="d-flex">
-                    <Grid xs={2} sm={2}>
+                <Grid item className="d-flex">
+                    <Grid item xs={2}>
                         <LeftBar />
                     </Grid>
-                    <Grid xs={10} sm={10} style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
+                    <Grid xs={10} item style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
                         <Card style={{ padding: "10px" }}>
                             <div className="col-12" style={{ marginTop: "5px", textAlign: "center" }}>
                                 <h4 className="align-center"> {data.length} Sub Admins <Build /> </h4>
@@ -169,42 +169,39 @@ function SubAdmins() {
                                                             data.filter((val) => {
                                                                 let value = val.name.toLowerCase();
                                                                 return value.includes(inputValueSearch);
-                                                            }).map((val, index) => {
-                                                                return (
-                                                                    <>
-                                                                        <tr key={index}>
-                                                                            <td>
-                                                                                {
-                                                                                    index + 1
-                                                                                }
-                                                                            </td>
+                                                            }).map((val, index) => (
 
-                                                                            <td>{val.name}</td>
-                                                                            <td>{val.numero}</td>
-                                                                            <td>{val.email}</td>
-                                                                            <td>{val.time}</td>
+                                                                <tr key={index}>
+                                                                    <td>
+                                                                        {
+                                                                            index + 1
+                                                                        }
+                                                                    </td>
 
-                                                                            <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
-                                                                                <button type="button"
-                                                                                    onClick={() => updateSubAdminModal(val)}
-                                                                                    className="btn btnChange">
-                                                                                    <i className="fa fa-edit"></i>
-                                                                                </button>
-                                                                                <button type="button"
-                                                                                    onClick={() => detailSudAdmin(val.id)}
-                                                                                    className="btn btnChange">
-                                                                                    <i className="fa fa-info"></i>
-                                                                                </button>
-                                                                                <button type="button"
-                                                                                    onClick={() => handleDeleteSubAdmin(val.id)}
-                                                                                    className="btn btnChange">
-                                                                                    <i className="fa fa-trash"></i>
-                                                                                </button>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </>
-                                                                )
-                                                            })
+                                                                    <td>{val.name}</td>
+                                                                    <td>{val.numero}</td>
+                                                                    <td>{val.email}</td>
+                                                                    <td>{val.time}</td>
+
+                                                                    <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
+                                                                        <button type="button"
+                                                                            onClick={() => updateSubAdminModal(val)}
+                                                                            className="btn btnChange">
+                                                                            <i className="fa fa-edit"></i>
+                                                                        </button>
+                                                                        <button type="button"
+                                                                            onClick={() => detailSudAdmin(val.id)}
+                                                                            className="btn btnChange">
+                                                                            <i className="fa fa-info"></i>
+                                                                        </button>
+                                                                        <button type="button"
+                                                                            onClick={() => handleDeleteSubAdmin(val.id)}
+                                                                            className="btn btnChange">
+                                                                            <i className="fa fa-trash"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            ) )
 
                                                         }
                                                     </>

@@ -104,14 +104,10 @@ function Dashboard() {
 
     const options2 = {
         scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: true,
-                    },
-                },
-            ],
-        },
+            y: {
+                beginAtZero: true,
+            }
+        }
     };
 
     const data5 = {
@@ -131,7 +127,7 @@ function Dashboard() {
     const options = {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
             }
         }
     };
@@ -147,7 +143,7 @@ function Dashboard() {
                     <Grid sm={12} xs={12} item={true}>
                         <Card>
                             <CardContent>
-                                <Typography variant="body">
+                                <Typography>
                                     <div className={classes.griddash}>
                                         <Grid sm={4} xs={4} className={classes.stat} item={true} id="stat">
                                             <Card>
@@ -159,7 +155,7 @@ function Dashboard() {
                                                     subheader="Nombre total des utilisateurs"
                                                 />
                                                 <div className="d-flex">
-                                                    <CardContent variant="body">
+                                                    <CardContent>
                                                         <Typography variant="h5" style={{ color: "#555" }}>{data.length}</Typography>
                                                     </CardContent>
                                                     <CardActions>
@@ -180,7 +176,7 @@ function Dashboard() {
                                                     subheader="Nombre total des annonces"
                                                 />
                                                 <div className="d-flex">
-                                                    <CardContent variant="body">
+                                                    <CardContent>
                                                         <Typography variant="h5" style={{ color: "#555" }}>{annonces.length}</Typography>
                                                     </CardContent>
                                                     <CardActions>
@@ -206,7 +202,7 @@ function Dashboard() {
                                                     subheader="Nombre total de provinces"
                                                 />
                                                 <div className="d-flex">
-                                                    <CardContent variant="body">
+                                                    <CardContent>
                                                         <Typography variant="h5" style={{ color: "#555" }}>
                                                             {prov.length}
                                                         </Typography>
@@ -235,8 +231,8 @@ function Dashboard() {
                                                     <CardActions>
                                                         <div
                                                             style={{
-                                                                border: '1px solid silver', width: '200px', marginLeft: '10px',borderRadius: '5px',
-                                                                margin: '0 auto', textAlign: 'center', height: '', fontSize: '25px' 
+                                                                border: '1px solid silver', width: '200px', marginLeft: '10px', borderRadius: '5px',
+                                                                margin: '0 auto', textAlign: 'center', height: '', fontSize: '25px'
                                                             }}
                                                         >
 
@@ -263,7 +259,7 @@ function Dashboard() {
                                         }
                                         subheader="Représentation graphique de postes"
                                     />
-                                    <CardContent variant="body">
+                                    <CardContent>
                                         <Bar data={data4} options={options2} />
                                     </CardContent>
                                 </Card>
@@ -277,7 +273,7 @@ function Dashboard() {
                                         }
                                         subheader="Représentation graphique d'achats"
                                     />
-                                    <CardContent variant="body">
+                                    <CardContent>
                                         <Line
                                             data={data5}
                                             options={options}

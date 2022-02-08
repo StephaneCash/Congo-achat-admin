@@ -141,11 +141,11 @@ function Users() {
     return (<>
         <div className="users">
             <NavBar />
-            <Grid className="d-flex">
-                <Grid xs={2} sm={2}>
+            <Grid item className="d-flex">
+                <Grid item xs={2}>
                     <LeftBar />
                 </Grid>
-                <Grid xs={10} sm={10} style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
+                <Grid item xs={10} style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
                     <Card style={{ padding: "10px" }}>
                         <div className="col-12" style={{ marginTop: "5px", textAlign: "center" }}>
                             <h4 className="align-center"> {data.length} Users <i className="fa fa-user-circle"></i> </h4>
@@ -205,46 +205,41 @@ function Users() {
                                                 {
                                                     data.filter(val => {
                                                         return val.name.toLowerCase().includes(dataInput);
-                                                    }).map((val, index) => {
-                                                        return (
-                                                            <>
-                                                                <tr key={index}>
-                                                                    <td>
-                                                                        {
-                                                                            index + 1
-                                                                        }
-                                                                    </td>
+                                                    }).map((val, index) => (
+                                                        <tr key={val.id}>
+                                                            <td>
+                                                                {
+                                                                    index + 1
+                                                                }
+                                                            </td>
 
-                                                                    <td>{val.username}</td>
-                                                                    <td>{val.email}</td>
-                                                                    <td>{val.name}</td>
-                                                                    <td>{val.phoneNumber}</td>
-                                                                    <td>{val.province}</td>
-                                                                    <td>
-                                                                        {val.balance} {val.balance.length > 0 ? 'CDF' : ''}
-                                                                    </td>
-                                                                    <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
-                                                                        <button type="button"
-                                                                            onClick={() => handleUpdateUser(val)}
-                                                                            className="btn btnChange">
-                                                                            <i className="fa fa-edit"></i>
-                                                                        </button>
-                                                                        <button type="button"
-                                                                            onClick={() => handleDetailUser(val.id)}
-                                                                            className="btn btnChange">
-                                                                            <i className="fa fa-info"></i>
-                                                                        </button>
-                                                                        <button type="button"
-                                                                            onClick={() => handleDeleteUser(val.id)}
-                                                                            className="btn btnChange">
-                                                                            <i className="fa fa-trash"></i>
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                            </>
-                                                        )
-                                                    })
-
+                                                            <td>{val.username}</td>
+                                                            <td>{val.email}</td>
+                                                            <td>{val.name}</td>
+                                                            <td>{val.phoneNumber}</td>
+                                                            <td>{val.province}</td>
+                                                            <td>
+                                                                {val.balance} {val.balance.length > 0 ? 'CDF' : ''}
+                                                            </td>
+                                                            <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
+                                                                <button type="button"
+                                                                    onClick={() => handleUpdateUser(val)}
+                                                                    className="btn btnChange">
+                                                                    <i className="fa fa-edit"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                    onClick={() => handleDetailUser(val.id)}
+                                                                    className="btn btnChange">
+                                                                    <i className="fa fa-info"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                    onClick={() => handleDeleteUser(val.id)}
+                                                                    className="btn btnChange">
+                                                                    <i className="fa fa-trash"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    ))
                                                 }
                                             </>
                                         ) : (

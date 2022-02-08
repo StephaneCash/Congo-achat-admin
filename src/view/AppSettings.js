@@ -17,9 +17,9 @@ function AppSettings() {
 
     const [data, setData] = useState([]);
     const appSettingsCollection = collection(db, 'app-settings',);
+    const collectionsCategory = collection(db, 'categories');
 
-    const [dataProvinces, setDataProvinces] = useState([]);
-    //const provincesCollection = collection(db, 'provinces');
+    const [dataCat, setDataCat] = useState([]);
 
     const getAppSettings = async () => {
         const dataAppSettings = await getDocs(appSettingsCollection);
@@ -27,10 +27,9 @@ function AppSettings() {
     }
 
 
-    const getProvinces = async () => {
-        
-        //const provinces = await getDocs(provincesCollection);
-        //setDataProvinces(provinces.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    const getCateg = async () => {
+        const categ = await getDocs(collectionsCategory);
+        setDataCat(categ.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
 
     const changeEtatBtn = () => {
@@ -45,7 +44,8 @@ function AppSettings() {
 
     useEffect(() => {
         getAppSettings();
-        //getProvinces();
+        getCateg();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     });
 
     return (
@@ -53,10 +53,10 @@ function AppSettings() {
             <div className="users appSettings">
                 <NavBar />
                 <div className="d-flex">
-                    <Grid xs={2} sm={2}>
+                    <Grid xs={2} item>
                         <LeftBar />
                     </Grid>
-                    <Grid xs={10} sm={10} style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
+                    <Grid xs={10} item style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
                         <Card style={{ padding: "10px" }}>
                             <div className="col-12" style={{ marginTop: "5px", textAlign: "center" }}>
                                 <h4 className="align-center"> App Settings <Settings /> </h4>
@@ -73,21 +73,20 @@ function AppSettings() {
                                         {
                                             data.length > 0 && data.map((val, index) => {
                                                 return (
-                                                    <div key={index}>
+                                                    <tr key={index}>
                                                         <TextField
-                                                            className="mt-1"
+                                                            style={{ marginRight: '10px' }}
+                                                            className="mb-2"
                                                             value={val.adPrice}
                                                             type="number"
                                                             variant='filled'
                                                             label="Add Price" />
-                                                        <br />
                                                         <TextField
                                                             value={val.mPaisaID}
                                                             type="number"
                                                             variant='filled'
                                                             label="Mpsa ID" />
-
-                                                    </div>
+                                                    </tr>
                                                 )
                                             })
                                         }
@@ -106,9 +105,14 @@ function AppSettings() {
                                                     <tr>
                                                         <th>Category</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Name</td>
-                                                    </tr>
+
+                                                    {dataCat.map((val, index) => (
+                                                        <tr key={index}>
+                                                            <td>
+                                                                {val.catName}
+                                                            </td>
+                                                        </tr>
+                                                    ))}
                                                 </tbody>
                                             </table>
                                         </>
@@ -136,9 +140,13 @@ function AppSettings() {
                                                     <tr>
                                                         <th>Sub Category</th>
                                                     </tr>
-                                                    <tr>
-                                                        <td>Name</td>
-                                                    </tr>
+                                                    {dataCat.map((val, index) => (
+                                                        <tr key={index}>
+                                                            <td>
+                                                                {val.subCategories}
+                                                            </td>
+                                                        </tr>
+                                                    ))}
                                                 </tbody>
                                             </table>
                                         </>

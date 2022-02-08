@@ -30,7 +30,7 @@ function Provinces() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const searchValue = (e) =>{
+    const searchValue = (e) => {
         let value = e.target.value.toLowerCase();
         setValueInput(value);
     };
@@ -39,10 +39,10 @@ function Provinces() {
         <div className="provinces">
             <NavBar />
             <div className="d-flex">
-                <Grid xs={2} sm={2}>
+                <Grid item sm={2}>
                     <LeftBar />
                 </Grid>
-                <Grid xs={10} sm={10} style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
+                <Grid xs={10} item style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
                     <Card style={{ padding: "10px" }}>
                         <div className="col-12" style={{ marginTop: "5px", textAlign: "center" }}>
                             <h4 className="align-center"> Gestion Provinces  </h4>
@@ -63,7 +63,7 @@ function Provinces() {
                                                 onChange={searchValue}
                                             />
                                             <div className="input-group-append">
-                                                <i style={{height: "40px", paddingTop:"10px"}} className="input-group-text fa fa-search fa-1x" aria-hidden="true"></i>
+                                                <i style={{ height: "40px", paddingTop: "10px" }} className="input-group-text fa fa-search fa-1x" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -97,35 +97,31 @@ function Provinces() {
                                         data.length > 0 ? (
                                             <>
                                                 {
-                                                data.filter((val)=>{
-                                                    return val.provinceName.toLowerCase().includes(valueInput);
-                                                }).map((val, index) => {
-                                                    return (
-                                                        <>
-                                                            <tr>
-                                                                <td>{index + 1}</td>
-                                                                <td>{val.provinceName}</td>
-                                                                <td>
-                                                                    {val.provinceCities}
-                                                                </td>
-                                                                <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
-                                                                    <button type="button"
-                                                                        className="btn btnChange">
-                                                                        <i className="fa fa-edit"></i>
-                                                                    </button>
-                                                                    <button type="button"
-                                                                        className="btn btnChange">
-                                                                        <i className="fa fa-info"></i>
-                                                                    </button>
-                                                                    <button type="button"
-                                                                        className="btn btnChange">
-                                                                        <i className="fa fa-trash"></i>
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        </>
-                                                    )
-                                                })}
+                                                    data.filter((val) => {
+                                                        return val.provinceName.toLowerCase().includes(valueInput);
+                                                    }).map((val, index) => (
+                                                        <tr key={index}>
+                                                            <td>{index + 1}</td>
+                                                            <td>{val.provinceName}</td>
+                                                            <td>
+                                                                {val.provinceCities}
+                                                            </td>
+                                                            <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
+                                                                <button type="button"
+                                                                    className="btn btnChange">
+                                                                    <i className="fa fa-edit"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                    className="btn btnChange">
+                                                                    <i className="fa fa-info"></i>
+                                                                </button>
+                                                                <button type="button"
+                                                                    className="btn btnChange">
+                                                                    <i className="fa fa-trash"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
                                             </>
                                         ) : (
                                             <>

@@ -58,19 +58,19 @@ const Annonces = () => {
     return (
         <>
             <NavBar />
-            <Grid container>
-                <Grid item sm={2} xs={2}>
+            <Grid item container>
+                <Grid item xs={2}>
                     <LeftBar />
                 </Grid>
-                <Grid item sm={10} xs={10} style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
-                    <Grid sm={12}>
+                <Grid item xs={10} style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
+                    <Grid item sm={12}>
                         <Card style={{ padding: "10px" }}>
                             <div className="col-12" style={{ marginTop: "15px", textAlign: "center" }}>
                                 <h4 className="align-center">  Annonces <Announcement /> </h4>
                                 <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                             </div>
                             <div className={classes.griddash}>
-                                <Grid item={true} id="stat" xs={12} sm={12}>
+                                <Grid item={true} id="stat" xs={12}>
                                     <div className="gallery pictures">
                                         {data.length > 0 && (<>
                                             {data.map((val, index) => {
@@ -83,7 +83,7 @@ const Annonces = () => {
                                                             <CardMedia
                                                                 component="img"
                                                                 height="150"
-                                                                image={val.photos}
+                                                                image={val.photos.toString()}
                                                             />
                                                             <CardActions disableSpacing>
                                                                 <Typography>
@@ -104,7 +104,7 @@ const Annonces = () => {
 
                                     </div>
                                     {data.length <= 0 && (<>
-                                        <Grid xs={12} sm={12} className="loader" item={true}>
+                                        <Grid xs={12} className="loader" item={true}>
                                             <Load style={{ color: 'red' }} />
                                         </Grid>
                                     </>)}

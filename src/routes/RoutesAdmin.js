@@ -8,6 +8,7 @@ import AppSettings from "../view/AppSettings";
 import SubAdmins from "../view/SubAdmins";
 import Provinces from "../view/Provinces";
 import ProtectedRoute from "../view/ProtectedRoute";
+import GestionMonetaire from "../view/GestionMonetaire";
 
 
 const RoutesAdmin = () => {
@@ -25,6 +26,7 @@ const RoutesAdmin = () => {
                 <Route path='appsetting' element={<ProtectedRoute><AppSettings /></ProtectedRoute>} />
                 <Route path='subAdmins' element={<ProtectedRoute><SubAdmins /></ProtectedRoute>} />
                 <Route path="provinces" element={<ProtectedRoute><Provinces /></ProtectedRoute>} />
+                <Route path="gestion-monetaire" element={<ProtectedRoute><GestionMonetaire /></ProtectedRoute>} />
             </Routes>
         </BrowserRouter>
     )

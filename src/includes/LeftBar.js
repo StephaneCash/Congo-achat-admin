@@ -1,6 +1,8 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
-import { ApartmentTwoTone, Build, Category, Dashboard, KeyboardArrowDownOutlined, 
-    MonetizationOn, People, Settings, LocationOn, Announcement } from "@material-ui/icons";
+import {
+    ApartmentTwoTone, Build, Category, Dashboard, KeyboardArrowDownOutlined,
+    MonetizationOn, People, Settings, LocationOn, Announcement
+} from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import "../css/Menu.css";
 
@@ -88,7 +90,10 @@ const LeftBar = () => {
                     <Typography className={classes.text}>Trouver vos clients</Typography>
                 </div>
                 <div className={classes.item}>
-                    <MonetizationOn className={classes.icon} /> <Typography className={classes.text}> Gestion monétaire</Typography>
+                    <MonetizationOn className={classes.icon} />
+                    <NavLink to='/gestion-monetaire'>
+                        <Typography className={classes.text}> Gestion monétaire</Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
                     <Category className={classes.icon} />

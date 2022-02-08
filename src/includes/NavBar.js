@@ -76,10 +76,10 @@ const NavBar = () => {
                     </Typography>
                     <div className={classes.icons}>
                         <Badge badgeContent={4} color="secondary" className={classes.badge}>
-                            <Mail color="white" />
+                            <Mail />
                         </Badge>
                         <Badge badgeContent={data.length} color="secondary" className={classes.badge}>
-                            <Notifications color="white" />
+                            <Notifications />
                         </Badge>
                         <Avatar style={{ backgroundColor: "#555" }} alt="C" src="s" />
                         <SettingsPower className={classes.logout} onClick={logOutHandle} />
