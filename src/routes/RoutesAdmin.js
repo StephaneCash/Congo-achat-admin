@@ -9,6 +9,7 @@ import SubAdmins from "../view/SubAdmins";
 import Provinces from "../view/Provinces";
 import ProtectedRoute from "../view/ProtectedRoute";
 import GestionMonetaire from "../view/GestionMonetaire";
+import TrouverClient from "../view/TrouverClient";
 
 
 const RoutesAdmin = () => {
@@ -27,6 +28,7 @@ const RoutesAdmin = () => {
                 <Route path='subAdmins' element={<ProtectedRoute><SubAdmins /></ProtectedRoute>} />
                 <Route path="provinces" element={<ProtectedRoute><Provinces /></ProtectedRoute>} />
                 <Route path="gestion-monetaire" element={<ProtectedRoute><GestionMonetaire /></ProtectedRoute>} />
+                <Route path="findClient" element={<ProtectedRoute><TrouverClient /></ProtectedRoute>} />
             </Routes>
         </BrowserRouter>
     )

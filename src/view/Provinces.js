@@ -21,10 +21,6 @@ function Provinces() {
         setData(dataProvinces.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
-    let newArr = [];
-
-    console.log("Data : ", data.provinceCities)
-
     useEffect(() => {
         getProvinces();
         // eslint-disable-next-line react-hooks/exhaustive-deps

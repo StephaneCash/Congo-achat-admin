@@ -2,7 +2,7 @@ import { Modal } from "react-bootstrap";
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { db } from "../config/FirebaseConfig";
-import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import swal from "sweetalert";
 import "../css/ModalDetailAnnonce.css";
 
@@ -60,9 +60,45 @@ const DetailUser = (props) => {
         }).catch((error) => {
             console.log(error);
         })
-    }
+    };
 
     const idRecu = props.id;
+
+    let dataS = {};
+    let etatBtn = false;
+
+    data.forEach(val => {
+        if (val.id === idRecu) {
+            dataS.productName = val.productName;
+            if (val.status === 'Approved') {
+                dataS.status = "Non Approuvé";
+                etatBtn = true;
+            } else if (val.status === 'Non Approuvé') {
+                dataS.status = "Approved";
+            }
+            dataS.amount = val.amount;
+        }
+    });
+
+    const handleDesaprove = (id) => {
+        const annonces = doc(db, 'ads', id);
+
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir désapprouver cette annonce ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                updateDoc(annonces, dataS);
+                getAnnonces();  
+                swal('Annonce désapprouvé avec succès', {
+                    icon: "success",
+                });
+            }
+        })
+    };
 
     return (
         <div className="modalAnnonce">
@@ -153,7 +189,15 @@ const DetailUser = (props) => {
                                                 <Grid>
                                                     <CardActions>
                                                         <Button variant='outlined' style={{ color: 'orange', border: '1px solid orange' }}>Pause</Button>
-                                                        <Button variant='outlined' color="secondary">Desaprove</Button>
+                                                        <Button
+                                                            variant='outlined'
+                                                            color="secondary"
+                                                            onClick={() => handleDesaprove(val.id)}
+                                                        >
+                                                            {etatBtn ? (
+                                                                "Désapprouver"
+                                                            ) : "Approuver"}
+                                                        </Button>
                                                         <Button
                                                             variant='outlined'
                                                             style={{ color: 'red', border: '1px solid red' }}

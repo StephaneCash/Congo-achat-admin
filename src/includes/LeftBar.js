@@ -87,13 +87,19 @@ const LeftBar = () => {
                 </div>
                 <div className={classes.item}>
                     <LocationOn className={classes.icon} />
-                    <Typography className={classes.text}>Trouver vos clients</Typography>
+                    <Typography className={classes.text}>
+                        <NavLink to="/findClient">
+                            Trouver vos clients
+                        </NavLink>
+                    </Typography>
                 </div>
                 <div className={classes.item}>
                     <MonetizationOn className={classes.icon} />
-                    <NavLink to='/gestion-monetaire'>
-                        <Typography className={classes.text}> Gestion monétaire</Typography>
-                    </NavLink>
+                    <Typography className={classes.text}>
+                        <NavLink to='/gestion-monetaire'>
+                            Gestion monétaire
+                        </NavLink>
+                    </Typography>
                 </div>
                 <div className={classes.item}>
                     <Category className={classes.icon} />
