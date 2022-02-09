@@ -4,6 +4,7 @@ import { db } from "../config/FirebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { useUserAuth } from "../config/useContextComponent";
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -58,7 +59,6 @@ const NavBar = () => {
     const logOutHandle = async () => {
         try {
             await logOut();
-            localStorage.removeItem('userAuth')
         } catch (err) {
             console.log(err.message);
         }
@@ -78,9 +78,11 @@ const NavBar = () => {
                         <Badge badgeContent={4} color="secondary" className={classes.badge}>
                             <Mail />
                         </Badge>
-                        <Badge badgeContent={data.length} color="secondary" className={classes.badge}>
-                            <Notifications />
-                        </Badge>
+                        <Link to='/annonces'>
+                            <Badge badgeContent={data.length} style={{ color: "#fff" }} color="secondary" className={classes.badge}>
+                                <Notifications />
+                            </Badge>
+                        </Link>
                         <Avatar style={{ backgroundColor: "#555" }} alt="C" src="s" />
                         <SettingsPower className={classes.logout} onClick={logOutHandle} />
                     </div>
