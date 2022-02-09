@@ -1,7 +1,6 @@
 import { Card, CardActions, Button, CardMedia, Grid, makeStyles, Typography, CardHeader } from "@material-ui/core";
 import LeftBar from "../includes/LeftBar";
 import NavBar from "../includes/NavBar";
-import "../css/Annonces.css";
 import { db } from "../config/FirebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
@@ -9,7 +8,9 @@ import Load from "../includes/Load";
 import "../css/essai.css";
 import DetailAnnonce from "../modal/DetailAnnonce";
 import { Announcement } from "@material-ui/icons";
-
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+import "../css/Annonces.css";
 
 const useStyles = makeStyles((theme) => ({
     griddash: {
@@ -49,7 +50,9 @@ const Annonces = () => {
     const detailAnnonce = (id) => {
         setIdDetail(id);
         setEtatModal(true);
-    }
+    };
+
+    console.data("Data photos", data)
 
     const closeModal = () => {
         setEtatModal(false);
@@ -80,12 +83,17 @@ const Annonces = () => {
                                                             <CardHeader
                                                                 subheader={val.subCategory}
                                                             />
-                                                            <CardMedia
-                                                                component="img"
-                                                                height="150"
-                                                                onClick={() => detailAnnonce(val.id)}
-                                                                image={val.photos.toString()}
-                                                            />
+                                                            <Carousel>
+                                                                <CardMedia
+                                                                    component="img"
+                                                                    height="150"
+                                                                    onClick={() => detailAnnonce(val.id)}
+                                                                    image={val.photos.map((val) => (
+                                                                        <>{val.photos}</>
+                                                                    )
+                                                                    )}
+                                                                />
+                                                            </Carousel>
                                                             <CardActions disableSpacing>
                                                                 <Typography>
                                                                     <strong style={{ fontSize: '20px' }}>{val.productName}</strong> <br />

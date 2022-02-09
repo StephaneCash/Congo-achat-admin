@@ -79,7 +79,7 @@ const NavBar = () => {
                             <Mail />
                         </Badge>
                         <Link to='/annonces'>
-                            <Badge badgeContent={data.length} color="secondary" className={classes.badge}>
+                            <Badge badgeContent={data.length} style={{ color: "#fff" }} color="secondary" className={classes.badge}>
                                 <Notifications />
                             </Badge>
                         </Link>
