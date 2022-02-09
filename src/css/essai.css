@@ -27,7 +27,7 @@
 @media (max-width: 2000px) {
     .pictures {
         display: grid !important;
-        grid-template-columns: 320px 320px 320px 320px !important;
+        grid-template-columns: 2px 320px 320px 320px !important;
         margin: auto;
     }
 
@@ -54,7 +54,21 @@
 
 @media (max-width: 1540px) {
     .pictures {
-        grid-template-columns: auto auto auto auto !important;
+        grid-template-columns: 290px 290px 290px 290px !important;
+        margin: auto;
+    }
+
+    .gallery .MuiCard-root {
+        height: auto;
+        margin-top: 22px;
+        border: 1px solid rgb(177, 100, 100);
+    }
+
+}
+
+@media (max-width: 1510px) {
+    .pictures {
+        grid-template-columns: 320px 320px 320px !important;
         margin: auto;
     }
 
