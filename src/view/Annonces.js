@@ -52,7 +52,7 @@ const Annonces = () => {
         setEtatModal(true);
     };
 
-    console.data("Data photos", data)
+    console.log("Data photos", data)
 
     const closeModal = () => {
         setEtatModal(false);
