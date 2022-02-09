@@ -83,6 +83,7 @@ const Annonces = () => {
                                                             <CardMedia
                                                                 component="img"
                                                                 height="150"
+                                                                onClick={() => detailAnnonce(val.id)}
                                                                 image={val.photos.toString()}
                                                             />
                                                             <CardActions disableSpacing>
