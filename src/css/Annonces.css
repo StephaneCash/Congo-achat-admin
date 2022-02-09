@@ -2,12 +2,6 @@
     max-height: auto;
 }
 
-.pictures {
-    display: grid !important;
-    grid-template-columns: 320px 320px 320px 320px !important;
-    margin: auto;
-}
-
 #stat .loader {
     width: 100%;
     text-align: center;
