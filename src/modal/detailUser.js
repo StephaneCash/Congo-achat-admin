@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import "../css/DetailUser.css";
 import { useState, useEffect } from "react";
 import { db } from "../config/FirebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import swal from "sweetalert"
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +27,31 @@ const DetailUser = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleBloquerUser = () => {
+    const idRecu = props.data;
+    const closeM = props.close;
+
+    let dataS = {};
+    let etatBtn = false;
+    let docData = '';
+
+    data.forEach(val => {
+        if (val.id === idRecu) {
+            dataS.name = val.name;
+            docData = val.status;
+            if (val.status === 'Actif') {
+                dataS.status = "Bloqué";
+                etatBtn = true;
+            } else if (val.status === 'Bloqué') {
+                dataS.status = "Actif";
+            }
+            dataS.username = val.username;
+        }
+    });
+
+    console.log("ETAT STATUS : ", docData)
+
+    const handleBloquerUser = (id) => {
+        const userCol = doc(db, 'users', id)
         swal({
             title: "Avertissement.",
             text: "Etes-vous sûr de vouloir bloquer cet utilisateur ?",
@@ -36,12 +60,22 @@ const DetailUser = (props) => {
             dangerMode: true
         }).then((willDelete) => {
             if (willDelete) {
-                alert("Utilisateur bloqué avec succès")
+                updateDoc(userCol, dataS);
+                if (docData == 'Actif') {
+                    swal('Utilisateur bloqué avec succès', {
+                        icon: "success",
+                    });
+                } else if(docData == 'Bloqué'){
+                    swal('Utilisateur débloqué avec succès', {
+                        icon: "success",
+                    });
+                }
+
+                getUsers();
+                closeM();
             }
         })
-    }
-
-    const idRecu = props.data;
+    };
 
     const classes = useStyles();
 
@@ -92,9 +126,9 @@ const DetailUser = (props) => {
                                                 <tr>
                                                     <Button
                                                         variant="outlined"
-                                                        style={{ color: "#c72f3c", marginTop: "10px"}}
-                                                        onClick={() => handleBloquerUser()}>
-                                                        Bloquer
+                                                        style={{ color: "#c72f3c", marginTop: "10px" }}
+                                                        onClick={() => handleBloquerUser(val.id)}>
+                                                        {etatBtn ? 'Bloquer' : "Débloquer"}
                                                     </Button>
                                                 </tr>
                                             </>

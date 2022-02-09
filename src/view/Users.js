@@ -67,11 +67,6 @@ function Users() {
         setEtatModal(true);
     }
 
-    const cloeModalAddUser = () => {
-        setEtatModal(false);
-        setFormData(initialiseValues);
-    }
-
     const closeModalDetailUser = () => {
         seteDtailModal(false);
     }
@@ -103,7 +98,13 @@ function Users() {
         const startIndex = (noPage - 1) * pageSize;
         const pagintData = _(data).slice(startIndex).take(pageSize).value();
         setPaginated(pagintData);
-    }
+    };
+
+    const cloeModalAddUser = () => {
+        setEtatModal(false);
+        setFormData(initialiseValues);
+        getUsers();
+    };
 
     const handleDetailUser = (id) => {
         setDetailUser(id);
@@ -136,7 +137,7 @@ function Users() {
         }).catch((error) => {
             console.log(error);
         })
-    }
+    };
 
     return (<>
         <div className="users">
@@ -195,6 +196,7 @@ function Users() {
                                         <th>Phone</th>
                                         <th>City, Province</th>
                                         <th>Balance</th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -221,6 +223,8 @@ function Users() {
                                                             <td>
                                                                 {val.balance} {val.balance.length > 0 ? 'CDF' : ''}
                                                             </td>
+                                                            <td>{val.status === "Actif" ? <>{val.status} <i className="fa fa-check" style={{ color: 'green' }}></i></>
+                                                                : <>{val.status} <i className='fa fa-close' style={{ color: 'red' }}></i></>}</td>
                                                             <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
                                                                 <button type="button"
                                                                     onClick={() => handleUpdateUser(val)}

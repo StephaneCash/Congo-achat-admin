@@ -52,11 +52,16 @@ const Annonces = () => {
         setEtatModal(true);
     };
 
-    console.log("Data photos", data)
-
     const closeModal = () => {
         setEtatModal(false);
+        getAnnonces();
+    };
+    let tabPhotos = {};
+
+    for (let i = 0; i < data.length; i++) {
+        tabPhotos = { ...data[i].photos }
     }
+    console.log(tabPhotos)
 
     return (
         <>
@@ -69,7 +74,7 @@ const Annonces = () => {
                     <Grid item sm={12}>
                         <Card style={{ padding: "10px" }}>
                             <div className="col-12" style={{ marginTop: "15px", textAlign: "center" }}>
-                                <h4 className="align-center">  Annonces <Announcement /> </h4>
+                                <h4 className="align-center"> {data.length} Annonces <Announcement /> </h4>
                                 <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                             </div>
                             <div className={classes.griddash}>
@@ -83,17 +88,11 @@ const Annonces = () => {
                                                             <CardHeader
                                                                 subheader={val.subCategory}
                                                             />
-                                                            <Carousel>
-                                                                <CardMedia
-                                                                    component="img"
-                                                                    height="150"
-                                                                    onClick={() => detailAnnonce(val.id)}
-                                                                    image={val.photos.map((val) => (
-                                                                        <>{val.photos}</>
-                                                                    )
-                                                                    )}
-                                                                />
-                                                            </Carousel>
+                                                            <CardMedia
+                                                                component="img"
+                                                                height="150"
+                                                                image={val.photos[0] || val.photos[1] || val.photos[2] || val.photos[3] || val.photos[4]}
+                                                            />
                                                             <CardActions disableSpacing>
                                                                 <Typography>
                                                                     <strong style={{ fontSize: '20px' }}>{val.productName}</strong> <br />

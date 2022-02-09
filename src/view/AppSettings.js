@@ -17,7 +17,6 @@ function AppSettings() {
 
     const [data, setData] = useState([]);
     const appSettingsCollection = collection(db, 'app-settings',);
-    const collectionsCategory = collection(db, 'categories');
 
     const [dataCat, setDataCat] = useState([]);
 
@@ -26,16 +25,10 @@ function AppSettings() {
         setData(dataAppSettings.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     }
 
-
-    const getCateg = async () => {
-        const categ = await getDocs(collectionsCategory);
-        setDataCat(categ.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    }
-
     const changeEtatBtn = () => {
         setEtat(true);
         setShowCategory(true);
-    }
+    };
 
     const handleBtnHide = () => {
         setEtat(false);
@@ -44,7 +37,6 @@ function AppSettings() {
 
     useEffect(() => {
         getAppSettings();
-        getCateg();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     });
 
@@ -62,97 +54,7 @@ function AppSettings() {
                                 <h4 className="align-center"> App Settings <Settings /> </h4>
                                 <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                             </div>
-                            {data.length <= 0 && (
-                                <div className="loader">
-                                    <Load />
-                                </div>
-                            )}
-                            <div className="col-6">
-                                <table className="table table-striped">
-                                    <tbody>
-                                        {
-                                            data.length > 0 && data.map((val, index) => {
-                                                return (
-                                                    <tr key={index}>
-                                                        <TextField
-                                                            style={{ marginRight: '10px' }}
-                                                            className="mb-2"
-                                                            value={val.adPrice}
-                                                            type="number"
-                                                            variant='filled'
-                                                            label="Add Price" />
-                                                        <TextField
-                                                            value={val.mPaisaID}
-                                                            type="number"
-                                                            variant='filled'
-                                                            label="Mpsa ID" />
-                                                    </tr>
-                                                )
-                                            })
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
-                            <div className='d-flex'>
-                                <div className="col-6">
-                                    <Typography variant="h5" style={{ marginLeft: "10px" }}>Category</Typography>
-                                    {etat === true ? (
-                                        <>
-                                            <table className="table table-bordered table-bordeless table-striped mt-5" style={{ marginLeft: "10px" }}>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Category</th>
-                                                    </tr>
-
-                                                    {dataCat.map((val, index) => (
-                                                        <tr key={index}>
-                                                            <td>
-                                                                {val.catName}
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </>
-                                    ) : ''}
-                                </div>
-                                <div className="col-6" className="mt-2" style={{ marginLeft: "100px", width: "100%" }}>
-
-                                    {etat === false ? (
-                                        <>
-                                            <Button variant="outlined" onClick={changeEtatBtn}>
-                                                Afficher
-                                            </Button>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Button variant="outlined" onClick={handleBtnHide}>
-                                                Cacher
-                                            </Button>
-                                        </>
-                                    )}
-                                    {etat === true && (
-                                        <>
-                                            <table className="table table-bordered table-bordeless table-striped" style={{ marginRight: "50px", marginTop: "35px" }}>
-                                                <tbody>
-                                                    <tr>
-                                                        <th>Sub Category</th>
-                                                    </tr>
-                                                    {dataCat.map((val, index) => (
-                                                        <tr key={index}>
-                                                            <td>
-                                                                {val.subCategories}
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </>
-                                    )}
-                                </div>
-                            </div>
+                            
                         </Card>
                     </Grid>
                 </div>

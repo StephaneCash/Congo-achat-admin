@@ -35,9 +35,9 @@ const DetailUser = (props) => {
         })
     }
 
-    const closeModal = (props) => {
-        return props.close;
-    }
+    const annonceClose  = props.close;
+
+    console.log(annonceClose, 'Function close Modal')
 
     const deleteAnnonce = async (id) => {
         const annonce = doc(db, 'ads', id);
@@ -51,7 +51,7 @@ const DetailUser = (props) => {
             if (willDelete) {
                 deleteDoc(annonce)
                 getAnnonces();
-                closeModal(props);
+                annonceClose();
                 swal('Annonce supprimée avec succès', {
                     icon: "success",
                 });
@@ -92,7 +92,7 @@ const DetailUser = (props) => {
         }).then((willDelete) => {
             if (willDelete) {
                 updateDoc(annonces, dataS);
-                getAnnonces();  
+                getAnnonces();
                 swal('Annonce désapprouvé avec succès', {
                     icon: "success",
                 });
@@ -134,7 +134,7 @@ const DetailUser = (props) => {
                                                 component="img"
                                                 height="200"
                                                 alt='Image annonce'
-                                                image={val.photos}
+                                                image={val.photos[0] || val.photos[index + 1]}
                                             />
                                             <CardContent>
                                                 <Grid xs={12} sm={12} className="mb-2">
