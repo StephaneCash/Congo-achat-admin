@@ -87,7 +87,7 @@ const Login = () => {
                                     </div>
 
                                 </CardContent>
-                                <h3 style={{ textAlign: "center" }}>S'identifier</h3>
+                                <h3 style={{ textAlign: "center" }}>S'authentifier</h3>
 
                             </Grid>
                             <div style={{ width: '91%', margin: '0 auto' }}>{error !== "" && <div className="alert alert-danger">{error.code}</div>}</div>

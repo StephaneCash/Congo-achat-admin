@@ -1,5 +1,5 @@
 import { Card, Grid, Button } from '@material-ui/core';
-import { Build, PersonAdd } from '@material-ui/icons';
+import { Build, PersonAdd, Check, Close } from '@material-ui/icons';
 import React from 'react';
 import LeftBar from '../includes/LeftBar';
 import NavBar from '../includes/NavBar';
@@ -101,6 +101,57 @@ function SubAdmins() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    let dataS = {};
+    let docData = "";
+    let etatBtn = false;
+
+    data.forEach(val => {
+        if (val.id === idDetail) {
+            dataS.catName = val.name;
+            docData = val.status;
+            if (val.status === 'Actif') {
+                dataS.status = "Bloqué";
+                etatBtn = true;
+            } else if (val.status === 'Bloqué') {
+                dataS.status = "Actif";
+            }
+            dataS.description = val.email;
+        }
+    });
+
+    console.log("DATA S : : ", dataS)
+
+    const handleBloquerSubAdmin = (id) => {
+        setIdDetail(id);
+
+        const catCol = doc(db, 'subAdmins', id);
+        let msg = "";
+        let msgConf = "";
+        if (docData === 'Actif') {
+            msg = 'Etes-vous sûr de vouloir bloquer ce sous-admin ?';
+            msgConf = 'Sous-admin bloqué avec succès';
+        } else if (docData === 'Bloqué') {
+            msg = 'Etes-vous sûr de vouloir débloquer ce sous-admin ?';
+            msgConf = 'Sous-admin débloqué avec succès';
+        }
+
+        swal({
+            title: "Avertissement.",
+            text: msg,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                updateDoc(catCol, dataS);
+                swal(msgConf, {
+                    icon: "success",
+                });
+                getSubAdmins();
+            }
+        })
+    };
+
     return (
         <>
             <div className="subAdmins">
@@ -157,6 +208,7 @@ function SubAdmins() {
                                                 <th>Nom </th>
                                                 <th>Numéro De Téléphone </th>
                                                 <th>E-mail </th>
+                                                <th>Status</th>
                                                 <th>Date De Création </th>
                                                 <th>Actions</th>
                                             </tr>
@@ -181,6 +233,18 @@ function SubAdmins() {
                                                                     <td>{val.name}</td>
                                                                     <td>{val.numero}</td>
                                                                     <td>{val.email}</td>
+                                                                    <td>
+                                                                        {
+                                                                            val.status === "Actif" ?
+                                                                                <>
+                                                                                    {val.status}
+                                                                                    <Check style={{ color: 'green', fontSize: '20px' }} />
+                                                                                </> :
+                                                                                <>
+                                                                                    {val.status} <Close style={{ color: 'red', fontSize: '20px' }} />
+                                                                                </>
+                                                                        }
+                                                                    </td>
                                                                     <td>{val.time}</td>
 
                                                                     <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
@@ -201,7 +265,7 @@ function SubAdmins() {
                                                                         </button>
                                                                     </td>
                                                                 </tr>
-                                                            ) )
+                                                            ))
 
                                                         }
                                                     </>
@@ -244,9 +308,12 @@ function SubAdmins() {
                                                                 </tr>
                                                                 <tr>
                                                                     <td colSpan="2px">
-                                                                        <Button variant="outlined">
-                                                                            Bloquer
-                                                                        </Button>
+                                                                        <Button variant="outlined" onClick={() => handleBloquerSubAdmin(val.id)}>
+                                                                            {
+                                                                                etatBtn ? <span style={{color:"red"}}>Bloquer</span> : 
+                                                                                <span style={{color:"green"}}>Débloquer</span> 
+                                                                            }
+                                                                        </Button> Status : {val.status}
                                                                     </td>
 
                                                                 </tr>

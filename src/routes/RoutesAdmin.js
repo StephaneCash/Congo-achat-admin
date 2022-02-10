@@ -10,6 +10,7 @@ import Provinces from "../view/Provinces";
 import ProtectedRoute from "../view/ProtectedRoute";
 import GestionMonetaire from "../view/GestionMonetaire";
 import TrouverClient from "../view/TrouverClient";
+import CategoriesAndSous from "../view/CategoriesAndSous";
 
 
 const RoutesAdmin = () => {
@@ -29,6 +30,7 @@ const RoutesAdmin = () => {
                 <Route path="provinces" element={<ProtectedRoute><Provinces /></ProtectedRoute>} />
                 <Route path="gestion-monetaire" element={<ProtectedRoute><GestionMonetaire /></ProtectedRoute>} />
                 <Route path="findClient" element={<ProtectedRoute><TrouverClient /></ProtectedRoute>} />
+                <Route path='categories' element={<ProtectedRoute><CategoriesAndSous /></ProtectedRoute>} />
             </Routes>
         </BrowserRouter>
     )

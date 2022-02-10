@@ -103,7 +103,11 @@ const LeftBar = () => {
                 </div>
                 <div className={classes.item}>
                     <Category className={classes.icon} />
-                    <Typography className={classes.text}>Catégories & Sous Catégories</Typography>
+                    <Typography className={classes.text}>
+                        <NavLink to="/categories">
+                            Catégories & Sous Catégories
+                        </NavLink>
+                    </Typography>
                 </div>
                 <div className={classes.item}>
                     <ApartmentTwoTone className={classes.icon} />

@@ -5,7 +5,7 @@ import _ from "lodash";
 import NavBar from "../includes/NavBar";
 import { Button, Card, Grid } from "@material-ui/core";
 import LeftBar from "../includes/LeftBar";
-import { PersonAdd } from "@material-ui/icons";
+import { Check, Close, PersonAdd } from "@material-ui/icons";
 import swal from "sweetalert";
 import DetailUser from "../modal/detailUser";
 import { db } from "../config/FirebaseConfig";
@@ -34,7 +34,7 @@ function Users() {
         //console.log(e);
         const { value, id } = e.target;
         setFormData({ ...formData, [id]: value });
-    }
+    };
 
     const handleSubmitUser = async (e) => {
 
@@ -223,8 +223,18 @@ function Users() {
                                                             <td>
                                                                 {val.balance} {val.balance.length > 0 ? 'CDF' : ''}
                                                             </td>
-                                                            <td>{val.status === "Actif" ? <>{val.status} <i className="fa fa-check" style={{ color: 'green' }}></i></>
-                                                                : <>{val.status} <i className='fa fa-close' style={{ color: 'red' }}></i></>}</td>
+                                                            <td>
+                                                                {
+                                                                    val.status === "Actif" ?
+                                                                        <>
+                                                                            {val.status}
+                                                                            <Check style={{ color: 'green', fontSize: '20px' }} />
+                                                                        </> :
+                                                                        <>
+                                                                            {val.status} <Close style={{ color: 'red', fontSize: '20px' }} />
+                                                                        </>
+                                                                }
+                                                            </td>
                                                             <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
                                                                 <button type="button"
                                                                     onClick={() => handleUpdateUser(val)}
@@ -285,6 +295,7 @@ function Users() {
                         show={detailModal}
                         data={detailUser}
                         close={closeModalDetailUser}
+                        getU={getUsers}
                     />
                 </Grid>
             </Grid>

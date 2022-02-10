@@ -21,6 +21,8 @@ const DetailUser = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const closeModalAnnonceDetail = props.close;
+
     const handleBloquerUser = () => {
         swal({
             title: "Avertissement.",
@@ -51,6 +53,7 @@ const DetailUser = (props) => {
             if (willDelete) {
                 deleteDoc(annonce)
                 getAnnonces();
+                closeModalAnnonceDetail();
                 annonceClose();
                 swal('Annonce supprimée avec succès', {
                     icon: "success",

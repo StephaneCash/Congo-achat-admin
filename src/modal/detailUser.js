@@ -48,29 +48,33 @@ const DetailUser = (props) => {
         }
     });
 
-    console.log("ETAT STATUS : ", docData)
+    const getU = props.getU;
 
     const handleBloquerUser = (id) => {
-        const userCol = doc(db, 'users', id)
+        const userCol = doc(db, 'users', id);
+        let msg = "";
+        let msgConf = "";
+        if (docData === 'Actif') {
+            msg = 'Etes-vous sûr de vouloir bloquer cet utilisateur';
+            msgConf = 'Utilisateur bloqué avec succès';
+        } else if (docData === 'Bloqué') {
+            msg = 'Etes-vous sûr de vouloir débloquer cet utilisateur';
+            msgConf = 'Utilisateur débloqué avec succès';
+        }
+
         swal({
             title: "Avertissement.",
-            text: "Etes-vous sûr de vouloir bloquer cet utilisateur ?",
+            text: msg,
             icon: "warning",
             buttons: true,
             dangerMode: true
         }).then((willDelete) => {
             if (willDelete) {
                 updateDoc(userCol, dataS);
-                if (docData == 'Actif') {
-                    swal('Utilisateur bloqué avec succès', {
-                        icon: "success",
-                    });
-                } else if(docData == 'Bloqué'){
-                    swal('Utilisateur débloqué avec succès', {
-                        icon: "success",
-                    });
-                }
-
+                getU();
+                swal(msgConf, {
+                    icon: "success",
+                });
                 getUsers();
                 closeM();
             }
