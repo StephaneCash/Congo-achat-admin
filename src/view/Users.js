@@ -5,7 +5,7 @@ import _ from "lodash";
 import NavBar from "../includes/NavBar";
 import { Button, Card, Grid } from "@material-ui/core";
 import LeftBar from "../includes/LeftBar";
-import { Check, Close, PersonAdd } from "@material-ui/icons";
+import { Cancel, CheckCircleSharp, PersonAdd } from "@material-ui/icons";
 import swal from "sweetalert";
 import DetailUser from "../modal/detailUser";
 import { db } from "../config/FirebaseConfig";
@@ -19,7 +19,7 @@ function Users() {
 
     const usersCollection = collection(db, "users");
 
-    const initialiseValues = { id: "", username: "", email: "", name: "", phoneNumber: "", province: "", city: "", balance: "" };
+    const initialiseValues = { id: "", username: "", email: "", name: "", phoneNumber: "", province: "", city: "", balance: "", status:"" };
     const [formData, setFormData] = useState(initialiseValues);
 
     const [paginated, setPaginated] = useState([]);
@@ -227,11 +227,11 @@ function Users() {
                                                                 {
                                                                     val.status === "Actif" ?
                                                                         <>
-                                                                            {val.status}
-                                                                            <Check style={{ color: 'green', fontSize: '20px' }} />
+                                                                            {val.status} 
+                                                                            <CheckCircleSharp style={{ marginLeft:'5px',color: 'green', fontSize: '22px' }} />
                                                                         </> :
                                                                         <>
-                                                                            {val.status} <Close style={{ color: 'red', fontSize: '20px' }} />
+                                                                            {val.status} <Cancel style={{ marginLeft:'5px',color: 'red', fontSize: '20px' }} />
                                                                         </>
                                                                 }
                                                             </td>

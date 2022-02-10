@@ -1,5 +1,5 @@
 import { Card, Grid, Button } from '@material-ui/core';
-import { Build, PersonAdd, Check, Close } from '@material-ui/icons';
+import { Build, PersonAdd, CheckCircleSharp, Cancel } from '@material-ui/icons';
 import React from 'react';
 import LeftBar from '../includes/LeftBar';
 import NavBar from '../includes/NavBar';
@@ -15,7 +15,7 @@ function SubAdmins() {
 
     const subAdmins = collection(db, 'subAdmins');
 
-    const initializeValues = { id: "", email: "", name: "", number: "", };
+    const initializeValues = { id: "", email: "", name: "", number: "", status:''};
     const [formData, setFormData] = useState(initializeValues);
 
     const [data, setData] = useState([]);
@@ -238,10 +238,10 @@ function SubAdmins() {
                                                                             val.status === "Actif" ?
                                                                                 <>
                                                                                     {val.status}
-                                                                                    <Check style={{ color: 'green', fontSize: '20px' }} />
+                                                                                    <CheckCircleSharp style={{ marginLeft:"5px",color: 'green', fontSize: '20px' }} />
                                                                                 </> :
                                                                                 <>
-                                                                                    {val.status} <Close style={{ color: 'red', fontSize: '20px' }} />
+                                                                                    {val.status}<Cancel style={{ marginLeft:"5px", color: 'red', fontSize: '20px' }} />
                                                                                 </>
                                                                         }
                                                                     </td>

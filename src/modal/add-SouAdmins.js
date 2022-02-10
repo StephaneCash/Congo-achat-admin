@@ -18,6 +18,7 @@ const AddSousAdmin = (props) => {
     const handleSubmitSubAdmin = props.handleSubmitSubAdmin;
 
     const { id, email, name, numero, } = data;
+    data.status = "Actif";
     let tempsNow = new Date();
     data.time = tempsNow.toString().substring(0, 25);
 
@@ -69,12 +70,12 @@ const AddSousAdmin = (props) => {
                                 type="submit"
                                 variant="outlined"
                                 className="btn"
-                                style={{ backgroundColor: 'white', color: '#555', marginLeft: '10px', float: "right" }}
+                                style={{ backgroundColor: 'white', color: 'green', marginLeft: '10px', float: "right", border: '1px solid green' }}
                             >
                                 {id ? "Editer" : "Ajouter"}
                             </Button>
                             <Button className="btn" variant="outlined"
-                                style={{ float: "right", marginLeft: "15px" }}
+                                style={{ float: "right", marginLeft: "15px", border: "1px solid red", color: "red" }}
                                 onClick={props.close}>Annuler</Button>
                         </div>
                     </form>

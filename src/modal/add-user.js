@@ -23,6 +23,7 @@ const AddUser = (props) => {
     const handleSubmitUser = props.handleSubmitUser;
 
     const { id, username, email, name, phoneNumber, province, city, balance } = data;
+    data.status = "Actif";
 
     return (
         <>

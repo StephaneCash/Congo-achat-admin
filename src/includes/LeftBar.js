@@ -22,8 +22,9 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         marginBottom: theme.spacing(4),
         [theme.breakpoints.up("sm")]: {
-            marginBottom: theme.spacing(3),
-            cursor: 'pointer'
+            marginBottom: theme.spacing(2),
+            fontSize:"18px",
+            cursor: 'pointer', 
         },
     },
     text: {
