@@ -54,7 +54,6 @@ function AppSettings() {
                                 <h4 className="align-center"> App Settings <Settings /> </h4>
                                 <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                             </div>
-                            
                         </Card>
                     </Grid>
                 </div>

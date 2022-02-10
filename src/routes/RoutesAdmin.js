@@ -30,7 +30,9 @@ const RoutesAdmin = () => {
                 <Route path="provinces" element={<ProtectedRoute><Provinces /></ProtectedRoute>} />
                 <Route path="gestion-monetaire" element={<ProtectedRoute><GestionMonetaire /></ProtectedRoute>} />
                 <Route path="findClient" element={<ProtectedRoute><TrouverClient /></ProtectedRoute>} />
-                <Route path='categories' element={<ProtectedRoute><CategoriesAndSous /></ProtectedRoute>} />
+                <Route path='categories' element={
+                    <ProtectedRoute><CategoriesAndSous /></ProtectedRoute>
+                } />
             </Routes>
         </BrowserRouter>
     )

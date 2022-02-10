@@ -5,10 +5,10 @@ import LeftBar from '../includes/LeftBar';
 import NavBar from '../includes/NavBar';
 import { db } from "../config/FirebaseConfig";
 import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Load from '../includes/Load';
 
-function CategoriesAndSous() {
+function CategoriesAndSous(props) {
 
     const [data, setData] = useState([]);
     const categoryCollection = collection(db, 'categories');
@@ -47,7 +47,7 @@ function CategoriesAndSous() {
 
     return (
         <div>
-            <div className="users appSettings">
+            <div className="categories">
                 <NavBar />
                 <div className="d-flex">
                     <Grid xs={2} item>

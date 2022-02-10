@@ -5,7 +5,7 @@ import LeftBar from '../includes/LeftBar';
 import NavBar from '../includes/NavBar';
 import { db } from "../config/FirebaseConfig";
 import { collection, getDocs, addDoc, deleteDoc, updateDoc, doc } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Load from '../includes/Load';
 import "../css/SubAdmins.css";
 import AddSousAdmin from '../modal/add-SouAdmins';
@@ -15,7 +15,7 @@ function SubAdmins() {
 
     const subAdmins = collection(db, 'subAdmins');
 
-    const initializeValues = { id: "", email: "", name: "", number: "", status:''};
+    const initializeValues = { id: "", email: "", name: "", number: "", status: '' };
     const [formData, setFormData] = useState(initializeValues);
 
     const [data, setData] = useState([]);
@@ -237,11 +237,12 @@ function SubAdmins() {
                                                                         {
                                                                             val.status === "Actif" ?
                                                                                 <>
-                                                                                    {val.status}
-                                                                                    <CheckCircleSharp style={{ marginLeft:"5px",color: 'green', fontSize: '20px' }} />
+                                                                                    <span style={{ color: "green" }}>{val.status}</span>
+                                                                                    <CheckCircleSharp style={{ marginLeft: "5px", color: 'green', fontSize: '20px' }} />
                                                                                 </> :
                                                                                 <>
-                                                                                    {val.status}<Cancel style={{ marginLeft:"5px", color: 'red', fontSize: '20px' }} />
+                                                                                    <span style={{ color: "red" }}>{val.status}</span>
+                                                                                    <Cancel style={{ marginLeft: "5px", color: 'red', fontSize: '20px' }} />
                                                                                 </>
                                                                         }
                                                                     </td>
@@ -310,8 +311,8 @@ function SubAdmins() {
                                                                     <td colSpan="2px">
                                                                         <Button variant="outlined" onClick={() => handleBloquerSubAdmin(val.id)}>
                                                                             {
-                                                                                etatBtn ? <span style={{color:"red"}}>Bloquer</span> : 
-                                                                                <span style={{color:"green"}}>Débloquer</span> 
+                                                                                etatBtn ? <span style={{ color: "red" }}>Bloquer</span> :
+                                                                                    <span style={{ color: "green" }}>Débloquer</span>
                                                                             }
                                                                         </Button> Status : {val.status}
                                                                     </td>
@@ -326,10 +327,8 @@ function SubAdmins() {
                                     </div>
                                 </Card>
                             </Grid>
-
                         </>)}
                     </Grid>
-
                 </Grid>
             </div>
             <AddSousAdmin
