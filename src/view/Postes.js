@@ -3,6 +3,9 @@ import { PostAddRounded } from '@material-ui/icons'
 import React from 'react'
 import LeftBar from '../includes/LeftBar'
 import NavBar from '../includes/NavBar'
+import { useState, useEffect } from "react";
+import { db } from "../config/FirebaseConfig";
+import { getDocs, doc, updateDoc, deleteDoc, addDoc, collection } from "firebase/firestore";
 
 function Postes() {
     return (

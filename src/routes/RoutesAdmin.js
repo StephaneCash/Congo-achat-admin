@@ -17,26 +17,27 @@ import Postes from "../view/Postes";
 const RoutesAdmin = () => {
 
     //let name = localStorage.getItem("userAuth");
-
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path='dashboard' element={<ProtectedRoute><Dashboard /> </ProtectedRoute>} />
-                <Route path='users' element={<ProtectedRoute><Users /></ProtectedRoute>} />
-                <Route path='annonces' element={<ProtectedRoute><Annonces /></ProtectedRoute>} />
-                <Route path="essais" element={<ProtectedRoute><Essai /></ProtectedRoute>} />
-                <Route path='appsetting' element={<ProtectedRoute><AppSettings /></ProtectedRoute>} />
-                <Route path='subAdmins' element={<ProtectedRoute><SubAdmins /></ProtectedRoute>} />
-                <Route path="provinces" element={<ProtectedRoute><Provinces /></ProtectedRoute>} />
-                <Route path="gestion-monetaire" element={<ProtectedRoute><GestionMonetaire /></ProtectedRoute>} />
-                <Route path="findClient" element={<ProtectedRoute><TrouverClient /></ProtectedRoute>} />
-                <Route path='categories' element={
-                    <ProtectedRoute><CategoriesAndSous /></ProtectedRoute>
-                } />
-                <Route path='postes' element={<ProtectedRoute><Postes /></ProtectedRoute>} />
-            </Routes>
-        </BrowserRouter>
+        <div>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Login />} />
+                    <Route path='dashboard' element={<ProtectedRoute><Dashboard /> </ProtectedRoute>} />
+                    <Route path='users' element={<ProtectedRoute><Users /></ProtectedRoute>} />
+                    <Route path='annonces' element={<ProtectedRoute><Annonces /></ProtectedRoute>} />
+                    <Route path="essais" element={<ProtectedRoute><Essai /></ProtectedRoute>} />
+                    <Route path='appsetting' element={<ProtectedRoute><AppSettings /></ProtectedRoute>} />
+                    <Route path='subAdmins' element={<ProtectedRoute><SubAdmins /></ProtectedRoute>} />
+                    <Route path="provinces" element={<ProtectedRoute><Provinces /></ProtectedRoute>} />
+                    <Route path="gestion-monetaire" element={<ProtectedRoute><GestionMonetaire /></ProtectedRoute>} />
+                    <Route path="findClient" element={<ProtectedRoute><TrouverClient /></ProtectedRoute>} />
+                    <Route path='categories' element={
+                        <ProtectedRoute><CategoriesAndSous /></ProtectedRoute>
+                    } />
+                    <Route path='postes' element={<ProtectedRoute><Postes /></ProtectedRoute>} />
+                </Routes>
+            </BrowserRouter>
+        </div>
     )
 }
 

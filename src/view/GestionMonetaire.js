@@ -7,24 +7,30 @@ import { db } from "../config/FirebaseConfig";
 import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import Load from '../includes/Load';
-import FlashMessage from "react-flash-message";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 function GestionMonetaire() {
     const [data, setData] = useState([]);
     const appSettings = collection(db, 'app-settings');
 
-    const [poste, setPoste] = useState();
-    const [pub, setPub] = useState();
-    const [mpsa, setMpsa] = useState();
-    const [airtel, setAirtel] = useState();
-    const [orange, setOrange] = useState();
-    const [cdf, setCdf] = useState();
-    const [taux, setTaux] = useState();
-
     const getAppSettings = async () => {
         const dataApp = await getDocs(appSettings);
         setData(dataApp.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
+
+    const [formData, setFormData] = useState({
+        adPrice: "",
+        adPriceForPublicity: '',
+        adPriceForPublicityUSD: "",
+        adPriceinUSD: "",
+        airtelMoney: "",
+        mPaisaID: "",
+        orangeMoney: "",
+        tauxEchange: "",
+    });
 
     useEffect(() => {
         getAppSettings();
@@ -33,13 +39,20 @@ function GestionMonetaire() {
 
     const [etat, setEtat] = useState(false)
 
-    const submitData = async (e) => {
-        e.preventDefault();
+    const submitData = async (id) => {
+        const monetaireDoc = doc(db, 'app-settings', id);
+        await updateDoc(monetaireDoc, formData);
         setEtat(true);
+        getAppSettings();
+        toast.success("Modification effectuée avec succès")
     };
 
-    const handleSubmitUser = (e) => {
-        setOrange(e.target.value)
+    const handle = (e) => {
+        const { value, id } = e.target;
+        let valueTarget = value;
+        let idTarget = id;
+        data[0].adPrice = value 
+            console.log("Données du form : ", id, " : ", `${valueTarget}`);
     }
 
     return (
@@ -59,18 +72,20 @@ function GestionMonetaire() {
                             <div className="col-12 p-5">
                                 {data.length > 0 ? (
                                     <>
-                                        <form onSubmit={submitData}>
+                                        <form>
                                             {
                                                 data.map((val, index) => (
                                                     <div className="row" key={index}>
                                                         <div className="col-5">
                                                             Prix du poste : <br />
                                                             <TextField
+                                                                id="adPrice"
+                                                                type="number"
                                                                 required
                                                                 variant="filled"
                                                                 value={val.adPrice}
                                                                 style={{ width: '80%' }}
-                                                                onChange={e => setPoste(e.target.value)}
+                                                                onChange={e => val.adPrice(e.target.value)}
                                                             />
                                                             <br />
                                                             <br />
@@ -79,18 +94,21 @@ function GestionMonetaire() {
                                                                 required
                                                                 variant="filled"
                                                                 style={{ width: '80%' }}
+                                                                id="adPriceForPublicity"
                                                                 value={val.adPriceForPublicity}
-                                                                onChange={e => setPub(e.target.value)}
+                                                                onChange={e => handle(e)}
                                                             />
                                                             <br />
                                                             <br />
                                                             Compte M-pesa : <br />
                                                             <TextField
+                                                                type="number"
                                                                 required
                                                                 variant="filled"
                                                                 value={val.mPaisaID}
-                                                                style={{ width: '80%' }}
-                                                                onChange={e => setMpsa(e.target.value)}
+                                                                id="mPaisaID"
+                                                                style={{ width: '80%' }} onChange={e => handle(e)}
+                                                                onChange={e => handle(e)}
                                                             />
                                                             <br />
                                                             <br />
@@ -98,19 +116,21 @@ function GestionMonetaire() {
                                                             <TextField
                                                                 required
                                                                 variant="filled"
+                                                                id="airtelMoney"
                                                                 style={{ width: '80%' }}
                                                                 value={val.airtelMoney}
-                                                                onChange={e => setAirtel(e.target.value)}
+                                                                onChange={e => handle(e)}
                                                             />
                                                         </div>
                                                         <div className="col-5">
                                                             Compte Orange Money : <br />
                                                             <TextField
+                                                                id="orangeMoney"
                                                                 required
                                                                 variant="filled"
                                                                 style={{ width: '80%' }}
                                                                 value={val.orangeMoney}
-                                                                onChange={handleSubmitUser}
+                                                                onChange={e => handle(e)}
                                                             />
                                                             <br />
                                                             <br />
@@ -119,40 +139,33 @@ function GestionMonetaire() {
                                                                 style={{ width: '80%' }}
                                                                 required
                                                                 variant="filled"
+                                                                id="adPriceinUSD"
                                                                 value={val.adPriceinUSD}
-                                                                onChange={e => setCdf(e.target.value)}
+                                                                onChange={e => handle(e)}
                                                             />
                                                             <br />
                                                             <br />
                                                             Taux du jour :<br />
                                                             <TextField
+                                                                type="number"
                                                                 required
                                                                 style={{ width: '80%' }}
+                                                                id="tauxEchange"
                                                                 variant="filled"
                                                                 value={val.tauxEchange}
-                                                                onChange={e => setTaux(e.target.value)}
+                                                                onChange={e => handle(e)}
                                                             />
                                                         </div>
                                                         <div className="col-2 mt-4">
                                                             <Button
                                                                 style={{ color: "green", border: '1px solid green' }}
                                                                 variant="outlined"
-                                                                type="submit"
+                                                                onClick={() => submitData(val.id)}
                                                             >
                                                                 Modifier
                                                                 <i className="fa fa-edit" style={{ marginLeft: "5px" }}></i>
                                                             </Button>
                                                         </div>
-                                                        {
-                                                            etat &&
-                                                            <FlashMessage>
-                                                                <p
-                                                                    style={{
-                                                                        color: "white", border: "1px solid silver", borderRadius: "5px",
-                                                                        padding: "15px", marginTop: "20px", backgroundColor: 'rgb(158, 211, 158)',
-                                                                    }}>Données modifiées avec succès !</p>
-                                                            </FlashMessage>
-                                                        }
                                                     </div>
                                                 ))
                                             }

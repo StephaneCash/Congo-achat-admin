@@ -18,7 +18,11 @@ const AddSousAdmin = (props) => {
     const handleSubmitSubAdmin = props.handleSubmitSubAdmin;
 
     const { id, email, name, numero, } = data;
-    data.status = "Actif";
+    if (id) {
+        data.status = data.status;
+    } else {
+        data.status = "Actif";
+    }
     let tempsNow = new Date();
     data.time = tempsNow.toString().substring(0, 25);
 
