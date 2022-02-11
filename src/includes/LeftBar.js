@@ -1,7 +1,7 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import {
     ApartmentTwoTone, Build, Category, Dashboard, KeyboardArrowDownOutlined,
-    MonetizationOn, People, Settings, LocationOn, Announcement
+    MonetizationOn, People, Settings, LocationOn, Announcement, PostAddRounded
 } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import "../css/Menu.css";
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         marginBottom: theme.spacing(4),
         [theme.breakpoints.up("sm")]: {
-            marginBottom: theme.spacing(2),
+            marginBottom: theme.spacing(1.5),
             fontSize: "18px",
             cursor: 'pointer',
         },
@@ -107,6 +107,14 @@ const LeftBar = () => {
                     <Typography className={classes.text}>
                         <NavLink to="/categories">
                             Catégories & Sous Catégories
+                        </NavLink>
+                    </Typography>
+                </div>
+                <div className={classes.item}>
+                    <PostAddRounded className={classes.icon} />
+                    <Typography className={classes.text}>
+                        <NavLink to="/postes">
+                            Postes
                         </NavLink>
                     </Typography>
                 </div>

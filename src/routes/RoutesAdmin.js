@@ -11,6 +11,7 @@ import ProtectedRoute from "../view/ProtectedRoute";
 import GestionMonetaire from "../view/GestionMonetaire";
 import TrouverClient from "../view/TrouverClient";
 import CategoriesAndSous from "../view/CategoriesAndSous";
+import Postes from "../view/Postes";
 
 
 const RoutesAdmin = () => {
@@ -33,6 +34,7 @@ const RoutesAdmin = () => {
                 <Route path='categories' element={
                     <ProtectedRoute><CategoriesAndSous /></ProtectedRoute>
                 } />
+                <Route path='postes' element={<ProtectedRoute><Postes /></ProtectedRoute>} />
             </Routes>
         </BrowserRouter>
     )
