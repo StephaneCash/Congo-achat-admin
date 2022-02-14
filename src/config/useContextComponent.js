@@ -10,6 +10,7 @@ const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
     const [user, setUser] = useState("");
+    const [pending, setPending] = useState(true);
 
     function login(email, password) {
         return signInWithEmailAndPassword(auth, email, password);
@@ -22,11 +23,16 @@ export function UserAuthContextProvider({ children }) {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            setPending(false);
         });
         return () => {
             unsubscribe();
         }
     }, [])
+
+    if(pending){
+        return <>Patientez...</>
+    }
 
     return <userAuthContext.Provider value={{ user, login, logOut }}> {children} </userAuthContext.Provider>;
 };

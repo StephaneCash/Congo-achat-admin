@@ -7,12 +7,18 @@ import { db } from "../config/FirebaseConfig";
 import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from "firebase/firestore";
 import { useState, useEffect, useContext } from "react";
 import Load from '../includes/Load';
+import AddCategory from '../modal/add-Category';
+import swal from 'sweetalert';
 
 function CategoriesAndSous(props) {
 
     const [data, setData] = useState([]);
     const categoryCollection = collection(db, 'categories');
     const [inputValueSearch, setInputValueSearch] = useState('');
+    const [showModal, setShowModal] = useState(false);
+
+    const initializeValues = { id: "", catName: "", description: "", subCategory: "", };
+    const [formData, setFormData] = useState(initializeValues);
 
     const getCaterory = async () => {
         const dataCategory = await getDocs(categoryCollection);
@@ -24,8 +30,18 @@ function CategoriesAndSous(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const addSudAdminModal = () => {
+    const onChange = (e) => {
+        const { value, id } = e.target;
+        setFormData({ ...formData, [id]: value });
+        console.log(id, ' : ', value)
+    }
 
+    const addSudAdminModal = () => {
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
     };
 
     const updateSubAdminModal = () => {
@@ -44,6 +60,23 @@ function CategoriesAndSous(props) {
         let value = e.target.value;
         setInputValueSearch(value.toLowerCase());
     };
+
+    const handleSubmitSubAdmin = async (e) => {
+        e.preventDefault();
+
+        if (formData.id) {
+            const docSousAdmin = doc(db, 'categories', formData.id);
+            await updateDoc(docSousAdmin, formData);
+            getCaterory()
+            swal({ title: "Succès", icon: 'success', text: `Catégorie modifiée avec succès` });
+            setFormData(initializeValues);
+        } else {
+            await addDoc(categoryCollection, formData);
+            getCaterory()
+            swal({ title: "Succès", icon: 'success', text: `Catégorie ajoutée avec succès` });
+            setFormData(initializeValues);
+        }
+    }
 
     return (
         <div>
@@ -67,12 +100,15 @@ function CategoriesAndSous(props) {
                                                 <input
                                                     type="text"
                                                     className="form-control input-search "
-                                                    placeholder="Rechercher par nom ou email"
+                                                    placeholder="Rechercher..."
                                                     autoComplete="off"
                                                     onChange={handleInput}
                                                 />
                                                 <div className="input-group-append">
-                                                    <i className="input-group-text fa fa-search fa-1x" aria-hidden="true"></i>
+                                                    <i
+                                                        style={{ height: '40px', lineHeight: '30px' }}
+                                                        className="input-group-text fa fa-search fa-1x"
+                                                        aria-hidden="true"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,10 +142,7 @@ function CategoriesAndSous(props) {
                                                 data.length > 0 ? (
                                                     <>
                                                         {
-                                                            data.filter((val) => {
-                                                                let value = val.catName.toLowerCase();
-                                                                return value.includes(inputValueSearch);
-                                                            }).map((val, index) => (
+                                                            data.map((val, index) => (
 
                                                                 <tr key={index}>
                                                                     <td>
@@ -162,6 +195,13 @@ function CategoriesAndSous(props) {
                     </Grid>
                 </div>
             </div>
+            <AddCategory
+                show={showModal}
+                closeModal={closeModal}
+                onChange={onChange}
+                data={formData}
+                handleSubmitSubAdmin={handleSubmitSubAdmin}
+            />
         </div>
     )
 }

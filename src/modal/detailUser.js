@@ -57,9 +57,11 @@ const DetailUser = (props) => {
         if (docData === 'Actif') {
             msg = 'Etes-vous sûr de vouloir bloquer cet utilisateur';
             msgConf = 'Utilisateur bloqué avec succès';
+            getU();
         } else if (docData === 'Bloqué') {
             msg = 'Etes-vous sûr de vouloir débloquer cet utilisateur';
             msgConf = 'Utilisateur débloqué avec succès';
+            getU();
         }
 
         swal({

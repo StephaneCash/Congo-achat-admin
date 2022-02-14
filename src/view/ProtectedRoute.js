@@ -12,9 +12,9 @@ function ProtectedRoute({ children }) {
         localStorage.setItem('userAuth', "auth");
     }*/
 
-   /* if (!user) {
+    if (!user) {
         return <Navigate to="/" />
-    };*/
+    };
 
     return children;
 }
