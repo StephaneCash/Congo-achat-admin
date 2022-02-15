@@ -83,7 +83,7 @@ const NavBar = () => {
                                 <Notifications />
                             </Badge>
                         </Link>
-                        <Avatar style={{ backgroundColor: "#555" }} alt="C" src="s" />
+                        <Avatar style={{ backgroundColor: "#555" }} alt={user.email.charAt(0).toUpperCase()} src="s" />
                         <SettingsPower className={classes.logout} onClick={logOutHandle} />
                     </div>
                 </Toolbar>

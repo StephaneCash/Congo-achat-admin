@@ -1,7 +1,7 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import {
     ApartmentTwoTone, Build, Category, Dashboard, KeyboardArrowDownOutlined,
-    MonetizationOn, People, Settings, LocationOn, Announcement, PostAddRounded
+    MonetizationOn, People, Settings, LocationOn, Announcement, PostAddRounded, NotificationsActive
 } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import "../css/Menu.css";
@@ -123,6 +123,14 @@ const LeftBar = () => {
                     <Typography className={classes.text}>
                         <NavLink to="/provinces">
                             Provinces
+                        </NavLink>
+                    </Typography>
+                </div>
+                <div className={classes.item}>
+                    <NotificationsActive className={classes.icon} />
+                    <Typography className={classes.text}>
+                        <NavLink to="/notifications">
+                            Notifications
                         </NavLink>
                     </Typography>
                 </div>

@@ -9,6 +9,7 @@ import { useState, useEffect, useContext } from "react";
 import Load from '../includes/Load';
 import AddCategory from '../modal/add-Category';
 import swal from 'sweetalert';
+import DetailCategory from '../modal/DetailCategory';
 
 function CategoriesAndSous(props) {
 
@@ -16,14 +17,18 @@ function CategoriesAndSous(props) {
     const categoryCollection = collection(db, 'categories');
     const [inputValueSearch, setInputValueSearch] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [id, setId] = useState();
+    const [showModalDetail, setShowModalDetail] = useState(false);
 
-    const initializeValues = { id: "", catName: "", description: "", subCategory: "", };
+    const initializeValues = { id: "", catName: "", description: "", subCategory: [], };
     const [formData, setFormData] = useState(initializeValues);
 
     const getCaterory = async () => {
         const dataCategory = await getDocs(categoryCollection);
         setData(dataCategory.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
+
+    console.log('Data Category : ', data);
 
     useEffect(() => {
         getCaterory();
@@ -42,20 +47,39 @@ function CategoriesAndSous(props) {
 
     const closeModal = () => {
         setShowModal(false);
+        setShowModalDetail(false);
     };
 
-    const updateSubAdminModal = () => {
-
+    const updateSubAdminModal = (val) => {
+        setFormData(val);
+        addSudAdminModal();
     };
 
-    const detailSudAdmin = () => {
-
+    const detailSudAdmin = (id) => {
+        setId(id);
+        setShowModalDetail(true)
     };
+    const handleDeleteCategory = async (id) => {
+        const subAdminDoc = doc(db, 'categories', id);
 
-    const handleDeleteSubAdmin = () => {
-
-    };
-
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir supprimer cette catégorie ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                deleteDoc(subAdminDoc)
+                getCaterory();
+                swal('Catégorie supprimée avec succès', {
+                    icon: "success",
+                });
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
     const handleInput = (e) => {
         let value = e.target.value;
         setInputValueSearch(value.toLowerCase());
@@ -67,14 +91,16 @@ function CategoriesAndSous(props) {
         if (formData.id) {
             const docSousAdmin = doc(db, 'categories', formData.id);
             await updateDoc(docSousAdmin, formData);
-            getCaterory()
+            getCaterory();
             swal({ title: "Succès", icon: 'success', text: `Catégorie modifiée avec succès` });
             setFormData(initializeValues);
+            closeModal();
         } else {
             await addDoc(categoryCollection, formData);
-            getCaterory()
+            getCaterory();
             swal({ title: "Succès", icon: 'success', text: `Catégorie ajoutée avec succès` });
             setFormData(initializeValues);
+            closeModal();
         }
     }
 
@@ -142,7 +168,9 @@ function CategoriesAndSous(props) {
                                                 data.length > 0 ? (
                                                     <>
                                                         {
-                                                            data.map((val, index) => (
+                                                            data.filter((val)=>{
+                                                                return val.catName.toLowerCase().includes(inputValueSearch);
+                                                            }).map((val, index) => (
 
                                                                 <tr key={index}>
                                                                     <td>
@@ -166,7 +194,7 @@ function CategoriesAndSous(props) {
                                                                             <i className="fa fa-info"></i>
                                                                         </button>
                                                                         <button type="button"
-                                                                            onClick={() => handleDeleteSubAdmin(val.id)}
+                                                                            onClick={() => handleDeleteCategory(val.id)}
                                                                             className="btn btnChange">
                                                                             <i className="fa fa-trash"></i>
                                                                         </button>
@@ -201,6 +229,11 @@ function CategoriesAndSous(props) {
                 onChange={onChange}
                 data={formData}
                 handleSubmitSubAdmin={handleSubmitSubAdmin}
+            />
+            <DetailCategory
+                show={showModalDetail}
+                close={closeModal}
+                data={id}
             />
         </div>
     )

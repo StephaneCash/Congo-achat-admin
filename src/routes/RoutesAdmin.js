@@ -12,7 +12,7 @@ import GestionMonetaire from "../view/GestionMonetaire";
 import TrouverClient from "../view/TrouverClient";
 import CategoriesAndSous from "../view/CategoriesAndSous";
 import Postes from "../view/Postes";
-
+import NotificationPush from "../view/NotificationPush";
 
 const RoutesAdmin = () => {
 
@@ -31,6 +31,7 @@ const RoutesAdmin = () => {
                     <Route path="provinces" element={<ProtectedRoute><Provinces /></ProtectedRoute>} />
                     <Route path="gestion-monetaire" element={<ProtectedRoute><GestionMonetaire /></ProtectedRoute>} />
                     <Route path="findClient" element={<ProtectedRoute><TrouverClient /></ProtectedRoute>} />
+                    <Route path="notifications" element={<ProtectedRoute><NotificationPush /></ProtectedRoute>} />
                     <Route path='categories' element={
                         <ProtectedRoute><CategoriesAndSous /></ProtectedRoute>
                     } />

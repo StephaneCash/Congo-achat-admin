@@ -25,7 +25,7 @@ const AddCategory = (props) => {
     const onChange = props.onChange;
     const handleSubmitSubAdmin = props.handleSubmitSubAdmin;
 
-    const { id, catName, description, subCategory} = data;
+    const { id, catName, description, subCategory } = data;
     if (id) {
         data.status = data.status;
     } else {
@@ -35,7 +35,7 @@ const AddCategory = (props) => {
     data.time = tempsNow.toString().substring(0, 25);
 
     const addInput = (id) => {
-        setInput([...input, { id: id + 2, subCategory: "" }]);
+        setInput([...input, { id: id + 2, subCategory: [] }]);
     };
 
     const removeInput = (id) => {
@@ -48,7 +48,7 @@ const AddCategory = (props) => {
         <>
             <Modal show={props.show} className={classes.modal} id="add-user">
                 <Modal.Header>
-                    {id ? `Editer ${catName}` : `Ajout sous-admin`}
+                    {id ? `Editer ${catName}` : `Ajout catégorie`}
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={handleSubmitSubAdmin}>
@@ -86,6 +86,7 @@ const AddCategory = (props) => {
                                                         variant="outlined"
                                                         label='Sous-catégorie'
                                                         id='subCategory'
+                                                        value={subCategory[i]}
                                                         onChange={(e) => onChange(e)}
 
                                                     />
