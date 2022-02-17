@@ -19,7 +19,7 @@ function Users() {
 
     const usersCollection = collection(db, "users");
 
-    const initialiseValues = { id: "", username: "", email: "", name: "", phoneNumber: "", province: "", city: "", balance: "", status:"" };
+    const initialiseValues = { id: "", username: "", email: "", name: "", phoneNumber: "", province: "", city: "", balance: "", status: "" };
     const [formData, setFormData] = useState(initialiseValues);
 
     const [paginated, setPaginated] = useState([]);
@@ -227,11 +227,12 @@ function Users() {
                                                                 {
                                                                     val.status === "Actif" ?
                                                                         <>
-                                                                            {val.status} 
-                                                                            <CheckCircleSharp style={{ marginLeft:'5px',color: 'green', fontSize: '22px' }} />
+                                                                            <span style={{ color: "green" }}>{val.status} </span>
+                                                                            <CheckCircleSharp style={{ marginLeft: '5px', color: 'green', fontSize: '22px' }} />
                                                                         </> :
                                                                         <>
-                                                                            {val.status} <Cancel style={{ marginLeft:'5px',color: 'red', fontSize: '20px' }} />
+                                                                            <span style={{ color: "red" }}>{val.status} </span>
+                                                                            <Cancel style={{ marginLeft: '5px', color: 'red', fontSize: '20px' }} />
                                                                         </>
                                                                 }
                                                             </td>

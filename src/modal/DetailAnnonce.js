@@ -5,6 +5,8 @@ import { db } from "../config/FirebaseConfig";
 import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import swal from "sweetalert";
 import "../css/ModalDetailAnnonce.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 
 const DetailUser = (props) => {
 
@@ -37,9 +39,7 @@ const DetailUser = (props) => {
         })
     }
 
-    const annonceClose  = props.close;
-
-    console.log(annonceClose, 'Function close Modal')
+    const annonceClose = props.close;
 
     const deleteAnnonce = async (id) => {
         const annonce = doc(db, 'ads', id);
@@ -69,10 +69,12 @@ const DetailUser = (props) => {
 
     let dataS = {};
     let etatBtn = false;
+    let tabPhotos = [];
 
-    data.forEach(val => {
+    data.forEach((val, i) => {
         if (val.id === idRecu) {
             dataS.productName = val.productName;
+            tabPhotos = { ...val.photos };
             if (val.status === 'Approved') {
                 dataS.status = "Non Approuvé";
                 etatBtn = true;
@@ -102,6 +104,9 @@ const DetailUser = (props) => {
             }
         })
     };
+
+    let tab = [3, 5, 7, 66, 21];
+    console.log(tab)
 
     return (
         <div className="modalAnnonce">
@@ -135,10 +140,11 @@ const DetailUser = (props) => {
                                             <CardHeader title={val.productName} />
                                             <CardMedia
                                                 component="img"
-                                                height="200"
+                                                height="auto"
                                                 alt='Image annonce'
                                                 image={val.photos[0] || val.photos[index + 1]}
                                             />
+                                        
                                             <CardContent>
                                                 <Grid xs={12} sm={12} className="mb-2">
                                                     CHF : {val.amount}
