@@ -1,17 +1,22 @@
-import { Button, Card, Grid } from '@material-ui/core'
+import { Button, Card, Grid } from '@material-ui/core';
 import { Add, PostAddRounded, CheckCircleSharp, Cancel } from '@material-ui/icons'
-import React from 'react'
+import React from 'react';
 import LeftBar from '../includes/LeftBar'
 import NavBar from '../includes/NavBar'
 import { useState, useEffect } from "react";
 import { db } from "../config/FirebaseConfig";
 import { getDocs, doc, updateDoc, deleteDoc, addDoc, collection } from "firebase/firestore";
-import Load from '../includes/Load'
+import Load from '../includes/Load';
+import { Pagination } from "antd"
 
 function Postes() {
 
     const annoncesData = collection(db, 'ads');
     const [data, setData] = useState([]);
+
+    const [total, setTotal] = useState("");
+    const [page, setPage] = useState(1);
+    const [pageNombre, setPageNombre] = useState(10);
 
     const [idDetail, setIdDetail] = useState();
     const [etatModal, setEtatModal] = useState(false);
@@ -20,7 +25,10 @@ function Postes() {
     const getAnnonces = async () => {
         const dataAnnonces = await getDocs(annoncesData);
         setData(dataAnnonces.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        setTotal(data.length);
     }
+
+    console.log(total)
 
     useEffect(() => {
         getAnnonces();
@@ -35,6 +43,10 @@ function Postes() {
         let value = e.target.value.toLowerCase();
         setDataInput(value)
     };
+
+    const indexOfLastPage = page + pageNombre;
+    const indexOfFistPage = indexOfLastPage - pageNombre;
+    const currentPage = data.slice(indexOfFistPage, indexOfLastPage);
 
     return (
         <>
@@ -82,6 +94,7 @@ function Postes() {
 
                             </div>
                         </div>
+                        
                         <div className="col-12 mt-3">
                             <table className="table table-bordered table-borderless table-hover">
                                 <thead style={{ backgroundColor: "#efefef" }}>
