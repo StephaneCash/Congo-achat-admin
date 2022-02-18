@@ -85,7 +85,6 @@ function GestionMonetaire() {
                                                                 variant="filled"
                                                                 value={val.adPrice}
                                                                 style={{ width: '80%' }}
-                                                                onChange={e => val.adPrice(e.target.value)}
                                                             />
                                                             <br />
                                                             <br />

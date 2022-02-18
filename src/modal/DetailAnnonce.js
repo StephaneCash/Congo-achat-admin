@@ -264,7 +264,6 @@ const DetailUser = (props) => {
                 <Modal.Footer>
                     <CardActions>
                         <Button variant="outlined" onClick={props.close}>Fermer</Button>
-                        <Button variant="outlined">Enregistrer</Button>
                     </CardActions>
                 </Modal.Footer>
             </Modal>
