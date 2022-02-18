@@ -25,20 +25,6 @@ const DetailUser = (props) => {
 
     const closeModalAnnonceDetail = props.close;
 
-    const handleBloquerUser = () => {
-        swal({
-            title: "Avertissement.",
-            text: "Etes-vous sûr de vouloir bloquer cet utilisateur ?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        }).then((willDelete) => {
-            if (willDelete) {
-                alert("Utilisateur bloqué avec succès")
-            }
-        })
-    }
-
     const annonceClose = props.close;
 
     const deleteAnnonce = async (id) => {
@@ -74,7 +60,7 @@ const DetailUser = (props) => {
     data.forEach((val, i) => {
         if (val.id === idRecu) {
             dataS.productName = val.productName;
-            tabPhotos = { ...val.photos };
+            tabPhotos = [...val.photos];
             if (val.status === 'Approved') {
                 dataS.status = "Non Approuvé";
                 etatBtn = true;
@@ -105,8 +91,9 @@ const DetailUser = (props) => {
         })
     };
 
-    let tab = [3, 5, 7, 66, 21];
-    console.log(tab)
+    function addDate(id){
+
+    }
 
     return (
         <div className="modalAnnonce">
@@ -138,13 +125,18 @@ const DetailUser = (props) => {
 
                                         <Card key={index}>
                                             <CardHeader title={val.productName} />
-                                            <CardMedia
-                                                component="img"
-                                                height="auto"
-                                                alt='Image annonce'
-                                                image={val.photos[0] || val.photos[index + 1]}
-                                            />
-                                        
+                                            <Carousel>
+                                                {
+                                                    tabPhotos.map((el, index) => {
+                                                        return (
+                                                            <div key={index} style={{ height: '400px' }}>
+                                                                <img src={el} style={{ width: '100%', height: '400px' }} />
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </Carousel>
+
                                             <CardContent>
                                                 <Grid xs={12} sm={12} className="mb-2">
                                                     CHF : {val.amount}
@@ -214,7 +206,11 @@ const DetailUser = (props) => {
                                                         >
                                                             Supprimer
                                                         </Button>
-                                                        <Button variant='outlined' style={{ color: 'green', border: '1px solid green' }}>Extend</Button>
+                                                        <Button variant='outlined'
+                                                            onClick={addDate(val.id)}
+                                                            style={{ color: 'green', border: '1px solid green' }}
+                                                        >
+                                                            Augmenter la date</Button>
                                                     </CardActions>
                                                 </Grid>
                                             </CardContent>

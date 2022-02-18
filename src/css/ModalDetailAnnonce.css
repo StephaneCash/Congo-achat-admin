@@ -16,3 +16,7 @@
     vertical-align: middle;
     margin-top: 70px !important;
 }
+
+.carousel .thumbs {
+    display: none;
+}
