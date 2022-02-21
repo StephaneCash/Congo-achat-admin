@@ -5,6 +5,7 @@ import LeftBar from '../includes/LeftBar';
 import NavBar from '../includes/NavBar'
     ; import ReactMapGL, { Marker, Popup, FullscreenControl, NavigationControl } from "react-map-gl";
 import { useState } from "react";
+import MarkerUser from "../modal/MarkerUser";
 
 function TrouverClient() {
 
@@ -26,6 +27,21 @@ function TrouverClient() {
         zoom: 4,
         pitch: 0
     });
+
+    const [etatModal, setEtatModal] = useState(false);
+
+    const closeModal = () => {
+        setEtatModal(false);
+    };
+
+    const viewDetailUser = () =>{
+        setEtatModal(true);
+        return (
+            <>
+            <Popup>All</Popup>
+            </>
+        )
+    }
 
     return (
         <>
@@ -52,12 +68,24 @@ function TrouverClient() {
                                 >
                                     <FullscreenControl style={fullscreenControlStyle} />
                                     <NavigationControl style={navControlStyle} />
+                                    <Marker
+                                        latitude={-2.9814344}
+                                        longitude={23.8222636}
+                                        onClick={viewDetailUser}
+                                    >
+                                        <i className="fa fa-map-marker fa-2x" style={{color:"red", cursor: "pointer"}}></i>
+                                    </Marker>
                                 </ReactMapGL>
                             </Card>
                         </Card>
                     </Grid>
                 </div>
             </div>
+
+            <MarkerUser
+                show={etatModal}
+                close={closeModal}
+            />
         </>
     );
 }
