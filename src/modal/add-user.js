@@ -140,18 +140,18 @@ const AddUser = (props) => {
                             </div>
                         </div>
                         <Button
+                            className='btn btn-voir-tout'
                             type="submit"
-                            className="btn"
                             variant="outlined"
-                            style={{ color: 'green', marginLeft: "10px", float: "right", border: "1px solid green" }}
+                            style={{ marginLeft: "10px", float: "right", }}
                         >
                             {id ? "Editer" : "Ajouter"}
                         </Button>
 
                         <Button
-                            style={{ float: "right" }}
-                            color='secondary' variant="outlined"
-                            className="btn" onClick={props.close}>
+                            style={{ float: "right", marginTop: "20px" }}
+                            variant="outlined"
+                            onClick={props.close}>
                             Annuler</Button>
 
                     </form>

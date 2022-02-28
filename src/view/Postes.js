@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { db } from "../config/FirebaseConfig";
 import { getDocs, doc, updateDoc, deleteDoc, addDoc, collection } from "firebase/firestore";
 import Load from '../includes/Load';
-import { Pagination } from "antd"
 
 function Postes() {
 
@@ -87,7 +86,7 @@ function Postes() {
                                     type="button"
                                     onClick={showModalAdd}
                                     variant="contained"
-                                    style={{ float: "right", backgroundColor: "#973c44", color: "#fff" }}
+                                    style={{ float: "right", backgroundColor: "#c72f3c", color: "#fff" }}
                                 >
                                     <Add />
                                 </Button>

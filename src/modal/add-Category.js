@@ -112,13 +112,13 @@ const AddCategory = (props) => {
                             <Button
                                 type="submit"
                                 variant="outlined"
-                                className="btn"
-                                style={{ backgroundColor: 'white', color: 'green', marginLeft: '10px', float: "right", border: '1px solid green' }}
+                                className="btn-voir-tout"
+                                style={{ marginLeft: '10px', float: "right", marginTop:'20px' }}
                             >
                                 {id ? "Editer" : "Ajouter"}
                             </Button>
                             <Button className="btn" variant="outlined"
-                                style={{ float: "right", marginLeft: "15px", border: "1px solid red", color: "red" }}
+                                style={{ float: "right", marginLeft: "15px", marginTop:'20px' }}
                                 onClick={props.closeModal}>Annuler</Button>
                         </div>
                     </form>

@@ -69,7 +69,7 @@ function Provinces() {
                                 <Button
                                     type="button"
                                     variant="contained"
-                                    style={{ float: "right", backgroundColor: "#973c44", color: "#fff" }}
+                                    style={{ float: "right", backgroundColor: "#c72f3c", color: "#fff" }}
                                 >
                                     <PersonAdd />
                                 </Button>

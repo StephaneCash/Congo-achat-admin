@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "../css/Dashboard.css";
 import { Line, Bar } from "react-chartjs-2";
 import { Chart, registerables } from 'chart.js';
-import { Button, Card, CardActions, CardContent, CardHeader, Grid, Typography, makeStyles, TextField } from "@material-ui/core";
+import { Button, Card, CardActions, CardContent, CardHeader, Grid, Typography, makeStyles } from "@material-ui/core";
 import NavBar from "../includes/NavBar";
 import LeftBar from "../includes/LeftBar";
 import { Announcement, Group, MonetizationOn, PeopleRounded, PostAddTwoTone } from "@material-ui/icons";
@@ -160,7 +160,14 @@ function Dashboard() {
                                                     </CardContent>
                                                     <CardActions>
                                                         <Link to="/users">
-                                                            <Button variant="contained" size="small" style={{ backgroundColor: "#973c44", color: "#fff" }}>V<span className="span" >oir tout</span></Button>
+                                                            <Button 
+                                                                className='btn-voir-tout'
+                                                                variant="contained" 
+                                                                size="small" 
+                                                                style={{ 
+                                                                    backgroundColor: "#c72f3c", 
+                                                                    color: "#fff", 
+                                                                }}>V<span className="span" >oir tout</span></Button>
                                                         </Link>
                                                     </CardActions>
                                                 </div>
@@ -182,8 +189,9 @@ function Dashboard() {
                                                     <CardActions>
                                                         <Link to="/annonces">
                                                             <Button
+                                                                className='btn-voir-tout'
                                                                 variant="contained"
-                                                                size="small" style={{ backgroundColor: "#973c44", color: "#fff" }}>
+                                                                size="small" style={{ backgroundColor:"#c72f3c", color: "#fff" }}>
                                                                 V<span className="span">oir tout</span>
                                                             </Button>
                                                         </Link>
@@ -209,7 +217,11 @@ function Dashboard() {
                                                     </CardContent>
                                                     <CardActions>
                                                         <Link to="/provinces">
-                                                            <Button variant="contained" size="small" style={{ backgroundColor: "#973c44", color: "#fff" }}>
+                                                            <Button 
+                                                                className='btn-voir-tout'
+                                                                variant="contained" 
+                                                                size="small" 
+                                                                style={{ backgroundColor: "#c72f3c", color: "#fff" }}>
                                                                 V<span className="span">oir tout</span>
                                                             </Button>
                                                         </Link>

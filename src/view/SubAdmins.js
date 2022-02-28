@@ -163,7 +163,7 @@ function SubAdmins() {
                     <Grid xs={10} item style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
                         <Card style={{ padding: "10px" }}>
                             <div className="col-12" style={{ marginTop: "5px", textAlign: "center" }}>
-                                <h4 className="align-center"> {data.length} Sub Admins <Build /> </h4>
+                                <h4 className="align-center"> {data.length} Sous-Administrateurs <Build /> </h4>
                                 <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                             </div>
 
@@ -188,10 +188,11 @@ function SubAdmins() {
                                 </div>
                                 <div className="col-7 mt-3">
                                     <Button
+                                        className='btn-voir-tout'
                                         onClick={addSudAdminModal}
                                         type="button"
                                         variant="contained"
-                                        style={{ float: "right", backgroundColor: "#973c44", color: "#fff" }}
+                                        style={{ float: "right", backgroundColor: "#c72f3c", color: "#fff" }}
                                     >
                                         <PersonAdd />
                                     </Button>

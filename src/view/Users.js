@@ -174,10 +174,11 @@ function Users() {
                             </div>
                             <div className="col-7 mt-3">
                                 <Button
+                                    className='btn-voir-tout'
                                     type="button"
                                     onClick={showModalAddUser}
                                     variant="contained"
-                                    style={{ float: "right", backgroundColor: "#973c44", color: "#fff" }}
+                                    style={{ float: "right", backgroundColor: "#c72f3c", color: "#fff" }}
                                 >
                                     <PersonAdd />
                                 </Button>

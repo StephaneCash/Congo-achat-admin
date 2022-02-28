@@ -91,6 +91,7 @@ const Annonces = () => {
                                                             <CardMedia
                                                                 component="img"
                                                                 height="150"
+                                                                onClick={() => detailAnnonce(val.id)}
                                                                 image={val.photos[0] || val.photos[1] || val.photos[2] || val.photos[3] || val.photos[4]}
                                                             />
                                                             <CardActions disableSpacing>

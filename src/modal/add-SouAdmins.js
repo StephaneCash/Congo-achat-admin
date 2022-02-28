@@ -30,7 +30,7 @@ const AddSousAdmin = (props) => {
         <>
             <Modal show={props.show} className={classes.modal} id="add-user">
                 <Modal.Header>
-                    {id ? `Editer ${name}` : `Ajout sous-admin`}
+                    {id ? `Editer ${name}` : `Ajout sous-administrateur`}
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={handleSubmitSubAdmin}>
@@ -71,15 +71,15 @@ const AddSousAdmin = (props) => {
                         </div>
                         <div className="mt-3">
                             <Button
+                                className='btn btn-voir-tout'
                                 type="submit"
                                 variant="outlined"
-                                className="btn"
-                                style={{ backgroundColor: 'white', color: 'green', marginLeft: '10px', float: "right", border: '1px solid green' }}
+                                style={{ marginLeft: '10px', float: "right" }}
                             >
                                 {id ? "Editer" : "Ajouter"}
                             </Button>
-                            <Button className="btn" variant="outlined"
-                                style={{ float: "right", marginLeft: "15px", border: "1px solid red", color: "red" }}
+                            <Button variant="outlined"
+                                style={{ float: "right", marginLeft: "15px", marginTop: "20px" }}
                                 onClick={props.close}>Annuler</Button>
                         </div>
                     </form>
