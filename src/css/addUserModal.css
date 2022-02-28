@@ -36,3 +36,8 @@
 .MuiInputBase-input:hover{
     box-shadow: 2px 1px 2px silver !important;
 }
+
+.btn{
+    background-color: #c72f3c !important;
+    color: #fff !important;
+}

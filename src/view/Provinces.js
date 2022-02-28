@@ -1,5 +1,5 @@
 import { Button, Card, Grid } from '@material-ui/core';
-import { PersonAdd } from '@material-ui/icons';
+import { Add } from '@material-ui/icons';
 import React from 'react';
 import LeftBar from '../includes/LeftBar';
 import Load from '../includes/Load';
@@ -8,6 +8,7 @@ import "../css/Provinces.css";
 import { useState, useEffect } from "react";
 import { getDocs, addDoc, updateDoc, deleteDoc, doc, collection } from "firebase/firestore";
 import { db } from "../config/FirebaseConfig";
+import swal from 'sweetalert';
 
 function Provinces() {
 
@@ -31,6 +32,28 @@ function Provinces() {
         setValueInput(value);
     };
 
+    const handleDeleteProvince = (id) =>{
+        const dataDelete = doc(db, 'provinces', id);
+
+        swal({
+            title: "Avertissement.",
+            text: "Etes-vous sûr de vouloir supprimer cette province ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                deleteDoc(dataDelete)
+                getProvinces();
+                swal('Province supprimée avec succès', {
+                    icon: "success",
+                });
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    };
+
     return <>
         <div className="provinces">
             <NavBar />
@@ -41,7 +64,7 @@ function Provinces() {
                 <Grid xs={10} item style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
                     <Card style={{ padding: "10px" }}>
                         <div className="col-12" style={{ marginTop: "5px", textAlign: "center" }}>
-                            <h4 className="align-center"> Gestion Provinces  </h4>
+                            <h4 className="align-center"> {data.length} Gestion Provinces  </h4>
                             <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                         </div>
 
@@ -71,7 +94,7 @@ function Provinces() {
                                     variant="contained"
                                     style={{ float: "right", backgroundColor: "#c72f3c", color: "#fff" }}
                                 >
-                                    <PersonAdd />
+                                    <Add />
                                 </Button>
 
                             </div>
@@ -112,6 +135,7 @@ function Provinces() {
                                                                     <i className="fa fa-info"></i>
                                                                 </button>
                                                                 <button type="button"
+                                                                    onClick={() =>handleDeleteProvince(val.id)}
                                                                     className="btn btnChange">
                                                                     <i className="fa fa-trash"></i>
                                                                 </button>

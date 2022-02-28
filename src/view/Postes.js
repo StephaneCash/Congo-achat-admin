@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { db } from "../config/FirebaseConfig";
 import { getDocs, doc, updateDoc, deleteDoc, addDoc, collection } from "firebase/firestore";
 import Load from '../includes/Load';
+import AddPoste from '../modal/addPoste';
 
 function Postes() {
 
@@ -35,7 +36,11 @@ function Postes() {
     }, []);
 
     function showModalAdd() {
+        setEtatModal(true);
+    };
 
+    const closeModal = () =>{
+        setEtatModal(false);
     };
 
     function handleSearch(e) {
@@ -184,6 +189,11 @@ function Postes() {
                     </Card>
                 </Grid>
             </div>
+            
+            <AddPoste 
+                show={etatModal}
+                close={closeModal}
+            />
         </>
     )
 }

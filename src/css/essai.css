@@ -15,9 +15,9 @@
 }
 
 .gallery .MuiCard-root {
-    height: 42vh;
-    margin-top: 12px;
-    border: 1px solid rgb(245, 211, 211) !important;
+    height: 37vh !important;
+    margin-top: 10px;
+    border: 1px solid silver !important;
 }
 
 .gallery .pics:hover {

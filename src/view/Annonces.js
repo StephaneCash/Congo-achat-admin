@@ -101,9 +101,6 @@ const Annonces = () => {
                                                                 </Typography>
                                                                 <Typography variant="h5"></Typography>
                                                             </CardActions>
-                                                            <CardActions>
-                                                                <Button variant='outlined' onClick={() => detailAnnonce(val.id)}>Détail</Button>
-                                                            </CardActions>
                                                         </Card>
                                                     </div>
                                                 )
