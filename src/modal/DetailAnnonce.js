@@ -229,10 +229,10 @@ const DetailUser = (props) => {
                                                 </Grid>
                                                 <Grid>
                                                     <CardActions>
-                                                        <Button variant='outlined' style={{ color: 'orange', border: '1px solid orange' }}>Pause</Button>
+                                                        <Button variant='outlined' className='btn btn-voir-tout'>Pause</Button>
                                                         <Button
                                                             variant='outlined'
-                                                            color="secondary"
+                                                            className='btn btn-voir-tout'
                                                             onClick={() => handleDesaprove(val.id)}
                                                         >
                                                             {etatBtn ? (
@@ -241,14 +241,14 @@ const DetailUser = (props) => {
                                                         </Button>
                                                         <Button
                                                             variant='outlined'
-                                                            style={{ color: 'red', border: '1px solid red' }}
+                                                            className='btn btn-voir-tout'
                                                             onClick={() => deleteAnnonce(val.id)}
                                                         >
                                                             Supprimer
                                                         </Button>
                                                         <Button variant='outlined'
+                                                            className='btn btn-voir-tout'
                                                             onClick={() => addDate(val.expireDate, val.id)}
-                                                            style={{ color: 'green', border: '1px solid green' }}
                                                         >
                                                             Augmenter la date</Button>
                                                     </CardActions>
