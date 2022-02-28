@@ -8,6 +8,7 @@ import { db } from "../config/FirebaseConfig";
 import { getDocs, doc, updateDoc, deleteDoc, addDoc, collection } from "firebase/firestore";
 import Load from '../includes/Load';
 import AddPoste from '../modal/addPoste';
+import "../css/Postes.css";
 
 function Postes() {
 
@@ -55,14 +56,14 @@ function Postes() {
     return (
         <>
             <NavBar />
-            <div className="d-flex">
+            <div className="d-flex postes">
                 <Grid xs={2} item>
                     <LeftBar />
                 </Grid>
                 <Grid xs={10} item style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
                     <Card style={{ padding: "10px" }}>
                         <div className="col-12" style={{ marginTop: "5px", textAlign: "center" }}>
-                            <h4 className="align-center"> Postes <PostAddRounded /> </h4>
+                            <h4 className="align-center"> {data.length} Postes <PostAddRounded /> </h4>
                             <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                         </div>
 
@@ -80,7 +81,7 @@ function Postes() {
                                                 onChange={handleSearch}
                                             />
                                             <div className="input-group-append">
-                                                <i className="input-group-text fa fa-search fa-1x" aria-hidden="true"></i>
+                                                <i style={{lineHeight:"25px"}} className="input-group-text fa fa-search fa-1x" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -89,6 +90,7 @@ function Postes() {
                             <div className="col-7 mt-3">
                                 <Button
                                     type="button"
+                                    className='addPoste'
                                     onClick={showModalAdd}
                                     variant="contained"
                                     style={{ float: "right", backgroundColor: "#c72f3c", color: "#fff" }}

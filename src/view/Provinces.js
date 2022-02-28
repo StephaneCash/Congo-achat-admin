@@ -92,6 +92,7 @@ function Provinces() {
                                 <Button
                                     type="button"
                                     variant="contained"
+                                    className="btnAdd"
                                     style={{ float: "right", backgroundColor: "#c72f3c", color: "#fff" }}
                                 >
                                     <Add />
