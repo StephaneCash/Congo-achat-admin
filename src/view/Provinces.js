@@ -64,7 +64,7 @@ function Provinces() {
                 <Grid xs={10} item style={{ marginTop: "80px", padding: "10px", backgroundColor: "#efefef" }}>
                     <Card style={{ padding: "10px" }}>
                         <div className="col-12" style={{ marginTop: "5px", textAlign: "center" }}>
-                            <h4 className="align-center"> {data.length} Gestion Provinces  </h4>
+                            <h4 className="align-center"> {data.length} Gestion Provinces actives </h4>
                             <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                         </div>
 

@@ -9,7 +9,6 @@ import "../css/essai.css";
 import DetailAnnonce from "../modal/DetailAnnonce";
 import { Announcement } from "@material-ui/icons";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
 import "../css/Annonces.css";
 
 const useStyles = makeStyles((theme) => ({

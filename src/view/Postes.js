@@ -1,13 +1,14 @@
-import { Button, Card, Grid } from '@material-ui/core';
-import { Add, PostAddRounded, CheckCircleSharp, Cancel } from '@material-ui/icons'
+import { Card, Grid } from '@material-ui/core';
+import {PostAddRounded, CheckCircleSharp, Cancel } from '@material-ui/icons'
 import React from 'react';
 import LeftBar from '../includes/LeftBar'
 import NavBar from '../includes/NavBar'
 import { useState, useEffect } from "react";
 import { db } from "../config/FirebaseConfig";
-import { getDocs, doc, updateDoc, deleteDoc, addDoc, collection } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import Load from '../includes/Load';
-import AddPoste from '../modal/addPoste';
+import DetailAnnonce from "../modal/DetailAnnonce";
+
 import "../css/Postes.css";
 
 function Postes() {
@@ -40,7 +41,7 @@ function Postes() {
         setEtatModal(true);
     };
 
-    const closeModal = () =>{
+    const closeModal = () => {
         setEtatModal(false);
     };
 
@@ -52,6 +53,11 @@ function Postes() {
     const indexOfLastPage = page + pageNombre;
     const indexOfFistPage = indexOfLastPage - pageNombre;
     const currentPage = data.slice(indexOfFistPage, indexOfLastPage);
+
+    const detailAnnonce = (id) => {
+        setIdDetail(id);
+        setEtatModal(true);
+    };
 
     return (
         <>
@@ -81,26 +87,14 @@ function Postes() {
                                                 onChange={handleSearch}
                                             />
                                             <div className="input-group-append">
-                                                <i style={{lineHeight:"25px"}} className="input-group-text fa fa-search fa-1x" aria-hidden="true"></i>
+                                                <i style={{ lineHeight: "25px" }} className="input-group-text fa fa-search fa-1x" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-7 mt-3">
-                                <Button
-                                    type="button"
-                                    className='addPoste'
-                                    onClick={showModalAdd}
-                                    variant="contained"
-                                    style={{ float: "right", backgroundColor: "#c72f3c", color: "#fff" }}
-                                >
-                                    <Add />
-                                </Button>
-
-                            </div>
                         </div>
-                        
+
                         <div className="col-12 mt-3">
                             <table className="table table-bordered table-borderless table-hover">
                                 <thead style={{ backgroundColor: "#efefef" }}>
@@ -112,7 +106,7 @@ function Postes() {
                                         <th>Province</th>
                                         <th>Description</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -156,18 +150,11 @@ function Postes() {
                                                                         <>Aucun status n'est défini.</>
                                                                     }
                                                                 </td>
-                                                                <td style={{ textAlign: 'center', width: "200px", border: "1px solid silver !important" }}>
+                                                                <td style={{ textAlign: 'center', width: "50px", border: "1px solid silver !important" }}>
                                                                     <button type="button"
-                                                                        className="btn btnChange">
-                                                                        <i className="fa fa-edit"></i>
-                                                                    </button>
-                                                                    <button type="button"
+                                                                        onClick={() => detailAnnonce(val.id)}
                                                                         className="btn btnChange">
                                                                         <i className="fa fa-info"></i>
-                                                                    </button>
-                                                                    <button type="button"
-                                                                        className="btn btnChange">
-                                                                        <i className="fa fa-trash"></i>
                                                                     </button>
                                                                 </td>
                                                             </tr>
@@ -191,9 +178,10 @@ function Postes() {
                     </Card>
                 </Grid>
             </div>
-            
-            <AddPoste 
+
+            <DetailAnnonce
                 show={etatModal}
+                id={idDetail}
                 close={closeModal}
             />
         </>

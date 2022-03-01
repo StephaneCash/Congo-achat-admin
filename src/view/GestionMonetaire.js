@@ -16,44 +16,39 @@ function GestionMonetaire() {
     const [data, setData] = useState([]);
     const appSettings = collection(db, 'app-settings');
 
+    const [id, setId] = useState('');
+
     const getAppSettings = async () => {
         const dataApp = await getDocs(appSettings);
         setData(dataApp.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
-    const [formData, setFormData] = useState({
-        adPrice: "",
-        adPriceForPublicity: '',
-        adPriceForPublicityUSD: "",
-        adPriceinUSD: "",
-        airtelMoney: "",
-        mPaisaID: "",
-        orangeMoney: "",
-        tauxEchange: "",
-    });
+    const [donnees, setDonnes] = useState([]);
 
     useEffect(() => {
         getAppSettings();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const [etat, setEtat] = useState(false)
-
-    const submitData = async (id) => {
-        const monetaireDoc = doc(db, 'app-settings', id);
-        await updateDoc(monetaireDoc, formData);
-        setEtat(true);
-        getAppSettings();
-        toast.success("Modification effectuée avec succès")
+    const submitData = async () => {
+        if (id) {
+            const monetaireDoc = doc(db, 'app-settings', id);
+            await updateDoc(monetaireDoc, donnees);
+            getAppSettings();
+            toast.success("Modification effectuée avec succès");
+        };
     };
 
-    const handle = (e) => {
-        const { value, id } = e.target;
-        let valueTarget = value;
-        let idTarget = id;
-        data[0].adPrice = value 
-            console.log("Données du form : ", id, " : ", `${valueTarget}`);
-    }
+    const [val, setVal] = useState(false);
+
+    const editer = (id) => {
+        for (let i = 0; i < data.length; i++) {
+            console.log(data[i].id)
+            setId(data[i].id)
+            setDonnes(data[i])
+        }
+        setVal(true);
+    };
 
     return (
         <>
@@ -70,111 +65,163 @@ function GestionMonetaire() {
                                 <h5 style={{ borderBottom: "1px solid #efefef" }}></h5>
                             </div>
                             <div className="col-12 p-5">
-                                {data.length > 0 ? (
-                                    <>
-                                        <form>
-                                            {
-                                                data.map((val, index) => (
-                                                    <div className="row" key={index}>
-                                                        <div className="col-5">
-                                                            Prix du poste : <br />
-                                                            <TextField
-                                                                id="adPrice"
-                                                                type="number"
-                                                                required
-                                                                variant="filled"
-                                                                value={val.adPrice}
-                                                                style={{ width: '80%' }}
-                                                            />
-                                                            <br />
-                                                            <br />
-                                                            Prix de la publicité : <br />
-                                                            <TextField
-                                                                required
-                                                                variant="filled"
-                                                                style={{ width: '80%' }}
-                                                                id="adPriceForPublicity"
-                                                                value={val.adPriceForPublicity}
-                                                                onChange={e => handle(e)}
-                                                            />
-                                                            <br />
-                                                            <br />
-                                                            Compte M-pesa : <br />
-                                                            <TextField
-                                                                type="number"
-                                                                required
-                                                                variant="filled"
-                                                                value={val.mPaisaID}
-                                                                id="mPaisaID"
-                                                                style={{ width: '80%' }} onChange={e => handle(e)}
-                                                                onChange={e => handle(e)}
-                                                            />
-                                                            <br />
-                                                            <br />
-                                                            Compte Airtel Money : <br />
-                                                            <TextField
-                                                                required
-                                                                variant="filled"
-                                                                id="airtelMoney"
-                                                                style={{ width: '80%' }}
-                                                                value={val.airtelMoney}
-                                                                onChange={e => handle(e)}
-                                                            />
-                                                        </div>
-                                                        <div className="col-5">
-                                                            Compte Orange Money : <br />
-                                                            <TextField
-                                                                id="orangeMoney"
-                                                                required
-                                                                variant="filled"
-                                                                style={{ width: '80%' }}
-                                                                value={val.orangeMoney}
-                                                                onChange={e => handle(e)}
-                                                            />
-                                                            <br />
-                                                            <br />
-                                                            CDF OU USD : <br />
-                                                            <TextField
-                                                                style={{ width: '80%' }}
-                                                                required
-                                                                variant="filled"
-                                                                id="adPriceinUSD"
-                                                                value={val.adPriceinUSD}
-                                                                onChange={e => handle(e)}
-                                                            />
-                                                            <br />
-                                                            <br />
-                                                            Taux du jour :<br />
-                                                            <TextField
-                                                                type="number"
-                                                                required
-                                                                style={{ width: '80%' }}
-                                                                id="tauxEchange"
-                                                                variant="filled"
-                                                                value={val.tauxEchange}
-                                                                onChange={e => handle(e)}
-                                                            />
-                                                        </div>
-                                                        <div className="col-2 mt-4">
-                                                            <Button
-                                                                style={{ color: "green", border: '1px solid green' }}
-                                                                variant="outlined"
-                                                                onClick={() => submitData(val.id)}
-                                                            >
-                                                                Modifier
-                                                                <i className="fa fa-edit" style={{ marginLeft: "5px" }}></i>
-                                                            </Button>
-                                                        </div>
-                                                    </div>
-                                                ))
-                                            }
-                                        </form>
-                                    </>
-                                ) : (
-                                    <div style={{ textAlign: "center", marginTop: "10px" }}>
-                                        <Load />
+                                <>
+                                    <div className="col-12">
+                                        <table className="table table-bordered table-borderless table-hover" style={{marginTop: "-30px"}}>
+                                            <thead style={{ backgroundColor: "#efefef" }}>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Prix de l"annonce</th>
+                                                    <th>Prix de la publicité</th>
+                                                    <th>MPSA</th>
+                                                    <th>Airtel Money</th>
+                                                    <th>Orange</th>
+                                                    <th>adPriceinUSD</th>
+                                                    <td>Taux</td>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {
+                                                    data.length > 0 ? (
+                                                        <>
+                                                            {
+                                                                data.map((val, index) => (
+                                                                    <tr key={val.id}>
+                                                                        <td>
+                                                                            {
+                                                                                index + 1
+                                                                            }
+                                                                        </td>
+
+                                                                        <td>{val.adPrice}</td>
+                                                                        <td>{val.adPriceForPublicity}</td>
+                                                                        <td>{val.mPaisaID}</td>
+                                                                        <td>{val.airtelMoney}</td>
+                                                                        <td>{val.orangeMoney}</td>
+                                                                        <td>{val.adPriceinUSD}</td>
+                                                                        <td>{val.tauxEchange}</td>
+                                                                        <td style={{ textAlign: 'center', width: "70px", border: "1px solid silver !important" }}>
+                                                                            <button type="button"
+                                                                                onClick={() => editer(val.id)}
+                                                                                className="btn btnChange">
+                                                                                <i className="fa fa-edit"></i>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                ))
+                                                            }
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <tr>
+                                                                <td colSpan="8px" style={{ textAlign: 'center' }}>
+                                                                    <Load />
+                                                                </td>
+                                                            </tr>
+                                                        </>
+                                                    )
+                                                }
+                                            </tbody>
+                                        </table>
                                     </div>
-                                )}
+                                    {val === true ? (<>
+                                        <form>
+                                            <div className="row">
+                                                <div className="col-5">
+                                                    <label style={{ marginBottom: "10px" }}>Prix du poste :</label> <br />
+                                                    <TextField
+                                                        id="adPrice"
+                                                        type="text"
+                                                        required
+                                                        variant="outlined"
+                                                        value={donnees.adPrice}
+                                                        style={{ width: '80%' }}
+                                                        onChange={(e) => setDonnes({ ...donnees, 'adPrice': e.target.value })}
+                                                    />
+                                                    <br />
+                                                    <br />
+                                                    <label style={{ marginBottom: "10px" }}>Prix de la publicité :</label> <br />
+                                                    <TextField
+                                                        required
+                                                        variant="outlined"
+                                                        style={{ width: '80%' }}
+                                                        id="adPriceForPublicity"
+                                                        value={donnees.adPriceForPublicity}
+                                                        onChange={(e) => setDonnes({ ...donnees, 'adPriceForPublicity': e.target.value })}
+                                                    />
+                                                    <br />
+                                                    <br />
+                                                    <label style={{ marginBottom: "10px" }}>Compte M-PSA :</label> <br />
+                                                    <TextField
+                                                        type="text"
+                                                        required
+                                                        variant="outlined"
+                                                        value={donnees.mPaisaID}
+                                                        id="mPaisaID"
+                                                        style={{ width: '80%' }}
+                                                        onChange={(e) => setDonnes({ ...donnees, 'mPaisaID': e.target.value })}
+                                                    />
+                                                    <br />
+                                                    <br />
+                                                    <label style={{ marginBottom: "10px" }}>Compte Airtel Money :</label> <br />
+                                                    <TextField
+                                                        required
+                                                        variant="outlined"
+                                                        id="airtelMoney"
+                                                        style={{ width: '80%' }}
+                                                        value={donnees.airtelMoney}
+                                                        onChange={(e) => setDonnes({ ...donnees, 'airtelMoney': e.target.value })}
+                                                    />
+                                                </div>
+                                                <div className="col-5">
+                                                    <label style={{ marginBottom: "10px" }}>Compte Orange Money :</label> <br />
+                                                    <TextField
+                                                        id="orangeMoney"
+                                                        required
+                                                        variant="outlined"
+                                                        style={{ width: '80%' }}
+                                                        value={donnees.orangeMoney}
+                                                        onChange={(e) => setDonnes({ ...donnees, 'orangeMoney': e.target.value })}
+                                                    />
+                                                    <br />
+                                                    <br />
+                                                    <label style={{ marginBottom: "10px" }}>CDF ou USD:</label> <br />
+                                                    <TextField
+                                                        style={{ width: '80%' }}
+                                                        required
+                                                        variant="outlined"
+                                                        id="adPriceinUSD"
+                                                        value={donnees.adPriceinUSD}
+                                                        onChange={(e) => setDonnes({ ...donnees, 'adPriceinUSD': e.target.value })}
+                                                    />
+                                                    <br />
+                                                    <br />
+                                                    <label style={{ marginBottom: "10px" }}>Taux du jour :</label> <br />
+                                                    <TextField
+                                                        type="text"
+                                                        required
+                                                        style={{ width: '80%' }}
+                                                        id="tauxEchange"
+                                                        variant="outlined"
+                                                        value={donnees.tauxEchange}
+                                                        onChange={(e) => setDonnes({ ...donnees, 'tauxEchange': e.target.value })}
+                                                    />
+                                                </div>
+                                                <div className="col-2 mt-4">
+                                                    <Button
+                                                        style={{ color: "green", border: '1px solid green' }}
+                                                        variant="outlined"
+                                                        onClick={submitData}
+                                                    >
+                                                        Modifier
+                                                        <i className="fa fa-edit" style={{ marginLeft: "5px" }}></i>
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </>) : ""}
+                                </>
                             </div>
                         </Card>
                     </Grid>

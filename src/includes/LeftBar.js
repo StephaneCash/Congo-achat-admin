@@ -134,10 +134,6 @@ const LeftBar = () => {
                         </NavLink>
                     </Typography>
                 </div>
-                <div className={classes.item}>
-                    <KeyboardArrowDownOutlined className={classes.icon} />
-                    <Typography className={classes.text}>Static content</Typography>
-                </div>
             </Container>
         </>
     );

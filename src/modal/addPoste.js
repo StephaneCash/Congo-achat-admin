@@ -28,7 +28,7 @@ const AddPoste = (props) => {
         <>
             <Modal show={props.show} className={classes.modal} id="add-poste">
                 <Modal.Header>
-                   Ajout d'un poste
+                   Ajout poste
                 </Modal.Header>
                 <Modal.Body>
                     <form>
