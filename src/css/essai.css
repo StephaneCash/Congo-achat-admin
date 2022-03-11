@@ -17,7 +17,6 @@
 .gallery .MuiCard-root {
     height: 37vh !important;
     margin-top: 10px;
-    border: 1px solid silver !important;
 }
 
 .gallery .pics:hover {
@@ -34,7 +33,6 @@
     .gallery .MuiCard-root {
         height: auto;
         margin-top: 12px;
-        border: 1px solid rgb(134, 86, 86);
     }
 }
 
@@ -48,7 +46,6 @@
     .gallery .MuiCard-root {
         height: auto;
         margin-top: 12px;
-        border: 1px solid rgb(121, 77, 77);
     }
 }
 
@@ -61,7 +58,6 @@
     .gallery .MuiCard-root {
         height: auto;
         margin-top: 12px;
-        border: 1px solid rgb(177, 100, 100);
     }
 
 }
@@ -75,7 +71,6 @@
     .gallery .MuiCard-root {
         height: auto;
         margin-top: 12px;
-        border: 1px solid rgb(177, 100, 100);
     }
 
 }
@@ -89,7 +84,6 @@
     .gallery .MuiCard-root {
         height: auto;
         margin-top: 12px;
-        border: 1px solid rgb(177, 100, 100);
     }
 
 }

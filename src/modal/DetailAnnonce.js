@@ -110,7 +110,6 @@ const DetailUser = (props) => {
                 dataDite.productName = val.productName;
                 dataDite.status = val.status;
                 dataDite.expireDate = dataSplit.join().replace(/[,]/g, "-");
-                console.log(dataDite)
             }
         });
 
@@ -131,8 +130,6 @@ const DetailUser = (props) => {
                 });
             }
         })
-
-        console.log(dataSplit.join().replace(/[,]/g, "-"))
     };
 
     return (
@@ -162,20 +159,27 @@ const DetailUser = (props) => {
                             if (val.id === idRecu) {
                                 return (
                                     <>
-
                                         <Card key={index}>
                                             <CardHeader title={val.productName} />
-                                            <Carousel>
-                                                {
-                                                    tabPhotos.map((el, index) => {
-                                                        return (
-                                                            <div key={index} style={{ height: '400px' }}>
-                                                                <img src={el} style={{ width: '100%', height: '400px' }} />
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
-                                            </Carousel>
+
+                                            {
+                                                tabPhotos ?
+                                                    <>
+                                                        <Carousel>
+                                                            {
+                                                                tabPhotos.map((el, index) => {
+                                                                    return (
+                                                                        <div key={index} style={{ height: '400px' }}>
+                                                                            <img src={el} style={{ width: '100%', height: '400px' }} />
+                                                                        </div>
+                                                                    )
+                                                                })
+                                                            }
+
+                                                        </Carousel>
+                                                    </>
+                                                    : "Image absente"
+                                            }
 
                                             <CardContent>
                                                 <Grid xs={12} sm={12} className="mb-2">
@@ -267,7 +271,7 @@ const DetailUser = (props) => {
                     </CardActions>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </div >
     );
 }
 

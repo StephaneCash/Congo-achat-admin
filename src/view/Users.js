@@ -161,7 +161,7 @@ function Users() {
                                             <input
                                                 type="text"
                                                 className="form-control input-search "
-                                                placeholder="Rechercher"
+                                                placeholder="Rechercher..."
                                                 autoComplete="off"
                                                 onChange={handleSearch}
                                             />

@@ -84,22 +84,36 @@ const Annonces = () => {
                                                 return (
                                                     <div className="pics" key={index}>
                                                         <Card sx={{ maxWidth: 34 }}>
-                                                            <CardHeader
-                                                                subheader={val.subCategory}
-                                                            />
                                                             <CardMedia
                                                                 component="img"
                                                                 height="150"
                                                                 onClick={() => detailAnnonce(val.id)}
-                                                                image={val.photos[0] || val.photos[1] || val.photos[2] || val.photos[3] || val.photos[4]}
+                                                                image={
+                                                                    val.photos[0] || val.photos[1] || val.photos[2] || val.photos[3] || val.photos[4] ?
+                                                                        val.photos[0] || val.photos[1] || val.photos[2] || val.photos[3] || val.photos[4] : "Aucune photo"
+                                                                }
                                                             />
                                                             <CardActions disableSpacing>
                                                                 <Typography>
                                                                     <strong style={{ fontSize: '20px' }}>{val.productName}</strong> <br />
                                                                     {val.province}, {val.city}
                                                                 </Typography>
-                                                                <Typography variant="h5"></Typography>
                                                             </CardActions>
+
+
+                                                            <div className="row">
+                                                                <div className="col-7">
+                                                                    <Typography variant="h6" style={{ marginLeft: "8px", fontSize: '15px' }}>
+                                                                        {val.subCategory}
+                                                                    </Typography>
+                                                                </div>
+                                                                <div className="col-5">
+                                                                    <Button
+                                                                        style={{ backgroundColor: "#fff", color: "#c72f3c" }}
+                                                                        onClick={() => detailAnnonce(val.id)}
+                                                                        variant="contained">Détail</Button>
+                                                                </div>
+                                                            </div>
                                                         </Card>
                                                     </div>
                                                 )
