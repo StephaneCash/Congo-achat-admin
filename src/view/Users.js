@@ -22,8 +22,6 @@ function Users() {
     const initialiseValues = { id: "", username: "", email: "", name: "", phoneNumber: "", province: "", city: "", balance: "", status: "" };
     const [formData, setFormData] = useState(initialiseValues);
 
-    const [paginated, setPaginated] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
     const [etatModal, setEtatModal] = useState(false);
     const [ListErr, setListErr] = useState(initialiseValues);
 
@@ -71,12 +69,9 @@ function Users() {
         seteDtailModal(false);
     }
 
-    const pageSize = 7;
-
     const getUsers = async () => {
         const dataUsers = await getDocs(usersCollection);
         setData(dataUsers.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        setPaginated(_(dataUsers.docs).slice(0).take(pageSize).value());
     };
 
     useEffect(() => {
@@ -84,21 +79,10 @@ function Users() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const pageCount = data ? Math.ceil(data.length / pageSize) : 0;
-
-    const pages = _.range(1, pageCount + 1);
-
     const handleSearch = (e) => {
         let value = e.target.value.toLowerCase();
         setDataInput(value);
     }
-
-    const pagination = (noPage) => {
-        setCurrentPage(noPage);
-        const startIndex = (noPage - 1) * pageSize;
-        const pagintData = _(data).slice(startIndex).take(pageSize).value();
-        setPaginated(pagintData);
-    };
 
     const cloeModalAddUser = () => {
         setEtatModal(false);
@@ -186,7 +170,7 @@ function Users() {
                             </div>
                         </div>
 
-                        <div className="col-12 mt-3">
+                        <div className="col-12 mt-3 dataUsers" >
                             <table className="table table-bordered table-borderless table-hover">
                                 <thead style={{ backgroundColor: "#efefef" }}>
                                     <tr>
@@ -270,27 +254,6 @@ function Users() {
                                     }
                                 </tbody>
                             </table>
-                            <nav className="d-flex justify-content-center">
-                                <ul className="pagination">
-                                    {
-                                        pages.map((page, index) => (
-                                            <li
-                                                key={index}
-                                                style={{ cursor: 'pointer' }}
-                                                className={
-                                                    page === currentPage ? "page-item active" : "page-item"
-                                                }>
-                                                <p className="page-link"
-                                                    style={{ backgroundColor: "#efefef", border: "2px solid silver", color: "#555" }}
-                                                    onClick={() => pagination(page)}>{page}
-                                                </p>
-
-                                            </li>
-                                        ))
-                                    }
-
-                                </ul>
-                            </nav>
                         </div>
                     </Card>
                     <DetailUser

@@ -47,7 +47,7 @@ const LeftBar = () => {
 
     return (
         <>
-            <Container className={classes.container}>
+            <Container className={classes.container} id="conatiner">
                 <div className={classes.item}>
                     <Dashboard className={classes.icon} />
                     <Typography className={classes.text}>

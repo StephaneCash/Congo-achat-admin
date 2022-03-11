@@ -45,6 +45,11 @@
     line-height:25px;
 }
 
+.dataUsers{
+    height: 62vh !important;
+    overflow: auto !important;
+}
+
 table tbody tr td{
     font-size:10px;
     cursor:pointer
