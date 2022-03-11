@@ -10,6 +10,7 @@ import DetailAnnonce from "../modal/DetailAnnonce";
 import { Announcement } from "@material-ui/icons";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import "../css/Annonces.css";
+import { Carousel } from 'react-responsive-carousel';
 
 const useStyles = makeStyles((theme) => ({
     griddash: {
@@ -55,12 +56,12 @@ const Annonces = () => {
         setEtatModal(false);
         getAnnonces();
     };
-    let tabPhotos = {};
+    
+    let tabPhotos = [];
 
-    for (let i = 0; i < data.length; i++) {
-        tabPhotos = { ...data[i].photos }
-    }
-    console.log(tabPhotos)
+    data.forEach((val) => {
+            tabPhotos = [...val.photos];
+    });
 
     return (
         <>

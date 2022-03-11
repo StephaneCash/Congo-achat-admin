@@ -10,9 +10,9 @@ import "../css/Menu.css";
 const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: theme.spacing(10),
-        backgroundColor: "#efefef",
+        backgroundColor: "#333",
         height: "100vh",
-        color: '#555',
+        color: '#fff',
         border: "1px solid silver",
         position: "fixed",
         width: "15%",

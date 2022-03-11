@@ -20,4 +20,19 @@
 .carousel .thumbs {
     display: none;
 }
+.carousel{
+    margin-top: -30px !important;
+}
+
+.modalAnnonce.modal-header{
+    height: 8px !important;
+}
+
+.carousel.carousel-slider .control-arrow:hover{
+    color: red !important;
+}
+
+.carousel.carousel-slider{
+    height: 300px !important;
+}
 

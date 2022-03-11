@@ -2,12 +2,11 @@
 
 a {
     text-decoration: none !important;
-    color: #555 !important;
+    color: #fff !important; 
     font-size: 14px;
-    font-weight: bold;
 }
 
 .active {
-    border-bottom: 3px solid #c72f3c;
+    border-bottom: 3px solid #fff;
 }
 

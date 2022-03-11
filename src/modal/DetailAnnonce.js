@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, CardMedia, Grid } from "@material-ui/core";
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Grid } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { db } from "../config/FirebaseConfig";
 import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
@@ -57,15 +57,22 @@ const DetailUser = (props) => {
     let etatBtn = false;
     let tabPhotos = [];
 
+    let msgStatus = "";
+    let msgStatusConfirm = "";
+
     data.forEach((val, i) => {
         if (val.id === idRecu) {
             dataS.productName = val.productName;
             tabPhotos = [...val.photos];
             if (val.status === 'Approved') {
                 dataS.status = "Non Approuvé";
+                msgStatus = "Etes-vous sûr de vouloir désapprouver cette annonce ?";
+                msgStatusConfirm = "Annonce désapprouvée avec succès";
                 etatBtn = true;
             } else if (val.status === 'Non Approuvé') {
                 dataS.status = "Approved";
+                msgStatus = "Etes-vous sûr de vouloir approuver cette annonce ?";
+                msgStatusConfirm = "Annonce approuvée avec succès";
             }
             dataS.amount = val.amount;
         }
@@ -76,7 +83,7 @@ const DetailUser = (props) => {
 
         swal({
             title: "Avertissement.",
-            text: "Etes-vous sûr de vouloir désapprouver cette annonce ?",
+            text: msgStatus,
             icon: "warning",
             buttons: true,
             dangerMode: true
@@ -84,7 +91,7 @@ const DetailUser = (props) => {
             if (willDelete) {
                 updateDoc(annonces, dataS);
                 getAnnonces();
-                swal('Annonce désapprouvé avec succès', {
+                swal(msgStatusConfirm, {
                     icon: "success",
                 });
             }
@@ -160,7 +167,7 @@ const DetailUser = (props) => {
                                 return (
                                     <>
                                         <Card key={index}>
-                                            <CardHeader title={val.productName} />
+                                            <CardHeader title={val.productName} style={{marginBottom:"20px"}} />
 
                                             {
                                                 tabPhotos ?
@@ -170,7 +177,7 @@ const DetailUser = (props) => {
                                                                 tabPhotos.map((el, index) => {
                                                                     return (
                                                                         <div key={index} style={{ height: '400px' }}>
-                                                                            <img src={el} style={{ width: '100%', height: '400px' }} />
+                                                                            <img src={el} style={{ width: '100%', height: '300px' }} />
                                                                         </div>
                                                                     )
                                                                 })
@@ -233,7 +240,6 @@ const DetailUser = (props) => {
                                                 </Grid>
                                                 <Grid>
                                                     <CardActions>
-                                                        <Button variant='outlined' className='btn btn-voir-tout'>Pause</Button>
                                                         <Button
                                                             variant='outlined'
                                                             className='btn btn-voir-tout'
