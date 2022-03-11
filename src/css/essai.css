@@ -301,6 +301,11 @@
         margin-top: 12px;
     }
 
+    .active{
+        border: none !important;
+        color: #c72f3c !important;
+    }
+
 }
 
 @media (max-width: 532px) {
@@ -315,6 +320,10 @@
         margin-top: 12px;
     }
 
+    .active{
+        border: none !important;
+        color: #c72f3c !important;
+    }
 }
 
 .gallery {

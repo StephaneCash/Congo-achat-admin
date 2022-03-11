@@ -28,9 +28,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     text: {
-        fontWeight: 500,
         [theme.breakpoints.down("sm")]: {
-            display: "none"
+            display: "none",
         },
     },
     icon: {
@@ -49,90 +48,84 @@ const LeftBar = () => {
         <>
             <Container className={classes.container} id="conatiner">
                 <div className={classes.item}>
-                    <Dashboard className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/dashboard" className="">Dashboard</NavLink>
-                    </Typography>
+                    <NavLink to="/dashboard" className="d-flex">
+                        <Dashboard className={classes.icon} id="icon" />
+                        <Typography className={classes.text} >
+                            Dashboard
+                        </Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
-                    <People className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/users" className="">
+                    <NavLink to="/users" className="d-flex">
+                        <People className={classes.icon} id="icon" />
+                        <Typography className={classes.text}>
                             Utilisateurs
-                        </NavLink>
-                    </Typography>
+                        </Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
-                    <Announcement className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/annonces">
+                    <NavLink to="/annonces" className="d-flex">
+                        <Announcement className={classes.icon} id="icon" />
+                        <Typography className={classes.text}>
                             Annonces
-                        </NavLink>
-                    </Typography>
+                        </Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
-                    <Settings className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/appsetting">
-                            App Settings
-                        </NavLink>
-                    </Typography>
-                </div>
-                <div className={classes.item}>
-                    <Build className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/subAdmins">
+                    <NavLink to="/subAdmins" className="d-flex">
+                        <Build className={classes.icon} />
+                        <Typography className={classes.text}>
                             Sous Admins
-                        </NavLink>
-                    </Typography>
+                        </Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
-                    <LocationOn className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/findClient">
+                    <NavLink to="/findClient" className="d-flex">
+                        <LocationOn className={classes.icon} />
+                        <Typography className={classes.text}>
                             Trouver vos clients
-                        </NavLink>
-                    </Typography>
+                        </Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
-                    <MonetizationOn className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to='/gestion-monetaire'>
+                    <NavLink to='/gestion-monetaire' className="d-flex">
+                        <MonetizationOn className={classes.icon} />
+                        <Typography className={classes.text}>
                             Gestion monétaire
-                        </NavLink>
-                    </Typography>
+                        </Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
-                    <Category className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/categories">
+                    <NavLink to="/categories" className="d-flex">
+                        <Category className={classes.icon} />
+                        <Typography className={classes.text}>
                             Catégories & Sous Catégories
-                        </NavLink>
-                    </Typography>
+                        </Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
-                    <PostAddRounded className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/postes">
+                    <NavLink to="/postes" className="d-flex">
+                        <PostAddRounded className={classes.icon} />
+                        <Typography className={classes.text}>
                             Postes
-                        </NavLink>
-                    </Typography>
+                        </Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
-                    <ApartmentTwoTone className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/provinces">
+                    <NavLink to="/provinces" className="d-flex">
+                        <ApartmentTwoTone className={classes.icon} />
+                        <Typography className={classes.text}>
                             Provinces
-                        </NavLink>
-                    </Typography>
+                        </Typography>
+                    </NavLink>
                 </div>
                 <div className={classes.item}>
-                    <NotificationsActive className={classes.icon} />
-                    <Typography className={classes.text}>
-                        <NavLink to="/notifications">
+                    <NavLink to="/notifications" className="d-flex">
+                        <NotificationsActive className={classes.icon} />
+                        <Typography className={classes.text}>
                             Notifications
-                        </NavLink>
-                    </Typography>
+                        </Typography>
+                    </NavLink>
                 </div>
             </Container>
         </>

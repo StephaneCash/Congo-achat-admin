@@ -31,7 +31,7 @@
 
 .users table thead tr th {
     font-size: 14px;
-    color: #555 !important;
+    color: #000 !important;
 }
 
 .users .buttonAdd{
@@ -52,7 +52,8 @@
 
 table tbody tr td{
     font-size:10px;
-    cursor:pointer
+    cursor:pointer;
+    font-family: Open sans !important;
 }
 
 .btn {
