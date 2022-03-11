@@ -2,16 +2,16 @@ import { AppBar, Avatar, Badge, makeStyles, Toolbar, Typography } from "@materia
 import { Mail, Notifications, SettingsPower } from "@material-ui/icons";
 import { db } from "../config/FirebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useUserAuth } from "../config/useContextComponent";
 import { Link } from "react-router-dom";
-
+import logo from "../images/logo.jpeg";
 
 const useStyles = makeStyles((theme) => ({
     tooBar: {
         display: "flex",
         justifyContent: 'space-between',
-        backgroundColor: '#c72f3c'
+        backgroundColor: '#ed145b'
     },
     logoLg: {
         display: "none",
@@ -69,10 +69,10 @@ const NavBar = () => {
             <AppBar position="fixed">
                 <Toolbar className={classes.tooBar}>
                     <Typography variant="h6" component="h2" className={classes.logoLg}>
-                        Congo Achat
+                        Congo Achat <img style={{ width: "5%", }} src={logo} alt="Logo" />
                     </Typography>
                     <Typography variant="h6" component="h2" className={classes.logoSm}>
-                        Congo Achat
+                        <img style={{ width: "15%", }} src={logo} alt="Logo" />
                     </Typography>
                     <div className={classes.icons}>
                         <Badge badgeContent={4} color="secondary" className={classes.badge}>

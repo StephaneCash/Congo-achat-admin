@@ -165,7 +165,7 @@ function Dashboard() {
                                                                 variant="contained" 
                                                                 size="small" 
                                                                 style={{ 
-                                                                    backgroundColor: "#c72f3c", 
+                                                                    backgroundColor: "#ed145b", 
                                                                     color: "#fff", 
                                                                 }}>V<span className="span" >oir tout</span></Button>
                                                         </Link>
@@ -191,7 +191,7 @@ function Dashboard() {
                                                             <Button
                                                                 className='btn-voir-tout'
                                                                 variant="contained"
-                                                                size="small" style={{ backgroundColor:"#c72f3c", color: "#fff" }}>
+                                                                size="small" style={{ backgroundColor:"#ed145b", color: "#fff" }}>
                                                                 V<span className="span">oir tout</span>
                                                             </Button>
                                                         </Link>
@@ -221,7 +221,7 @@ function Dashboard() {
                                                                 className='btn-voir-tout'
                                                                 variant="contained" 
                                                                 size="small" 
-                                                                style={{ backgroundColor: "#c72f3c", color: "#fff" }}>
+                                                                style={{ backgroundColor: "#ed145b", color: "#fff" }}>
                                                                 V<span className="span">oir tout</span>
                                                             </Button>
                                                         </Link>

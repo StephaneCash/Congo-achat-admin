@@ -19,7 +19,7 @@
 }
 
 #add-user .btn-voir-tout{
-    background-color:#c72f3c;
+    background-color:#ed145b;
     color: #fff;
 }
 
@@ -29,8 +29,8 @@
 
 #add-user .btn:hover{
     background-color: #fff !important;
-    color: #c72f3c !important;
-    border: 1px solid #c72f3c;
+    color: #ed145b !important;
+    border: 1px solid #ed145b;
 }
 
 .MuiInputBase-input:hover{
@@ -38,13 +38,13 @@
 }
 
 #add-poste .btn{
-    background-color: #c72f3c !important;
+    background-color: #ed145b !important;
     color : #fff !important;
-    border: 1px solid #c72f3c !important;
+    border: 1px solid #ed145b !important;
 }
 
 #add-poste .btn:hover{
     background-color: #fff !important;
-    color : #c72f3c !important;
-    border: 1px solid #c72f3c !important;
+    color : #ed145b !important;
+    border: 1px solid #ed145b !important;
 }

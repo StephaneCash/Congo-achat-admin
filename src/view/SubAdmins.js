@@ -192,7 +192,7 @@ function SubAdmins() {
                                         onClick={addSudAdminModal}
                                         type="button"
                                         variant="contained"
-                                        style={{ float: "right", backgroundColor: "#c72f3c", color: "#fff" }}
+                                        style={{ float: "right", backgroundColor: "#ed145b", color: "#fff" }}
                                     >
                                         <PersonAdd />
                                     </Button>

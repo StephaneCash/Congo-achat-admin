@@ -110,7 +110,7 @@ const Annonces = () => {
                                                                 </div>
                                                                 <div className="col-5">
                                                                     <Button
-                                                                        style={{ backgroundColor: "#fff", color: "#c72f3c" }}
+                                                                        style={{ backgroundColor: "#fff", color: "#ed145b" }}
                                                                         onClick={() => detailAnnonce(val.id)}
                                                                         variant="contained">Détail</Button>
                                                                 </div>
