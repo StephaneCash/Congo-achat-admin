@@ -99,7 +99,7 @@ const LeftBar = () => {
                     <NavLink to="/categories" className="d-flex">
                         <Category className={classes.icon} />
                         <Typography className={classes.text}>
-                            Catégories & Sous Catégories
+                            Catégories
                         </Typography>
                     </NavLink>
                 </div>
