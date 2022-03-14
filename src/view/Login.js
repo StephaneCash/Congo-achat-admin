@@ -1,5 +1,5 @@
-import { TextField, Button, Card, CardContent, Grid } from "@material-ui/core";
-import { Person } from "@material-ui/icons";
+import { TextField, Button, Card, CardContent, Grid, FormControl, InputLabel, InputAdornment, OutlinedInput, IconButton } from "@material-ui/core";
+import { Person, Visibility, VisibilityOff } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/Styles";
 import "../css/Login.css";
 import { useNavigate } from "react-router-dom";
@@ -64,6 +64,10 @@ const Login = () => {
             setError(err);
             console.log("Erreur : ", error);
         }
+    };
+
+    const handlePass = () =>{
+        
     }
 
     return (
@@ -114,6 +118,27 @@ const Login = () => {
                                             onChange={(e) => setPassword(e.target.value)}
                                             name="password"
                                         />
+
+                                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                            <OutlinedInput
+                                                id="outlined-adornment-password"
+                                                type={'password'}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                endAdornment={
+                                                    <InputAdornment position="end">
+                                                        <IconButton
+                                                            aria-label="toggle password visibility"
+                                                            edge="end"
+                                                            onClick={handlePass}
+                                                        >
+                                                            <VisibilityOff />  <Visibility />
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                }
+                                                label="Password"
+                                            />
+                                        </FormControl>
 
                                     </CardContent>
                                 </Grid>
