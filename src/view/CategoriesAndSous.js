@@ -28,8 +28,6 @@ function CategoriesAndSous(props) {
         setData(dataCategory.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
-    console.log('Data Category : ', data);
-
     useEffect(() => {
         getCaterory();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +36,6 @@ function CategoriesAndSous(props) {
     const onChange = (e) => {
         const { value, id } = e.target;
         setFormData({ ...formData, [id]: value });
-        console.log(id, ' : ', value)
     }
 
     const addSudAdminModal = () => {

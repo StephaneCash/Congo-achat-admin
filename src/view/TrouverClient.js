@@ -6,6 +6,7 @@ import NavBar from '../includes/NavBar'
     ; import ReactMapGL, { Marker, Popup, FullscreenControl, NavigationControl } from "react-map-gl";
 import { useState } from "react";
 import MarkerUser from "../modal/MarkerUser";
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 function TrouverClient() {
 

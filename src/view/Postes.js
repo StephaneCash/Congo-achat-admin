@@ -30,8 +30,6 @@ function Postes() {
         setTotal(data.length);
     }
 
-    console.log(total)
-
     useEffect(() => {
         getAnnonces();
         // eslint-disable-next-line react-hooks/exhaustive-deps

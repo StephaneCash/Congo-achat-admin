@@ -1,7 +1,7 @@
 import { Container, makeStyles, Typography } from "@material-ui/core";
 import {
     ApartmentTwoTone, Build, Category, Dashboard,
-    MonetizationOn, People, Settings, LocationOn, Announcement, PostAddRounded, NotificationsActive
+    MonetizationOn, People, LocationOn, Announcement, PostAddRounded, NotificationsActive
 } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 import "../css/Menu.css";
@@ -10,9 +10,9 @@ import "../css/Menu.css";
 const useStyles = makeStyles((theme) => ({
     container: {
         paddingTop: theme.spacing(10),
-        backgroundColor: "#333",
+        backgroundColor: "#fff",
         height: "100vh",
-        color: '#fff',
+        color: '#333',
         border: "1px solid silver",
         position: "fixed",
         width: "15%",

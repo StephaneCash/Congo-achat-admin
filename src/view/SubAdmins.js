@@ -119,8 +119,6 @@ function SubAdmins() {
         }
     });
 
-    console.log("DATA S : : ", dataS)
-
     const handleBloquerSubAdmin = (id) => {
         setIdDetail(id);
 

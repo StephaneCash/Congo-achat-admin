@@ -43,7 +43,6 @@ function GestionMonetaire() {
 
     const editer = (id) => {
         for (let i = 0; i < data.length; i++) {
-            console.log(data[i].id)
             setId(data[i].id)
             setDonnes(data[i])
         }
