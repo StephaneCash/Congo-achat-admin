@@ -1,0 +1,53 @@
+[debug] [2022-03-14T09:07:16.569Z] ----------------------------------------------------------------------
+[debug] [2022-03-14T09:07:16.573Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\kikon\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2022-03-14T09:07:16.575Z] CLI Version:   10.1.4
+[debug] [2022-03-14T09:07:16.575Z] Platform:      win32
+[debug] [2022-03-14T09:07:16.575Z] Node Version:  v16.13.2
+[debug] [2022-03-14T09:07:16.577Z] Time:          Mon Mar 14 2022 10:07:16 GMT+0100 (heure normale d’Afrique de l’Ouest)
+[debug] [2022-03-14T09:07:16.578Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-03-14T09:07:16.705Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-03-14T09:07:16.706Z] > authorizing via signed-in user (kikonistephane@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  E:\Congo_Achat_ADMIN\front
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2022-03-14T09:07:39.394Z] Using project from CLI flag: congo-achat
+[debug] [2022-03-14T09:07:39.396Z] > refreshing access token with scopes: []
+[debug] [2022-03-14T09:07:39.396Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-03-14T09:07:50.520Z] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2022-03-14T09:08:01.627Z] FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+    at invalidCredentialError (C:\Users\kikon\AppData\Roaming\npm\node_modules\firebase-tools\lib\auth.js:141:12)
+    at refreshTokens (C:\Users\kikon\AppData\Roaming\npm\node_modules\firebase-tools\lib\auth.js:448:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Client.getAccessToken (C:\Users\kikon\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:147:23)
+    at async Client.addAuthHeader (C:\Users\kikon\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:138:21)
+    at async Client.request (C:\Users\kikon\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:94:34)
+    at async getFirebaseProject (C:\Users\kikon\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:290:21)
+    at async Object.doSetup [as project] (C:\Users\kikon\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\project.js:85:27)
+    at async init (C:\Users\kikon\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:19:9)
+[error] 
+[error] Error: Failed to get Firebase project congo-achat. Please make sure the project exists and your account has permission to access it.
