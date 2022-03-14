@@ -1,7 +1,9 @@
 import { Modal } from "react-bootstrap";
+import { useState } from 'react';
 import "../css/addUserModal.css";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button, TextField } from "@material-ui/core";
+import { Button, IconButton, InputAdornment, OutlinedInput, TextField } from "@material-ui/core";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -27,6 +29,12 @@ const AddSousAdmin = (props) => {
     let tempsNow = new Date();
     data.time = tempsNow.toString().substring(0, 25);
 
+    const [showPass, setShowPass] = useState(false);
+
+    function handlePass() {
+        setShowPass(!showPass);
+    };
+
     return (
         <>
             <Modal show={props.show} className={classes.modal} id="add-user">
@@ -47,18 +55,34 @@ const AddSousAdmin = (props) => {
                                 value={email}
                             />
                             <br /><br />
-                            <TextField
-                                placeholder="Créer un mot de passe"
-                                variant="outlined"
+
+                            <OutlinedInput
+                                type={showPass ? 'text' : 'password'}
                                 style={{ width: '100%' }}
-                                label="Créer un mot de passe"
+                                className='mb-4'
                                 required
-                                type="password"
-                                id='password'
-                                onChange={(e) => onChange(e)}
                                 value={password}
+                                id='password'
+                                placeholder="Entrer le mot de passe"
+                                onChange={(e) => onChange(e)}
+                                endAdornment={
+                                    <InputAdornment position="end" >
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            edge="end"
+                                            onClick={handlePass}
+                                        >
+                                            {
+                                                showPass ? <VisibilityOff style={{ fontSize: "20px" }} /> :
+                                                    <Visibility style={{ fontSize: "20px" }} />
+                                            }
+
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                                label="Password"
+                                name="password"
                             />
-                            <br /><br />
 
                             <TextField
                                 type="password"
@@ -71,7 +95,7 @@ const AddSousAdmin = (props) => {
                                 value={confirmPassword}
                                 id='confirmPassword'
                             />
-                            {msgError ? <div className="alert alert-danger mt-2" style={{fontSize: '14px'}}>{msgError}</div>: ""}
+                            {msgError ? <div className="alert alert-danger mt-2" style={{ fontSize: '14px' }}>{msgError}</div> : ""}
                         </div>
                         <div className="mt-3">
                             <Button
