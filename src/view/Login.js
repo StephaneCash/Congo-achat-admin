@@ -66,8 +66,10 @@ const Login = () => {
         }
     };
 
-    const handlePass = () =>{
-        
+    const [showPass, setShowPass] = useState(false);
+
+    const handlePass = () => {
+        setShowPass(!showPass);
     }
 
     return (
@@ -108,37 +110,32 @@ const Login = () => {
                                             name="username"
                                             onChange={(e) => setEmail(e.target.value)}
                                         />
-                                        <TextField
-                                            className={classes.input}
-                                            id="password"
-                                            type="password"
+
+                                        <OutlinedInput
+                                            id="outlined-adornment-password"
+                                            type={showPass ? 'text' : 'password'}
+                                            style={{ width: '100%' }}
                                             required
-                                            variant="outlined"
-                                            label="Entrer votre password"
+                                            placeholder="Entrer le mot de passe"
                                             onChange={(e) => setPassword(e.target.value)}
+                                            endAdornment={
+                                                <InputAdornment position="end" >
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        edge="end"
+                                                        onClick={handlePass}
+                                                    >
+                                                        {
+                                                            showPass ? <VisibilityOff style={{ fontSize: "20px" }} /> :
+                                                                <Visibility style={{ fontSize: "20px" }} />
+                                                        }
+
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
+                                            label="Password"
                                             name="password"
                                         />
-
-                                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                                            <OutlinedInput
-                                                id="outlined-adornment-password"
-                                                type={'password'}
-                                                onChange={(e) => setPassword(e.target.value)}
-                                                endAdornment={
-                                                    <InputAdornment position="end">
-                                                        <IconButton
-                                                            aria-label="toggle password visibility"
-                                                            edge="end"
-                                                            onClick={handlePass}
-                                                        >
-                                                            <VisibilityOff />  <Visibility />
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                }
-                                                label="Password"
-                                            />
-                                        </FormControl>
 
                                     </CardContent>
                                 </Grid>
