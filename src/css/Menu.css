@@ -8,11 +8,10 @@ a {
 }
 
 .active {
-    border-bottom: 3px solid #ed145b;
+    border-left: 3px solid #ed145b;
     background-color: #efefef !important;
     padding: 5px !important;
     width: 100% !important;
-    border-radius: 5px 5px 0px 0px;
 }
 .MuiTypography-body1{
     font-size: 14px !important;
