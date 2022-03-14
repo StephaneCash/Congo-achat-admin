@@ -10,17 +10,25 @@ import Load from '../includes/Load';
 import "../css/SubAdmins.css";
 import AddSousAdmin from '../modal/add-SouAdmins';
 import swal from 'sweetalert';
+import { getAuth, updateEmail } from "firebase/auth";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 function SubAdmins() {
 
+    const auth = getAuth();
+
+    console.log(auth.getUser)
+
     const subAdmins = collection(db, 'subAdmins');
 
-    const initializeValues = { id: "", email: "", name: "", number: "", status: '' };
+    const initializeValues = { id: "", email: "", password: "", confirmPassword: "", status: '' };
     const [formData, setFormData] = useState(initializeValues);
 
     const [data, setData] = useState([]);
     const [idDetail, setIdDetail] = useState();
     const [inputValueSearch, setInputValueSearch] = useState("");
+
+    const [msgError, setMsgError] = useState('');
 
     const getSubAdmins = async () => {
         const dataSubAdmin = await getDocs(subAdmins);
@@ -30,25 +38,72 @@ function SubAdmins() {
     const onChange = (e) => {
         const { value, id } = e.target;
         setFormData({ ...formData, [id]: value });
-    }
+    };
+
+    const validationPassword = () => {
+        let isValid = true;
+        if (formData.password !== '' && formData.confirmPassword !== '') {
+            if (formData.password !== formData.confirmPassword) {
+                isValid = false;
+                setMsgError('Les deux mots de passe ne correspondent pas');
+            } else {
+                setMsgError('');
+            }
+        }
+        return isValid;
+    };
+
 
     const handleSubmitSubAdmin = async (e) => {
         e.preventDefault();
 
-        if (formData.id) {
-            const docSousAdmin = doc(db, 'subAdmins', formData.id);
-            await updateDoc(docSousAdmin, formData);
-            getSubAdmins();
-            swal({ title: "Succès", icon: 'success', text: `Sous admin modifié avec succès` });
-            setFormData(initializeValues);
-            handleCloseModal();
-        } else {
-            await addDoc(subAdmins, formData);
-            getSubAdmins();
-            handleCloseModal();
-            swal({ title: "Succès", icon: 'success', text: `Sous admin ajouté avec succès` });
-            setFormData(initializeValues);
+        if (validationPassword()) {
+            if (formData.id) {
+                updateEmail(auth.currentUser, formData.email).then((res) => {
+                    console.log(res)
+                }).catch((err) => {
+                    console.log(err);
+                })
+                /*const docSousAdmin = doc(db, 'subAdmins', formData.id);
+                await updateDoc(docSousAdmin, formData);
+                getSubAdmins();
+                swal({ title: "Succès", icon: 'success', text: `Sous admin modifié avec succès` });
+                setFormData(initializeValues);
+                handleCloseModal();*/
+            } else {
+                await addDoc(subAdmins, formData);
+                createUserWithEmailAndPassword(auth, formData.email, formData.password)
+                    .then((res) => {
+                        console.log(res.user);
+                        getSubAdmins();
+                        handleCloseModal();
+                        swal({ title: "Succès", icon: 'success', text: `Sous admin ajouté avec succès` });
+                        setFormData(initializeValues);
+
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+
         }
+
+        // console.log(formData)
+
+        /* if (formData.id) {
+             const docSousAdmin = doc(db, 'subAdmins', formData.id);
+             await updateDoc(docSousAdmin, formData);
+             getSubAdmins();
+             swal({ title: "Succès", icon: 'success', text: `Sous admin modifié avec succès` });
+             setFormData(initializeValues);
+             handleCloseModal();
+         } else {
+             await addDoc(subAdmins, formData);
+             getSubAdmins();
+             handleCloseModal();
+             swal({ title: "Succès", icon: 'success', text: `Sous admin ajouté avec succès` });
+             setFormData(initializeValues);
+         }*/
     }
 
     const handleDeleteSubAdmin = async (id) => {
@@ -107,7 +162,7 @@ function SubAdmins() {
 
     data.forEach(val => {
         if (val.id === idDetail) {
-            dataS.catName = val.name;
+            dataS.catName = val.email;
             docData = val.status;
             if (val.status === 'Actif') {
                 dataS.status = "Bloqué";
@@ -115,7 +170,6 @@ function SubAdmins() {
             } else if (val.status === 'Bloqué') {
                 dataS.status = "Actif";
             }
-            dataS.description = val.email;
         }
     });
 
@@ -217,10 +271,7 @@ function SubAdmins() {
                                                 data.length > 0 ? (
                                                     <>
                                                         {
-                                                            data.filter((val) => {
-                                                                let value = val.name.toLowerCase();
-                                                                return value.includes(inputValueSearch);
-                                                            }).map((val, index) => (
+                                                            data.map((val, index) => (
 
                                                                 <tr key={index}>
                                                                     <td>
@@ -336,6 +387,7 @@ function SubAdmins() {
                 onChange={onChange}
                 data={formData}
                 handleSubmitSubAdmin={handleSubmitSubAdmin}
+                msgError={msgError}
             />
         </>
     );

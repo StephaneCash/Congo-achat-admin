@@ -1,8 +1,7 @@
 import { Modal } from "react-bootstrap";
 import "../css/addUserModal.css";
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles";
 import { Button, TextField } from "@material-ui/core";
-import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -13,11 +12,13 @@ const AddSousAdmin = (props) => {
 
     const classes = useStyles();
 
+    const msgError = props.msgError;
+
     const data = props.data;
     const onChange = props.onChange;
     const handleSubmitSubAdmin = props.handleSubmitSubAdmin;
 
-    const { id, email, name, numero, } = data;
+    const { id, email, password, confirmPassword, } = data;
     if (id) {
         data.status = data.status;
     } else {
@@ -30,7 +31,7 @@ const AddSousAdmin = (props) => {
         <>
             <Modal show={props.show} className={classes.modal} id="add-user">
                 <Modal.Header>
-                    {id ? `Editer ${name}` : `Ajout sous-administrateur`}
+                    {id ? `Editer ${email}` : `Ajout sous-administrateur`}
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={handleSubmitSubAdmin}>
@@ -47,27 +48,28 @@ const AddSousAdmin = (props) => {
                             />
                             <br /><br />
                             <TextField
-                                placeholder="Name"
+                                placeholder="Créer un mot de passe"
                                 variant="outlined"
                                 style={{ width: '100%' }}
-                                label="Name"
+                                label="Créer un mot de passe"
                                 required
-                                id='name'
+                                id='password'
                                 onChange={(e) => onChange(e)}
-                                value={name}
+                                value={password}
                             />
                             <br /><br />
 
                             <TextField
                                 variant="outlined"
-                                label="Numéro de téléphone"
+                                label="Confirmer le mot de passe"
                                 placeholder="Numéro phone"
                                 style={{ width: '100%' }}
                                 required
                                 onChange={(e) => onChange(e)}
-                                value={numero}
-                                id='numero'
+                                value={confirmPassword}
+                                id='confirmPassword'
                             />
+                            {msgError ? <div className="alert alert-danger mt-2" style={{fontSize: '14px'}}>{msgError}</div>: ""}
                         </div>
                         <div className="mt-3">
                             <Button
