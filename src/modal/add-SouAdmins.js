@@ -61,6 +61,7 @@ const AddSousAdmin = (props) => {
                             <br /><br />
 
                             <TextField
+                                type="password"
                                 variant="outlined"
                                 label="Confirmer le mot de passe"
                                 placeholder="Confirmer le mot de passe"
