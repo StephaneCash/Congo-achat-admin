@@ -53,6 +53,7 @@ const AddSousAdmin = (props) => {
                                 style={{ width: '100%' }}
                                 label="Créer un mot de passe"
                                 required
+                                type="password"
                                 id='password'
                                 onChange={(e) => onChange(e)}
                                 value={password}
@@ -62,7 +63,7 @@ const AddSousAdmin = (props) => {
                             <TextField
                                 variant="outlined"
                                 label="Confirmer le mot de passe"
-                                placeholder="Numéro phone"
+                                placeholder="Confirmer le mot de passe"
                                 style={{ width: '100%' }}
                                 required
                                 onChange={(e) => onChange(e)}
