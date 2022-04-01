@@ -66,8 +66,8 @@ function GestionMonetaire() {
                             </div>
                             <div className="col-12 p-5">
                                 <>
-                                    <div className="col-12 tableGestionMonetaire">
-                                        <table className="table table-bordered table-borderless table-hover" style={{marginTop: "-30px",}}>
+                                    <div className="col-12 tableGestionMonetaire" style={{marginTop: "-20px",}}>
+                                        <table className="table table-bordered table-borderless table-hover">
                                             <thead style={{ backgroundColor: "#efefef" }}>
                                                 <tr>
                                                     <th>#</th>
@@ -127,7 +127,7 @@ function GestionMonetaire() {
                                     </div>
                                     {val === true ? (<>
                                         <form>
-                                            <div className="row">
+                                            <div className="row tableGestionMonetaire">
                                                 <div className="col-5">
                                                     <label style={{ marginBottom: "10px" }}>Prix du poste :</label> <br />
                                                     <TextField
