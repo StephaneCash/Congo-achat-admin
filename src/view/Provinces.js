@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { getDocs, addDoc, updateDoc, deleteDoc, doc, collection } from "firebase/firestore";
 import { db } from "../config/FirebaseConfig";
 import swal from 'sweetalert';
+import "../css/GestionMonetaire.css";
 
 function Provinces() {
 
@@ -102,7 +103,7 @@ function Provinces() {
                         </div>
 
                         <div className="col-12 mt-3">
-                            <table className="table table-bordered table-borderless table-hover">
+                            <table className="table table-responsive table-bordered table-borderless table-hover">
                                 <thead style={{ backgroundColor: "#efefef" }}>
                                     <tr>
                                         <th>#</th>

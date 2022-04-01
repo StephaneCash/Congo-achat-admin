@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import Load from '../includes/Load';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "../css/GestionMonetaire.css";
 
 toast.configure();
 
@@ -65,8 +66,8 @@ function GestionMonetaire() {
                             </div>
                             <div className="col-12 p-5">
                                 <>
-                                    <div className="col-12">
-                                        <table className="table table-bordered table-borderless table-hover" style={{marginTop: "-30px"}}>
+                                    <div className="col-12 tableGestionMonetaire">
+                                        <table className="table table-bordered table-borderless table-hover" style={{marginTop: "-30px",}}>
                                             <thead style={{ backgroundColor: "#efefef" }}>
                                                 <tr>
                                                     <th>#</th>

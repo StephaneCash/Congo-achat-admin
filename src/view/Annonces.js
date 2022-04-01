@@ -87,7 +87,7 @@ const Annonces = () => {
                                                         <Card sx={{ maxWidth: 34 }}>
                                                             <CardMedia
                                                                 component="img"
-                                                                height="150"
+                                                                height="130"
                                                                 onClick={() => detailAnnonce(val.id)}
                                                                 image={
                                                                     val.photos[0] || val.photos[1] || val.photos[2] || val.photos[3] || val.photos[4] ?

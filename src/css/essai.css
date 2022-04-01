@@ -5,7 +5,6 @@
 }
 
 .gallery .MuiCardHeader-content {
-    height: 20px;
     font-size: 12px !important;
 }
 
@@ -15,8 +14,8 @@
 }
 
 .gallery .MuiCard-root {
-    height: 37vh !important;
-    margin-top: 10px;
+    height: auto !important;
+    padding-bottom: 12px
 }
 
 .gallery .pics:hover {

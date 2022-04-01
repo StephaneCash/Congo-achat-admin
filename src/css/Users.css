@@ -46,7 +46,7 @@
 }
 
 .dataUsers{
-    height: 62vh !important;
+    height: auto !important;
     overflow: auto !important;
 }
 

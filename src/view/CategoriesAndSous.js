@@ -150,7 +150,7 @@ function CategoriesAndSous(props) {
                                 </div>
                             </div>
                             <div className="col-12 mt-3">
-                                <div className="sudAdminsList">
+                                <div className="sudAdminsList tableGestionMonetaire">
                                     <table className="table table-bordered table-borderless table-hover">
                                         <thead style={{ backgroundColor: "#efefef" }}>
                                             <tr>

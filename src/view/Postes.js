@@ -93,8 +93,8 @@ function Postes() {
                             </div>
                         </div>
 
-                        <div className="col-12 mt-3">
-                            <table className="table table-bordered table-borderless table-hover">
+                        <div className="col-12 mt-3 tableGestionMonetaire">
+                            <table className="table table-responsive table-bordered table-borderless table-hover">
                                 <thead style={{ backgroundColor: "#efefef" }}>
                                     <tr>
                                         <th>#</th>
